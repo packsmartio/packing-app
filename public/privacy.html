@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Privacy Policy — Pack Smart</title>
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #1a1a26;
+    --border: #ffffff0d;
+    --accent: #3b82f6;
+    --accent-soft: #60a5fa;
+    --text: #f0ede8;
+    --muted: #666;
+    --dim: #333;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, sans-serif; min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #1a1a2e, #0f0f13);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { display: flex; flex-direction: column; }
+  .logo-sub { font-size: 10px; color: var(--accent-soft); letter-spacing: 3px; text-transform: uppercase; }
+  .logo-title { font-size: 18px; font-weight: 800; }
+
+  .lang-bar {
+    display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;
+  }
+  .lang-btn {
+    background: none; border: 1px solid var(--dim); border-radius: 20px;
+    color: var(--muted); padding: 4px 10px; font-size: 11px; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--accent); border-color: var(--accent); color: white; font-weight: 700;
+  }
+
+  main { max-width: 680px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .page-title {
+    font-size: 28px; font-weight: 800; margin-bottom: 6px;
+    background: linear-gradient(135deg, #f0ede8, #60a5fa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .page-date { font-size: 12px; color: var(--muted); margin-bottom: 40px; }
+
+  section { margin-bottom: 36px; }
+  h2 {
+    font-size: 15px; font-weight: 700; color: var(--accent-soft);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 12px; padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  p { font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 10px; }
+  .highlight {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 14px 16px;
+    font-size: 14px; color: var(--text); line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  a { color: var(--accent-soft); text-decoration: none; }
+
+  footer {
+    text-align: center; padding: 24px;
+    font-size: 12px; color: var(--dim);
+    border-top: 1px solid var(--border);
+  }
+
+  .content { display: none; }
+  .content.active { display: block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-sub">Pack Smart</span>
+    <span class="logo-title">Privacy Policy</span>
+  </div>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('ja')">🇯🇵 JP</button>
+    <button class="lang-btn" onclick="setLang('en')">🇺🇸 EN</button>
+    <button class="lang-btn" onclick="setLang('fr')">🇫🇷 FR</button>
+    <button class="lang-btn" onclick="setLang('pt')">🇧🇷 PT</button>
+    <button class="lang-btn" onclick="setLang('es')">🇪🇸 ES</button>
+    <button class="lang-btn" onclick="setLang('zh')">🇨🇳 ZH</button>
+    <button class="lang-btn" onclick="setLang('ko')">🇰🇷 KO</button>
+  </div>
+</header>
+
+<main>
+
+<!-- 🇯🇵 日本語 -->
+<div class="content active" id="lang-ja">
+  <div class="page-title">プライバシーポリシー</div>
+  <div class="page-date">最終更新日：2026年1月</div>
+
+  <section>
+    <h2>はじめに</h2>
+    <div class="highlight">Pack Smart（以下「本アプリ」）は、ユーザーのプライバシーを最優先に考えて設計されています。本アプリは、あなたの個人情報を収集・送信・販売しません。</div>
+  </section>
+
+  <section>
+    <h2>収集する情報</h2>
+    <p>本アプリは、外部サーバーへのデータ送信を一切行いません。</p>
+    <p>イベント名、持ち物リスト、設定などのデータは、すべてお使いの端末内（ブラウザのローカルストレージ）にのみ保存されます。</p>
+  </section>
+
+  <section>
+    <h2>第三者への提供</h2>
+    <p>本アプリはユーザーデータを第三者に提供、販売、共有することはありません。</p>
+  </section>
+
+  <section>
+    <h2>広告・トラッキング</h2>
+    <p>本アプリには広告は表示されません。トラッキングツール（Google Analytics等）も使用していません。</p>
+  </section>
+
+  <section>
+    <h2>データの削除</h2>
+    <p>ブラウザの設定から「サイトデータを削除」することで、本アプリに保存されたすべてのデータを削除できます。</p>
+  </section>
+
+  <section>
+    <h2>お問い合わせ</h2>
+    <p>プライバシーに関するご質問は、販売ページよりお問い合わせください。</p>
+  </section>
+</div>
+
+<!-- 🇺🇸 English -->
+<div class="content" id="lang-en">
+  <div class="page-title">Privacy Policy</div>
+  <div class="page-date">Last updated: January 2026</div>
+
+  <section>
+    <h2>Introduction</h2>
+    <div class="highlight">Pack Smart is designed with your privacy as the top priority. This app does not collect, transmit, or sell your personal information.</div>
+  </section>
+
+  <section>
+    <h2>Data We Collect</h2>
+    <p>This app does not send any data to external servers.</p>
+    <p>All data — including event names, packing lists, and settings — is stored exclusively on your device (browser local storage).</p>
+  </section>
+
+  <section>
+    <h2>Third-Party Sharing</h2>
+    <p>We do not share, sell, or provide user data to any third party.</p>
+  </section>
+
+  <section>
+    <h2>Advertising & Tracking</h2>
+    <p>This app contains no advertisements and uses no tracking tools (such as Google Analytics).</p>
+  </section>
+
+  <section>
+    <h2>Deleting Your Data</h2>
+    <p>You can delete all app data at any time by clearing site data from your browser settings.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>For privacy-related questions, please contact us via the purchase page.</p>
+  </section>
+</div>
+
+<!-- 🇫🇷 Français -->
+<div class="content" id="lang-fr">
+  <div class="page-title">Politique de Confidentialité</div>
+  <div class="page-date">Dernière mise à jour : janvier 2026</div>
+
+  <section>
+    <h2>Introduction</h2>
+    <div class="highlight">Pack Smart est conçu en faisant de votre vie privée une priorité absolue. Cette application ne collecte, ne transmet ni ne vend vos informations personnelles.</div>
+  </section>
+
+  <section>
+    <h2>Données collectées</h2>
+    <p>Cette application n'envoie aucune donnée à des serveurs externes.</p>
+    <p>Toutes les données — noms d'événements, listes de bagages, paramètres — sont stockées uniquement sur votre appareil (stockage local du navigateur).</p>
+  </section>
+
+  <section>
+    <h2>Partage avec des tiers</h2>
+    <p>Nous ne partageons, ne vendons ni ne fournissons vos données à des tiers.</p>
+  </section>
+
+  <section>
+    <h2>Publicité et suivi</h2>
+    <p>Cette application ne contient aucune publicité et n'utilise aucun outil de suivi.</p>
+  </section>
+
+  <section>
+    <h2>Suppression des données</h2>
+    <p>Vous pouvez supprimer toutes vos données à tout moment en effaçant les données du site dans les paramètres de votre navigateur.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Pour toute question relative à la confidentialité, contactez-nous via la page d'achat.</p>
+  </section>
+</div>
+
+<!-- 🇧🇷 Português -->
+<div class="content" id="lang-pt">
+  <div class="page-title">Política de Privacidade</div>
+  <div class="page-date">Última atualização: janeiro de 2026</div>
+
+  <section>
+    <h2>Introdução</h2>
+    <div class="highlight">O Pack Smart foi projetado tendo sua privacidade como prioridade máxima. Este aplicativo não coleta, transmite nem vende suas informações pessoais.</div>
+  </section>
+
+  <section>
+    <h2>Dados Coletados</h2>
+    <p>Este aplicativo não envia nenhum dado a servidores externos.</p>
+    <p>Todos os dados — nomes de eventos, listas de itens e configurações — são armazenados exclusivamente no seu dispositivo (armazenamento local do navegador).</p>
+  </section>
+
+  <section>
+    <h2>Compartilhamento com Terceiros</h2>
+    <p>Não compartilhamos, vendemos nem fornecemos dados dos usuários a terceiros.</p>
+  </section>
+
+  <section>
+    <h2>Publicidade e Rastreamento</h2>
+    <p>Este aplicativo não contém anúncios e não utiliza ferramentas de rastreamento.</p>
+  </section>
+
+  <section>
+    <h2>Exclusão de Dados</h2>
+    <p>Você pode excluir todos os dados do aplicativo a qualquer momento limpando os dados do site nas configurações do seu navegador.</p>
+  </section>
+
+  <section>
+    <h2>Contato</h2>
+    <p>Para dúvidas relacionadas à privacidade, entre em contato pela página de compra.</p>
+  </section>
+</div>
+
+<!-- 🇪🇸 Español -->
+<div class="content" id="lang-es">
+  <div class="page-title">Política de Privacidad</div>
+  <div class="page-date">Última actualización: enero de 2026</div>
+
+  <section>
+    <h2>Introducción</h2>
+    <div class="highlight">Pack Smart está diseñado con tu privacidad como prioridad absoluta. Esta aplicación no recopila, transmite ni vende tu información personal.</div>
+  </section>
+
+  <section>
+    <h2>Datos que Recopilamos</h2>
+    <p>Esta aplicación no envía ningún dato a servidores externos.</p>
+    <p>Todos los datos — nombres de eventos, listas de artículos y configuraciones — se almacenan exclusivamente en tu dispositivo (almacenamiento local del navegador).</p>
+  </section>
+
+  <section>
+    <h2>Compartición con Terceros</h2>
+    <p>No compartimos, vendemos ni proporcionamos datos de usuarios a terceros.</p>
+  </section>
+
+  <section>
+    <h2>Publicidad y Seguimiento</h2>
+    <p>Esta aplicación no contiene publicidad y no utiliza herramientas de seguimiento.</p>
+  </section>
+
+  <section>
+    <h2>Eliminación de Datos</h2>
+    <p>Puedes eliminar todos los datos de la aplicación en cualquier momento borrando los datos del sitio en la configuración de tu navegador.</p>
+  </section>
+
+  <section>
+    <h2>Contacto</h2>
+    <p>Para preguntas relacionadas con la privacidad, contáctanos a través de la página de compra.</p>
+  </section>
+</div>
+
+<!-- 🇨🇳 中文 -->
+<div class="content" id="lang-zh">
+  <div class="page-title">隐私政策</div>
+  <div class="page-date">最后更新：2026年1月</div>
+
+  <section>
+    <h2>简介</h2>
+    <div class="highlight">Pack Smart 的设计以保护您的隐私为首要原则。本应用不收集、传输或出售您的个人信息。</div>
+  </section>
+
+  <section>
+    <h2>收集的数据</h2>
+    <p>本应用不向任何外部服务器发送数据。</p>
+    <p>所有数据（包括活动名称、物品清单和设置）均仅存储在您的设备本地（浏览器本地存储）。</p>
+  </section>
+
+  <section>
+    <h2>第三方共享</h2>
+    <p>我们不向任何第三方共享、出售或提供用户数据。</p>
+  </section>
+
+  <section>
+    <h2>广告与追踪</h2>
+    <p>本应用不包含任何广告，也不使用任何追踪工具。</p>
+  </section>
+
+  <section>
+    <h2>删除数据</h2>
+    <p>您可以随时通过浏览器设置清除网站数据，删除本应用的所有数据。</p>
+  </section>
+
+  <section>
+    <h2>联系我们</h2>
+    <p>如有隐私相关问题，请通过购买页面与我们联系。</p>
+  </section>
+</div>
+
+<!-- 🇰🇷 한국어 -->
+<div class="content" id="lang-ko">
+  <div class="page-title">개인정보 처리방침</div>
+  <div class="page-date">최종 업데이트: 2026년 1월</div>
+
+  <section>
+    <h2>소개</h2>
+    <div class="highlight">Pack Smart는 귀하의 개인정보 보호를 최우선으로 설계되었습니다. 이 앱은 귀하의 개인정보를 수집, 전송 또는 판매하지 않습니다.</div>
+  </section>
+
+  <section>
+    <h2>수집하는 데이터</h2>
+    <p>이 앱은 외부 서버로 어떠한 데이터도 전송하지 않습니다.</p>
+    <p>이벤트 이름, 짐 목록, 설정 등 모든 데이터는 귀하의 기기(브라우저 로컬 스토리지)에만 저장됩니다.</p>
+  </section>
+
+  <section>
+    <h2>제3자 공유</h2>
+    <p>당사는 사용자 데이터를 제3자에게 공유, 판매 또는 제공하지 않습니다.</p>
+  </section>
+
+  <section>
+    <h2>광고 및 추적</h2>
+    <p>이 앱에는 광고가 없으며 추적 도구도 사용하지 않습니다.</p>
+  </section>
+
+  <section>
+    <h2>데이터 삭제</h2>
+    <p>브라우저 설정에서 사이트 데이터를 삭제하면 언제든지 앱의 모든 데이터를 삭제할 수 있습니다.</p>
+  </section>
+
+  <section>
+    <h2>문의</h2>
+    <p>개인정보 관련 문의는 구매 페이지를 통해 연락해 주세요.</p>
+  </section>
+</div>
+
+</main>
+
+<footer>© 2026 Pack Smart. All rights reserved.</footer>
+
+<script>
+function setLang(code) {
+  document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('lang-' + code).classList.add('active');
+  event.target.classList.add('active');
+  document.documentElement.lang = code;
+}
+</script>
+</body>
+</html>
