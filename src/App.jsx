@@ -56,6 +56,12 @@ const TRANSLATIONS = {
     language: "言語",
     selectEvent: "イベントを選択",
     selectEventHint: "「イベント」タブからイベントを選んでください",
+    sampleModalTitle: "サンプルデータを追加しますか？",
+    sampleModalDesc: "旅行の例を追加して、使い方をすぐに確認できます。後から削除できます。",
+    sampleModalYes: "✨ 追加する",
+    sampleModalNo: "空の状態で始める",
+    langSelectTitle: "言語を選んでください",
+    langSelectBtn: "次へ →",
   },
   en: {
     appSub: "PACK SMART",
@@ -111,6 +117,12 @@ const TRANSLATIONS = {
     language: "Language",
     selectEvent: "Select an event",
     selectEventHint: "Choose an event from the \"Events\" tab",
+    sampleModalTitle: "Add sample data?",
+    sampleModalDesc: "Add a sample trip to explore the app. You can delete it anytime.",
+    sampleModalYes: "✨ Add sample",
+    sampleModalNo: "Start empty",
+    langSelectTitle: "Choose your language",
+    langSelectBtn: "Next →",
   },
   fr: {
     appSub: "PACK SMART",
@@ -166,6 +178,12 @@ const TRANSLATIONS = {
     language: "Langue",
     selectEvent: "Sélectionner un événement",
     selectEventHint: "Choisissez un événement depuis l'onglet \"Événements\"",
+    sampleModalTitle: "Ajouter des données exemple ?",
+    sampleModalDesc: "Ajoutez un voyage exemple pour explorer l'app. Vous pouvez le supprimer à tout moment.",
+    sampleModalYes: "✨ Ajouter",
+    sampleModalNo: "Commencer vide",
+    langSelectTitle: "Choisissez votre langue",
+    langSelectBtn: "Suivant →",
   },
   pt: {
     appSub: "PACK SMART",
@@ -221,6 +239,12 @@ const TRANSLATIONS = {
     language: "Idioma",
     selectEvent: "Selecionar evento",
     selectEventHint: "Escolha um evento na aba \"Eventos\"",
+    sampleModalTitle: "Adicionar dados de exemplo?",
+    sampleModalDesc: "Adicione uma viagem de exemplo para explorar o app. Você pode excluir quando quiser.",
+    sampleModalYes: "✨ Adicionar",
+    sampleModalNo: "Começar vazio",
+    langSelectTitle: "Escolha seu idioma",
+    langSelectBtn: "Próximo →",
   },
   es: {
     appSub: "PACK SMART",
@@ -276,6 +300,12 @@ const TRANSLATIONS = {
     language: "Idioma",
     selectEvent: "Seleccionar evento",
     selectEventHint: "Elige un evento en la pestaña \"Eventos\"",
+    sampleModalTitle: "¿Agregar datos de ejemplo?",
+    sampleModalDesc: "Agrega un viaje de ejemplo para explorar la app. Puedes eliminarlo cuando quieras.",
+    sampleModalYes: "✨ Agregar",
+    sampleModalNo: "Empezar vacío",
+    langSelectTitle: "Elige tu idioma",
+    langSelectBtn: "Siguiente →",
   },
   zh: {
     appSub: "PACK SMART",
@@ -331,6 +361,12 @@ const TRANSLATIONS = {
     language: "语言",
     selectEvent: "选择活动",
     selectEventHint: "请在「活动」标签页选择一个活动",
+    sampleModalTitle: "添加示例数据？",
+    sampleModalDesc: "添加一个示例旅行来探索应用。随时可以删除。",
+    sampleModalYes: "✨ 添加",
+    sampleModalNo: "从空白开始",
+    langSelectTitle: "请选择语言",
+    langSelectBtn: "下一步 →",
   },
   ko: {
     appSub: "PACK SMART",
@@ -386,6 +422,12 @@ const TRANSLATIONS = {
     language: "언어",
     selectEvent: "이벤트를 선택하세요",
     selectEventHint: "\"이벤트\" 탭에서 이벤트를 선택하세요",
+    sampleModalTitle: "샘플 데이터를 추가할까요?",
+    sampleModalDesc: "샘플 여행을 추가해서 앱을 탐색해보세요. 언제든지 삭제할 수 있습니다.",
+    sampleModalYes: "✨ 추가하기",
+    sampleModalNo: "빈 상태로 시작",
+    langSelectTitle: "언어를 선택하세요",
+    langSelectBtn: "다음 →",
   },
 };
 
@@ -420,7 +462,6 @@ const sampleEvents = {
 const emptyItem = (prep) => ({ name: "", qty: 1, days: [], prep, prepWhere: "", category: "", tags: [] });
 
 export default function App() {
-  // ── データ読み込み（アプリ起動時）──
   const load = (key, fallback) => {
     try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; }
   };
@@ -428,12 +469,20 @@ export default function App() {
     try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
   };
 
+  // ── 初回判定 ──
+  // ps_onboarded が保存されていなければ初回
+  const isFirstTime = !localStorage.getItem("ps_onboarded");
+
   const [lang, setLang] = useState(() => load("ps_lang", "ja"));
+  const [showLangSelect, setShowLangSelect] = useState(isFirstTime);
+  const [showSampleModal, setShowSampleModal] = useState(false);
+  const [selectedLang, setSelectedLang] = useState(() => load("ps_lang", "ja"));
+
   const t = TRANSLATIONS[lang];
   const initEvents = sampleEvents[lang] || sampleEvents["en"];
 
-  const [events, setEvents] = useState(() => load("ps_events", initEvents));
-  const [selectedEventId, setSelectedEventId] = useState(() => load("ps_selectedId", initEvents[0]?.id || null));
+  const [events, setEvents] = useState(() => load("ps_events", []));
+  const [selectedEventId, setSelectedEventId] = useState(() => load("ps_selectedId", null));
   const [tabIndex, setTabIndex] = useState(0);
   const [sortBy, setSortBy] = useState("day");
   const [filterPrep, setFilterPrep] = useState("all");
@@ -448,7 +497,6 @@ export default function App() {
   const [userTags, setUserTags] = useState(() => load("ps_userTags", []));
   const [newTagInput, setNewTagInput] = useState("");
 
-  // ── データ保存（変更のたびに自動保存）──
   React.useEffect(() => { save("ps_events", events); }, [events]);
   React.useEffect(() => { save("ps_selectedId", selectedEventId); }, [selectedEventId]);
   React.useEffect(() => { save("ps_lang", lang); }, [lang]);
@@ -536,6 +584,88 @@ export default function App() {
   const toggleTag = (tag, setter) => setter(p => ({ ...p, tags: p.tags.includes(tag) ? p.tags.filter(t=>t!==tag) : [...p.tags,tag] }));
   const calcQty = (cur, n) => Math.min(9999, parseInt(String(cur === 1 && n <= 9 ? "" : cur) + String(n)) || 1);
   const daysLabel = (days) => !days?.length ? "—" : days.map(d => lang === "ja" ? `${d}${t.daysUnit}` : lang === "ko" ? `${d}${t.daysUnit}` : lang === "zh" ? `第${d}${t.daysUnit}` : `Day ${d}`).join(", ");
+
+  // ── 言語選択画面 ──────────────────────────────────────
+  if (showLangSelect) {
+    return (
+      <div style={{ background: "#0f0f13", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24, fontFamily: "system-ui,sans-serif" }}>
+        <div style={{ fontSize: 48, marginBottom: 12 }}>🧳</div>
+        <div style={{ fontSize: 11, color: "#60a5fa", letterSpacing: 3, textTransform: "uppercase", marginBottom: 6 }}>PACK SMART</div>
+        <div style={{ fontSize: 24, fontWeight: 700, color: "#f0ede8", marginBottom: 40 }}>
+          {TRANSLATIONS[selectedLang].langSelectTitle}
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 320 }}>
+          {LANG_OPTIONS.map(l => (
+            <button key={l.code} onClick={() => setSelectedLang(l.code)} style={{
+              padding: "14px 20px", borderRadius: 14, border: "none",
+              background: selectedLang === l.code ? "linear-gradient(135deg,#2563eb,#3b82f6)" : "#1a1a26",
+              color: selectedLang === l.code ? "white" : "#888",
+              fontSize: 16, fontWeight: selectedLang === l.code ? 700 : 400,
+              cursor: "pointer", textAlign: "left",
+              border: selectedLang === l.code ? "none" : "1px solid #ffffff08",
+            }}>{l.label}</button>
+          ))}
+        </div>
+        <button onClick={() => {
+          setLang(selectedLang);
+          save("ps_lang", selectedLang);
+          setShowLangSelect(false);
+          // ps_eventsが空なら次にサンプルモーダルを表示
+          const existing = load("ps_events", []);
+          if (!existing || existing.length === 0) {
+            setShowSampleModal(true);
+          }
+          save("ps_onboarded", "1");
+        }} style={{
+          marginTop: 32, padding: "16px 48px", borderRadius: 40,
+          background: "linear-gradient(135deg,#2563eb,#3b82f6)",
+          color: "white", fontSize: 16, fontWeight: 700,
+          border: "none", cursor: "pointer", width: "100%", maxWidth: 320,
+        }}>
+          {TRANSLATIONS[selectedLang].langSelectBtn}
+        </button>
+      </div>
+    );
+  }
+
+  // ── サンプルデータモーダル ────────────────────────────
+  if (showSampleModal) {
+    return (
+      <div style={{ background: "#0f0f13", minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 24, fontFamily: "system-ui,sans-serif" }}>
+        <div style={{ maxWidth: 360, width: "100%", background: "#1a1a26", borderRadius: 20, padding: "32px 24px", textAlign: "center", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <div style={{ fontSize: 52, marginBottom: 16 }}>📋</div>
+          <h2 style={{ color: "#f0ede8", fontSize: 20, margin: "0 0 12px", fontWeight: 700 }}>
+            {t.sampleModalTitle}
+          </h2>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, margin: "0 0 28px", lineHeight: 1.7 }}>
+            {t.sampleModalDesc}
+          </p>
+          <button onClick={() => {
+            const sample = sampleEvents[lang] ?? sampleEvents["ja"];
+            setEvents(sample);
+            save("ps_events", sample);
+            setSelectedEventId(sample[0]?.id || null);
+            setShowSampleModal(false);
+          }} style={{
+            width: "100%", padding: 16, borderRadius: 14,
+            background: "linear-gradient(135deg,#2563eb,#3b82f6)",
+            color: "#fff", fontSize: 16, fontWeight: 700,
+            border: "none", marginBottom: 12, cursor: "pointer",
+          }}>
+            {t.sampleModalYes}
+          </button>
+          <button onClick={() => setShowSampleModal(false)} style={{
+            width: "100%", padding: 14, borderRadius: 14,
+            background: "rgba(255,255,255,0.06)",
+            color: "rgba(255,255,255,0.6)",
+            fontSize: 15, border: "none", cursor: "pointer",
+          }}>
+            {t.sampleModalNo}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   // ── QtyPad ─────────────────────────────────────────────
   const QtyPad = ({ value, setter }) => (
@@ -826,11 +956,6 @@ export default function App() {
   );
 }
 
-// Fix 300ms tap delay on iOS Safari
-if (typeof document !== "undefined") {
-  const meta = document.querySelector("meta[name=viewport]");
-  if (meta) meta.content = "width=device-width, initial-scale=1, maximum-scale=1";
-}
 
 const inputStyle = { width: "100%", background: "#0f0f13", border: "1px solid #ffffff15", borderRadius: 10, padding: "11px 14px", color: "#f0ede8", fontSize: 14, marginBottom: 8, boxSizing: "border-box", outline: "none" };
 const selectStyle = { background: "#1e2030", border: "1px solid #ffffff10", borderRadius: 20, padding: "6px 10px", color: "#aaa", fontSize: 11, outline: "none", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 };
