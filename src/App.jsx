@@ -937,7 +937,7 @@ export default function App() {
           setSelectedLang(lang);
           setShowLangSelect(true);
         }} style={{ width: "100%", padding: "10px", borderRadius: 12, border: "1px solid #ffffff15", background: "transparent", color: "#60a5fa", fontSize: 13, cursor: "pointer" }}>
-          🌐 {t.resetLang}
+          🌐 Change language & reset sample data
         </button>
       </div>
 
