@@ -506,6 +506,12 @@ const sampleEvents = {
   ]}],
 };
 
+const inputStyle = { width: "100%", background: "#0f0f13", border: "1px solid #ffffff15", borderRadius: 10, padding: "11px 14px", color: "#f0ede8", fontSize: 14, marginBottom: 8, boxSizing: "border-box", outline: "none" };
+const selectStyle = { background: "#1e2030", border: "1px solid #ffffff10", borderRadius: 20, padding: "6px 10px", color: "#aaa", fontSize: 11, outline: "none", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 };
+const lbl = { display: "block", fontSize: 11, color: "#555", marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" };
+const pillBtn = { background: "linear-gradient(135deg,#2563eb,#3b82f6)", border: "none", borderRadius: 20, color: "white", padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer" };
+const card = { background: "#1a1a26", border: "1px solid #ffffff08", borderRadius: 16, padding: 16, marginBottom: 14 };
+
 const emptyItem = (prep) => ({ name: "", qty: 1, days: [], prep, prepWhere: "", category: "", tags: [] });
 
 const calcQty = (cur, n) => Math.min(9999, Math.max(1, n));
@@ -1000,10 +1006,3 @@ export default function App() {
     </div>
   );
 }
-
-
-const inputStyle = { width: "100%", background: "#0f0f13", border: "1px solid #ffffff15", borderRadius: 10, padding: "11px 14px", color: "#f0ede8", fontSize: 14, marginBottom: 8, boxSizing: "border-box", outline: "none" };
-const selectStyle = { background: "#1e2030", border: "1px solid #ffffff10", borderRadius: 20, padding: "6px 10px", color: "#aaa", fontSize: 11, outline: "none", cursor: "pointer", whiteSpace: "nowrap", flexShrink: 0 };
-const lbl = { display: "block", fontSize: 11, color: "#555", marginBottom: 6, letterSpacing: 1, textTransform: "uppercase" };
-const pillBtn = { background: "linear-gradient(135deg,#2563eb,#3b82f6)", border: "none", borderRadius: 20, color: "white", padding: "8px 16px", fontSize: 13, fontWeight: 600, cursor: "pointer" };
-const card = { background: "#1a1a26", border: "1px solid #ffffff08", borderRadius: 16, padding: 16, marginBottom: 14 };
