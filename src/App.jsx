@@ -62,6 +62,7 @@ const TRANSLATIONS = {
     sampleModalNo: "空の状態で始める",
     langSelectTitle: "言語を選んでください",
     langSelectBtn: "次へ →",
+    resetLang: "言語を選び直す（サンプルも変わります）",
   },
   en: {
     appSub: "PACK SMART",
@@ -123,6 +124,7 @@ const TRANSLATIONS = {
     sampleModalNo: "Start empty",
     langSelectTitle: "Choose your language",
     langSelectBtn: "Next →",
+    resetLang: "Change language & reset sample data",
   },
   fr: {
     appSub: "PACK SMART",
@@ -184,6 +186,7 @@ const TRANSLATIONS = {
     sampleModalNo: "Commencer vide",
     langSelectTitle: "Choisissez votre langue",
     langSelectBtn: "Suivant →",
+    resetLang: "Changer la langue et réinitialiser",
   },
   pt: {
     appSub: "PACK SMART",
@@ -245,6 +248,7 @@ const TRANSLATIONS = {
     sampleModalNo: "Começar vazio",
     langSelectTitle: "Escolha seu idioma",
     langSelectBtn: "Próximo →",
+    resetLang: "Mudar idioma e redefinir exemplo",
   },
   es: {
     appSub: "PACK SMART",
@@ -306,6 +310,7 @@ const TRANSLATIONS = {
     sampleModalNo: "Empezar vacío",
     langSelectTitle: "Elige tu idioma",
     langSelectBtn: "Siguiente →",
+    resetLang: "Cambiar idioma y restablecer ejemplo",
   },
   zh: {
     appSub: "PACK SMART",
@@ -367,6 +372,7 @@ const TRANSLATIONS = {
     sampleModalNo: "从空白开始",
     langSelectTitle: "请选择语言",
     langSelectBtn: "下一步 →",
+    resetLang: "重新选择语言并重置示例",
   },
   ko: {
     appSub: "PACK SMART",
@@ -428,6 +434,7 @@ const TRANSLATIONS = {
     sampleModalNo: "빈 상태로 시작",
     langSelectTitle: "언어를 선택하세요",
     langSelectBtn: "다음 →",
+    resetLang: "언어 변경 및 샘플 초기화",
   },
 };
 
@@ -455,13 +462,47 @@ const getSampleDate = () => {
 };
 
 const sampleEvents = {
-  ja: [{ id: 1, name: "実家への帰省", type: "定期", nextDate: getSampleDate(), items: [
-    { id: 1, name: "着替え", qty: 3, days: [1,2], prep: "家にある", prepWhere: "", category: "衣類", tags: [], done: false },
+  ja: [{ id: 1, name: "旅行", type: "単発", nextDate: getSampleDate(), items: [
+    { id: 1, name: "着替え", qty: 3, days: [1,2,3], prep: "家にある", prepWhere: "", category: "衣類", tags: [], done: false },
     { id: 2, name: "充電器", qty: 1, days: [1], prep: "家にある", prepWhere: "", category: "電子機器", tags: [], done: false },
+    { id: 3, name: "パスポート", qty: 1, days: [1], prep: "家にある", prepWhere: "", category: "書類", tags: [], done: false },
+    { id: 4, name: "常備薬", qty: 1, days: [1], prep: "買う", prepWhere: "ドラッグストア", category: "日用品", tags: [], done: false },
   ]}],
-  en: [{ id: 1, name: "Summer Vacation", type: "One-time", nextDate: getSampleDate(), items: [
-    { id: 1, name: "Clothes", qty: 3, days: [1,2], prep: "Have it", prepWhere: "", category: "Clothing", tags: [], done: false },
+  en: [{ id: 1, name: "Trip", type: "One-time", nextDate: getSampleDate(), items: [
+    { id: 1, name: "Clothes", qty: 3, days: [1,2,3], prep: "Have it", prepWhere: "", category: "Clothing", tags: [], done: false },
     { id: 2, name: "Charger", qty: 1, days: [1], prep: "Have it", prepWhere: "", category: "Electronics", tags: [], done: false },
+    { id: 3, name: "Passport", qty: 1, days: [1], prep: "Have it", prepWhere: "", category: "Documents", tags: [], done: false },
+    { id: 4, name: "Medicine", qty: 1, days: [1], prep: "Buy it", prepWhere: "Pharmacy", category: "Toiletries", tags: [], done: false },
+  ]}],
+  fr: [{ id: 1, name: "Voyage", type: "Unique", nextDate: getSampleDate(), items: [
+    { id: 1, name: "Vêtements", qty: 3, days: [1,2,3], prep: "J'ai déjà", prepWhere: "", category: "Vêtements", tags: [], done: false },
+    { id: 2, name: "Chargeur", qty: 1, days: [1], prep: "J'ai déjà", prepWhere: "", category: "Électronique", tags: [], done: false },
+    { id: 3, name: "Passeport", qty: 1, days: [1], prep: "J'ai déjà", prepWhere: "", category: "Documents", tags: [], done: false },
+    { id: 4, name: "Médicaments", qty: 1, days: [1], prep: "Acheter", prepWhere: "Pharmacie", category: "Toilettes", tags: [], done: false },
+  ]}],
+  pt: [{ id: 1, name: "Viagem", type: "Único", nextDate: getSampleDate(), items: [
+    { id: 1, name: "Roupas", qty: 3, days: [1,2,3], prep: "Já tenho", prepWhere: "", category: "Roupas", tags: [], done: false },
+    { id: 2, name: "Carregador", qty: 1, days: [1], prep: "Já tenho", prepWhere: "", category: "Eletrônicos", tags: [], done: false },
+    { id: 3, name: "Passaporte", qty: 1, days: [1], prep: "Já tenho", prepWhere: "", category: "Documentos", tags: [], done: false },
+    { id: 4, name: "Remédios", qty: 1, days: [1], prep: "Comprar", prepWhere: "Farmácia", category: "Higiene", tags: [], done: false },
+  ]}],
+  es: [{ id: 1, name: "Viaje", type: "Único", nextDate: getSampleDate(), items: [
+    { id: 1, name: "Ropa", qty: 3, days: [1,2,3], prep: "Ya tengo", prepWhere: "", category: "Ropa", tags: [], done: false },
+    { id: 2, name: "Cargador", qty: 1, days: [1], prep: "Ya tengo", prepWhere: "", category: "Electrónica", tags: [], done: false },
+    { id: 3, name: "Pasaporte", qty: 1, days: [1], prep: "Ya tengo", prepWhere: "", category: "Documentos", tags: [], done: false },
+    { id: 4, name: "Medicamentos", qty: 1, days: [1], prep: "Comprar", prepWhere: "Farmacia", category: "Higiene", tags: [], done: false },
+  ]}],
+  zh: [{ id: 1, name: "旅行", type: "单次", nextDate: getSampleDate(), items: [
+    { id: 1, name: "衣服", qty: 3, days: [1,2,3], prep: "已有", prepWhere: "", category: "服装", tags: [], done: false },
+    { id: 2, name: "充电器", qty: 1, days: [1], prep: "已有", prepWhere: "", category: "电子产品", tags: [], done: false },
+    { id: 3, name: "护照", qty: 1, days: [1], prep: "已有", prepWhere: "", category: "证件", tags: [], done: false },
+    { id: 4, name: "药品", qty: 1, days: [1], prep: "购买", prepWhere: "药店", category: "日用品", tags: [], done: false },
+  ]}],
+  ko: [{ id: 1, name: "여행", type: "단발", nextDate: getSampleDate(), items: [
+    { id: 1, name: "옷", qty: 3, days: [1,2,3], prep: "이미 있음", prepWhere: "", category: "의류", tags: [], done: false },
+    { id: 2, name: "충전기", qty: 1, days: [1], prep: "이미 있음", prepWhere: "", category: "전자기기", tags: [], done: false },
+    { id: 3, name: "여권", qty: 1, days: [1], prep: "이미 있음", prepWhere: "", category: "서류", tags: [], done: false },
+    { id: 4, name: "약", qty: 1, days: [1], prep: "구매", prepWhere: "약국", category: "생활용품", tags: [], done: false },
   ]}],
 };
 
@@ -672,10 +713,15 @@ export default function App() {
           setLang(selectedLang);
           save("ps_lang", selectedLang);
           setShowLangSelect(false);
-          // ps_eventsが空なら次にサンプルモーダルを表示
           const existing = load("ps_events", []);
           if (!existing || existing.length === 0) {
             setShowSampleModal(true);
+          } else {
+            // 設定から戻ってきた場合はサンプルをリセット
+            const sample = sampleEvents[selectedLang] || sampleEvents["en"];
+            setEvents(sample);
+            save("ps_events", sample);
+            setSelectedEventId(sample[0]?.id || null);
           }
           save("ps_onboarded", "1");
         }} style={{
@@ -876,11 +922,17 @@ export default function App() {
 
       <div style={card}>
         <div style={{ fontSize: 14, fontWeight: 600, marginBottom: 10 }}>{t.language}</div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
           {LANG_OPTIONS.map(l => (
             <button key={l.code} onClick={() => { setLang(l.code); }} style={{ padding: "8px 14px", borderRadius: 20, border: "none", background: lang === l.code ? "#3b82f6" : "#1e2030", color: lang === l.code ? "white" : "#888", fontSize: 13, fontWeight: lang === l.code ? 700 : 400, cursor: "pointer" }}>{l.label}</button>
           ))}
         </div>
+        <button onClick={() => {
+          setSelectedLang(lang);
+          setShowLangSelect(true);
+        }} style={{ width: "100%", padding: "10px", borderRadius: 12, border: "1px solid #ffffff15", background: "transparent", color: "#60a5fa", fontSize: 13, cursor: "pointer" }}>
+          🌐 {t.resetLang}
+        </button>
       </div>
 
       <div style={{ ...card, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
