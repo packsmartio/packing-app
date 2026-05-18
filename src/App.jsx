@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 // ── 翻訳データ ──────────────────────────────────────────
 const TRANSLATIONS = {
@@ -448,18 +448,97 @@ const prepColor = (p, methods) => {
   return idx === 0 ? "#4ade80" : idx === 1 ? "#fb923c" : "#c084fc";
 };
 
+const getSampleDate = () => {
+  const now = new Date();
+  const target = new Date(now.getFullYear(), now.getMonth() + 3, 1);
+  return target.toISOString().split("T")[0];
+};
+
 const sampleEvents = {
-  ja: [{ id: 1, name: "実家への帰省", type: "定期", nextDate: "2026-08-10", items: [
+  ja: [{ id: 1, name: "実家への帰省", type: "定期", nextDate: getSampleDate(), items: [
     { id: 1, name: "着替え", qty: 3, days: [1,2], prep: "家にある", prepWhere: "", category: "衣類", tags: [], done: false },
     { id: 2, name: "充電器", qty: 1, days: [1], prep: "家にある", prepWhere: "", category: "電子機器", tags: [], done: false },
   ]}],
-  en: [{ id: 1, name: "Summer Vacation", type: "One-time", nextDate: "2026-08-10", items: [
+  en: [{ id: 1, name: "Summer Vacation", type: "One-time", nextDate: getSampleDate(), items: [
     { id: 1, name: "Clothes", qty: 3, days: [1,2], prep: "Have it", prepWhere: "", category: "Clothing", tags: [], done: false },
     { id: 2, name: "Charger", qty: 1, days: [1], prep: "Have it", prepWhere: "", category: "Electronics", tags: [], done: false },
   ]}],
 };
 
 const emptyItem = (prep) => ({ name: "", qty: 1, days: [], prep, prepWhere: "", category: "", tags: [] });
+
+const calcQty = (cur, n) => Math.min(9999, Math.max(1, n));
+
+// ── QtyPad ─────────────────────────────────────────────
+const QtyPad = ({ value, setter, t }) => (
+  <div>
+    <div style={{ background: "#1e2030", borderRadius: 12, padding: "10px 14px", marginBottom: 8, fontSize: 28, fontWeight: 700, color: "#f0ede8", textAlign: "right" }}>
+      {value}<span style={{ fontSize: 13, color: "#555", marginLeft: 6 }}>{t.qtyUnit}</span>
+    </div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+      {QTY_NUMS.map(n => (
+        <button key={n} onClick={() => setter(p => ({ ...p, qty: calcQty(p.qty, n) }))} style={{ minWidth: 38, height: 38, borderRadius: 10, border: "none", padding: "0 6px", background: "#1e2030", color: "#ccc", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>{n}</button>
+      ))}
+      <button onClick={() => setter(p => ({ ...p, qty: Math.max(1, Math.floor(p.qty / 10)) }))} style={{ minWidth: 38, height: 38, borderRadius: 10, border: "none", padding: "0 10px", background: "#2a1a1a", color: "#f87171", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>⌫</button>
+      <button onClick={() => setter(p => ({ ...p, qty: 1 }))} style={{ minWidth: 38, height: 38, borderRadius: 10, border: "none", padding: "0 10px", background: "#1a1a26", color: "#555", fontSize: 11, cursor: "pointer" }}>C</button>
+    </div>
+  </div>
+);
+
+// ── ItemForm ────────────────────────────────────────────
+const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTags, toggleDay, toggleTag, daysLabel }) => (
+  <div>
+    <input value={item.name} onChange={e => setter(p => ({ ...p, name: e.target.value }))} placeholder={t.itemNamePlaceholder} style={inputStyle} />
+    <div style={lbl}>{t.qty}</div>
+    <QtyPad value={item.qty} setter={setter} t={t} />
+    <div style={{ marginTop: 10 }} />
+    <div style={lbl}>{t.days} {item.days.length > 0 && <span style={{ color: "#60a5fa" }}>{daysLabel(item.days)}</span>}</div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 6 }}>
+      {DAY_NUMS.map(d => (
+        <button key={d} onClick={() => toggleDay(d, setter)} style={{ width: 38, height: 38, borderRadius: 10, border: "none", background: item.days.includes(d) ? "#3b82f6" : "#1e2030", color: item.days.includes(d) ? "white" : "#666", fontSize: 14, fontWeight: item.days.includes(d) ? 700 : 400, cursor: "pointer" }}>{d}</button>
+      ))}
+    </div>
+    <button onClick={() => setter(p => ({ ...p, days: [] }))} style={{ background: "none", border: "1px solid #333", borderRadius: 8, color: "#555", fontSize: 11, padding: "4px 12px", cursor: "pointer", marginBottom: 12 }}>{t.resetDays}</button>
+
+    <div style={lbl}>{t.prepMethod}</div>
+    <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+      {t.prepMethods.map((p) => (
+        <button key={p} onClick={() => setter(prev => ({ ...prev, prep: p, prepWhere: "" }))} style={{ flex: 1, padding: "9px 4px", borderRadius: 10, border: "none", background: item.prep === p ? prepColor(p, t.prepMethods) : "#1e2030", color: item.prep === p ? "#000" : "#888", fontSize: 11, fontWeight: item.prep === p ? 700 : 400, cursor: "pointer" }}>{p}</button>
+      ))}
+    </div>
+    {item.prep === t.prepMethods[1] && (
+      <input placeholder={t.wherePlaceholder} value={item.prepWhere} onChange={e => setter(p => ({ ...p, prepWhere: e.target.value }))} style={inputStyle} />
+    )}
+
+    {useCat && (
+      <>
+        <div style={lbl}>{t.category}</div>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
+          {t.categories.map(c => (
+            <button key={c} onClick={() => setter(p => ({ ...p, category: p.category === c ? "" : c }))} style={{ padding: "7px 14px", borderRadius: 20, border: "none", background: item.category === c ? "#3b82f6" : "#1e2030", color: item.category === c ? "white" : "#888", fontSize: 12, fontWeight: item.category === c ? 700 : 400, cursor: "pointer" }}>{c}</button>
+          ))}
+        </div>
+      </>
+    )}
+
+    {userTags.length > 0 && (
+      <>
+        <div style={lbl}>{t.tags}</div>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
+          {userTags.map(tag => (
+            <button key={tag} onClick={() => toggleTag(tag, setter)} style={{ padding: "7px 14px", borderRadius: 20, border: "none", background: item.tags.includes(tag) ? "#7c3aed" : "#1e2030", color: item.tags.includes(tag) ? "white" : "#888", fontSize: 12, fontWeight: item.tags.includes(tag) ? 700 : 400, cursor: "pointer" }}>{tag}</button>
+          ))}
+        </div>
+      </>
+    )}
+
+    <div style={{ display: "flex", gap: 8, marginBottom: onDelete ? "8px" : "0px" }}>
+      <button onClick={onCancel} style={{ ...pillBtn, background: "#2a2d3e", flex: 1 }}>{t.cancel}</button>
+      <button onClick={onSave} style={{ ...pillBtn, flex: 2 }}>{t.save}</button>
+    </div>
+    {onDelete && <button onClick={onDelete} style={{ width: "100%", padding: 8, borderRadius: 8, border: "none", background: "#3a1a1a", color: "#f87171", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{t.deleteItem}</button>}
+  </div>
+);
 
 export default function App() {
   const load = (key, fallback) => {
@@ -497,51 +576,28 @@ export default function App() {
   const [userTags, setUserTags] = useState(() => load("ps_userTags", []));
   const [newTagInput, setNewTagInput] = useState("");
 
-  React.useEffect(() => { save("ps_events", events); }, [events]);
-  React.useEffect(() => { save("ps_selectedId", selectedEventId); }, [selectedEventId]);
-  React.useEffect(() => { save("ps_lang", lang); }, [lang]);
-  React.useEffect(() => { save("ps_useCat", useCat); }, [useCat]);
-  React.useEffect(() => { save("ps_userTags", userTags); }, [userTags]);
+  useEffect(() => { save("ps_events", events); }, [events]);
+  useEffect(() => { save("ps_selectedId", selectedEventId); }, [selectedEventId]);
+  useEffect(() => { save("ps_lang", lang); }, [lang]);
+  useEffect(() => { save("ps_useCat", useCat); }, [useCat]);
+  useEffect(() => { save("ps_userTags", userTags); }, [userTags]);
+  useEffect(() => {
+    const translation = TRANSLATIONS[lang];
+    if (translation) setNewItem(emptyItem(translation.prepMethods[0]));
+  }, [lang]);
 
-  // Swipe
-  const touchStartX = useRef(null);
-  const [dragPct, setDragPct] = useState(0);
-  const [animating, setAnimating] = useState(false);
 
-  const handleTouchStart = (e) => { if (!animating) { touchStartX.current = e.touches[0].clientX; } };
-  const handleTouchMove = (e) => {
-    if (touchStartX.current === null) return;
-    const diff = e.touches[0].clientX - touchStartX.current;
-    const w = window.innerWidth || 400;
-    let pct = (diff / w) * 100;
-    if ((pct > 0 && tabIndex === 0) || (pct < 0 && tabIndex === t.tabs.length - 1)) pct *= 0.15;
-    setDragPct(pct);
-  };
-  const handleTouchEnd = (e) => {
-    if (touchStartX.current === null) return;
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    touchStartX.current = null;
-    if (Math.abs(diff) >= 60) {
-      const dir = diff > 0 ? 1 : -1;
-      const next = tabIndex + dir;
-      if (next >= 0 && next < t.tabs.length) {
-        setAnimating(true);
-        setDragPct(-dir * 100);
-        setTimeout(() => { setTabIndex(next); setDragPct(0); setTimeout(() => setAnimating(false), 50); }, 350);
-        return;
-      }
-    }
-    setAnimating(true); setDragPct(0); setTimeout(() => setAnimating(false), 400);
-  };
+
 
   const selectedEvent = events.find(e => e.id === selectedEventId);
   const filteredItems = useMemo(() => {
-    if (!selectedEvent) return [];
-    let items = [...selectedEvent.items];
+    const currentEvent = events.find(e => e.id === selectedEventId);
+    if (!currentEvent) return [];
+    let items = [...currentEvent.items];
     if (filterPrep !== "all") items = items.filter(i => i.prep === filterPrep);
     items.sort((a, b) => sortBy === "day" ? (a.days[0]||99)-(b.days[0]||99) : sortBy === "prep" ? a.prep.localeCompare(b.prep) : a.name.localeCompare(b.name));
     return items;
-  }, [selectedEvent, sortBy, filterPrep]);
+  }, [events, selectedEventId, sortBy, filterPrep]);
 
   const addEvent = () => {
     if (!newEvent.name.trim()) return;
@@ -557,7 +613,14 @@ export default function App() {
     setEvents(p => p.map(e => e.id === editingEvent.id ? { ...e, ...editingEvent } : e));
     setEditingEvent(null);
   };
-  const deleteEvent = (id) => { setEvents(p => p.filter(e => e.id !== id)); setEditingEvent(null); };
+  const deleteEvent = (id) => {
+    const remaining = events.filter(e => e.id !== id);
+    setEvents(remaining);
+    if (selectedEventId === id) {
+      setSelectedEventId(remaining[0]?.id || null);
+    }
+    setEditingEvent(null);
+  };
   const updateItems = (fn) => setEvents(p => p.map(e => e.id === selectedEventId ? { ...e, items: fn(e.items) } : e));
   const toggleDone = (id) => updateItems(items => items.map(i => i.id === id ? { ...i, done: !i.done } : i));
   const deleteItem = (id) => updateItems(items => items.filter(i => i.id !== id));
@@ -577,12 +640,11 @@ export default function App() {
   };
 
   const isPeriodicType = (type) => {
-    return type === t.periodic || type === "定期" || type === "Recurring" || type === "Récurrent" || type === "Recorrente" || type === "Recurrente" || type === "定期" || type === "정기" || type === "periodic";
+    return ["定期", "Recurring", "Récurrent", "Recorrente", "Recurrente", "정기", "periodic", t.periodic].includes(type);
   };
 
   const toggleDay = (d, setter) => setter(p => ({ ...p, days: p.days.includes(d) ? p.days.filter(x=>x!==d).sort((a,b)=>a-b) : [...p.days,d].sort((a,b)=>a-b) }));
   const toggleTag = (tag, setter) => setter(p => ({ ...p, tags: p.tags.includes(tag) ? p.tags.filter(t=>t!==tag) : [...p.tags,tag] }));
-  const calcQty = (cur, n) => Math.min(9999, parseInt(String(cur === 1 && n <= 9 ? "" : cur) + String(n)) || 1);
   const daysLabel = (days) => !days?.length ? "—" : days.map(d => lang === "ja" ? `${d}${t.daysUnit}` : lang === "ko" ? `${d}${t.daysUnit}` : lang === "zh" ? `第${d}${t.daysUnit}` : `Day ${d}`).join(", ");
 
   // ── 言語選択画面 ──────────────────────────────────────
@@ -592,7 +654,7 @@ export default function App() {
         <div style={{ fontSize: 48, marginBottom: 12 }}>🧳</div>
         <div style={{ fontSize: 11, color: "#60a5fa", letterSpacing: 3, textTransform: "uppercase", marginBottom: 6 }}>PACK SMART</div>
         <div style={{ fontSize: 24, fontWeight: 700, color: "#f0ede8", marginBottom: 40 }}>
-          {TRANSLATIONS[selectedLang].langSelectTitle}
+          {(TRANSLATIONS[selectedLang] || TRANSLATIONS["ja"]).langSelectTitle}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 320 }}>
           {LANG_OPTIONS.map(l => (
@@ -622,7 +684,7 @@ export default function App() {
           color: "white", fontSize: 16, fontWeight: 700,
           border: "none", cursor: "pointer", width: "100%", maxWidth: 320,
         }}>
-          {TRANSLATIONS[selectedLang].langSelectBtn}
+          {(TRANSLATIONS[selectedLang] || TRANSLATIONS["ja"]).langSelectBtn}
         </button>
       </div>
     );
@@ -641,7 +703,7 @@ export default function App() {
             {t.sampleModalDesc}
           </p>
           <button onClick={() => {
-            const sample = sampleEvents[lang] ?? sampleEvents["ja"];
+            const sample = sampleEvents[lang] || sampleEvents["en"];
             setEvents(sample);
             save("ps_events", sample);
             setSelectedEventId(sample[0]?.id || null);
@@ -666,77 +728,6 @@ export default function App() {
       </div>
     );
   }
-
-  // ── QtyPad ─────────────────────────────────────────────
-  const QtyPad = ({ value, setter }) => (
-    <div>
-      <div style={{ background: "#1e2030", borderRadius: 12, padding: "10px 14px", marginBottom: 8, fontSize: 28, fontWeight: 700, color: "#f0ede8", textAlign: "right" }}>
-        {value}<span style={{ fontSize: 13, color: "#555", marginLeft: 6 }}>{t.qtyUnit}</span>
-      </div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-        {QTY_NUMS.map(n => (
-          <button key={n} onClick={() => setter(p => ({ ...p, qty: calcQty(p.qty, n) }))} style={{ minWidth: 38, height: 38, borderRadius: 10, border: "none", padding: "0 6px", background: "#1e2030", color: "#ccc", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>{n}</button>
-        ))}
-        <button onClick={() => setter(p => ({ ...p, qty: Math.max(1, Math.floor(p.qty / 10)) }))} style={{ minWidth: 38, height: 38, borderRadius: 10, border: "none", padding: "0 10px", background: "#2a1a1a", color: "#f87171", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>⌫</button>
-        <button onClick={() => setter(p => ({ ...p, qty: 1 }))} style={{ minWidth: 38, height: 38, borderRadius: 10, border: "none", padding: "0 10px", background: "#1a1a26", color: "#555", fontSize: 11, cursor: "pointer" }}>C</button>
-      </div>
-    </div>
-  );
-
-  // ── ItemForm ────────────────────────────────────────────
-  const ItemForm = ({ item, setter, onSave, onCancel, onDelete }) => (
-    <div>
-      <input value={item.name} onChange={e => setter(p => ({ ...p, name: e.target.value }))} placeholder={t.itemNamePlaceholder} style={inputStyle} />
-      <div style={lbl}>{t.qty}</div>
-      <QtyPad value={item.qty} setter={setter} />
-      <div style={{ marginTop: 10 }} />
-      <div style={lbl}>{t.days} {item.days.length > 0 && <span style={{ color: "#60a5fa" }}>{daysLabel(item.days)}</span>}</div>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 6 }}>
-        {DAY_NUMS.map(d => (
-          <button key={d} onClick={() => toggleDay(d, setter)} style={{ width: 38, height: 38, borderRadius: 10, border: "none", background: item.days.includes(d) ? "#3b82f6" : "#1e2030", color: item.days.includes(d) ? "white" : "#666", fontSize: 14, fontWeight: item.days.includes(d) ? 700 : 400, cursor: "pointer" }}>{d}</button>
-        ))}
-      </div>
-      <button onClick={() => setter(p => ({ ...p, days: [] }))} style={{ background: "none", border: "1px solid #333", borderRadius: 8, color: "#555", fontSize: 11, padding: "4px 12px", cursor: "pointer", marginBottom: 12 }}>{t.resetDays}</button>
-
-      <div style={lbl}>{t.prepMethod}</div>
-      <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-        {t.prepMethods.map((p, i) => (
-          <button key={p} onClick={() => setter(prev => ({ ...prev, prep: p, prepWhere: "" }))} style={{ flex: 1, padding: "9px 4px", borderRadius: 10, border: "none", background: item.prep === p ? prepColor(p, t.prepMethods) : "#1e2030", color: item.prep === p ? "#000" : "#888", fontSize: 11, fontWeight: item.prep === p ? 700 : 400, cursor: "pointer" }}>{p}</button>
-        ))}
-      </div>
-      {item.prep === t.prepMethods[1] && (
-        <input placeholder={t.wherePlaceholder} value={item.prepWhere} onChange={e => setter(p => ({ ...p, prepWhere: e.target.value }))} style={inputStyle} />
-      )}
-
-      {useCat && (
-        <>
-          <div style={lbl}>{t.category}</div>
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
-            {t.categories.map(c => (
-              <button key={c} onClick={() => setter(p => ({ ...p, category: p.category === c ? "" : c }))} style={{ padding: "7px 14px", borderRadius: 20, border: "none", background: item.category === c ? "#3b82f6" : "#1e2030", color: item.category === c ? "white" : "#888", fontSize: 12, fontWeight: item.category === c ? 700 : 400, cursor: "pointer" }}>{c}</button>
-            ))}
-          </div>
-        </>
-      )}
-
-      {userTags.length > 0 && (
-        <>
-          <div style={lbl}>{t.tags}</div>
-          <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
-            {userTags.map(tag => (
-              <button key={tag} onClick={() => toggleTag(tag, setter)} style={{ padding: "7px 14px", borderRadius: 20, border: "none", background: item.tags.includes(tag) ? "#7c3aed" : "#1e2030", color: item.tags.includes(tag) ? "white" : "#888", fontSize: 12, fontWeight: item.tags.includes(tag) ? 700 : 400, cursor: "pointer" }}>{tag}</button>
-            ))}
-          </div>
-        </>
-      )}
-
-      <div style={{ display: "flex", gap: 8, marginBottom: onDelete ? 8 : 0 }}>
-        <button onClick={onCancel} style={{ ...pillBtn, background: "#2a2d3e", flex: 1 }}>{t.cancel}</button>
-        <button onClick={onSave} style={{ ...pillBtn, flex: 2 }}>{t.save}</button>
-      </div>
-      {onDelete && <button onClick={onDelete} style={{ width: "100%", padding: 8, borderRadius: 8, border: "none", background: "#3a1a1a", color: "#f87171", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>{t.deleteItem}</button>}
-    </div>
-  );
 
   // ── Tab: Events ─────────────────────────────────────────
   const renderEvents = () => (
@@ -834,11 +825,11 @@ export default function App() {
           {editingItem?.id === item.id ? (
             <div>
               <div style={{ fontSize: 12, fontWeight: 700, color: "#60a5fa", marginBottom: 10 }}>{t.editItem}</div>
-              <ItemForm item={editingItem} setter={setEditingItem} onSave={saveEditItem} onCancel={() => setEditingItem(null)} onDelete={() => { deleteItem(item.id); setEditingItem(null); }} />
+              <ItemForm item={editingItem} setter={setEditingItem} onSave={saveEditItem} onCancel={() => setEditingItem(null)} onDelete={() => { deleteItem(item.id); setEditingItem(null); }} t={t} useCat={useCat} userTags={userTags} toggleDay={toggleDay} toggleTag={toggleTag} daysLabel={daysLabel} />
             </div>
           ) : (
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <button onClick={() => toggleDone(item.id)} style={{ width: 24, height: 24, borderRadius: "50%", border: item.done?"none":"2px solid #3b82f6", background: item.done?"#3b82f6":"transparent", cursor: "pointer", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, color: "white" }}>{item.done?"✓":""}</button>
+              <button onClick={() => toggleDone(item.id)} style={{ width: 44, height: 44, borderRadius: "50%", border: item.done?"none":"2px solid #3b82f6", background: item.done?"#3b82f6":"transparent", cursor: "pointer", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "white" }}>{item.done?"✓":""}</button>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontSize: 15, fontWeight: 600, textDecoration: item.done?"line-through":"none", color: item.done?"#444":"#f0ede8" }}>
                   {item.name}<span style={{ fontSize: 12, color: "#666", fontWeight: 400, marginLeft: 6 }}>×{item.qty}</span>
@@ -860,22 +851,23 @@ export default function App() {
   );
 
   // ── Tab: Add ────────────────────────────────────────────
-  const renderAdd = () => (
-    <div>
-      <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 16, color: "#60a5fa" }}>{t.addTo(selectedEvent?.name || "")}</div>
-      <div style={{ marginBottom: 14 }}>
-        <div style={lbl}>{t.itemName}</div>
-        <input placeholder={t.itemNamePlaceholder} value={newItem.name} onChange={e => setNewItem({ ...newItem, name: e.target.value })} style={inputStyle} />
+  const renderAdd = () => {
+    if (!selectedEvent) {
+      return (
+        <div style={{ textAlign: "center", color: "#555", padding: 40 }}>
+          <div style={{ fontSize: 32, marginBottom: 12 }}>📋</div>
+          <div style={{ fontSize: 14 }}>{t.selectEvent}</div>
+          <div style={{ fontSize: 12, marginTop: 6, color: "#444" }}>{t.selectEventHint}</div>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 16, color: "#60a5fa" }}>{t.addTo(selectedEvent.name)}</div>
+        <ItemForm item={newItem} setter={setNewItem} onSave={addItem} onCancel={() => { setNewItem(emptyItem(t.prepMethods[0])); setTabIndex(1); }} t={t} useCat={useCat} userTags={userTags} toggleDay={toggleDay} toggleTag={toggleTag} daysLabel={daysLabel} />
       </div>
-      <div style={{ marginBottom: 14 }}>
-        <div style={lbl}>{t.qty}</div>
-        <QtyPad value={newItem.qty} setter={setNewItem} />
-      </div>
-      <div style={{ marginBottom: 14 }}>
-        <ItemForm item={newItem} setter={setNewItem} onSave={addItem} onCancel={() => { setNewItem(emptyItem(t.prepMethods[0])); setTabIndex(1); }} />
-      </div>
-    </div>
-  );
+    );
+  };
 
   // ── Tab: Settings ───────────────────────────────────────
   const renderSettings = () => (
@@ -908,7 +900,13 @@ export default function App() {
           {userTags.map(tag => (
             <div key={tag} style={{ display: "flex", alignItems: "center", gap: 4, background: "#2a1f3d", borderRadius: 20, padding: "5px 10px" }}>
               <span style={{ fontSize: 12, color: "#c084fc" }}>{tag}</span>
-              <button onClick={() => setUserTags(p => p.filter(t => t !== tag))} style={{ background: "none", border: "none", color: "#7c3aed", cursor: "pointer", fontSize: 13, padding: 0, lineHeight: 1 }}>✕</button>
+              <button onClick={() => {
+                setUserTags(p => p.filter(t => t !== tag));
+                setEvents(p => p.map(ev => ({
+                  ...ev,
+                  items: ev.items.map(i => ({ ...i, tags: i.tags.filter(t => t !== tag) }))
+                })));
+              }} style={{ background: "none", border: "none", color: "#7c3aed", cursor: "pointer", fontSize: 13, padding: 0, lineHeight: 1 }}>✕</button>
             </div>
           ))}
           {userTags.length === 0 && <span style={{ fontSize: 12, color: "#444" }}>{t.noTags}</span>}
@@ -924,8 +922,7 @@ export default function App() {
   const tabContents = [renderEvents(), renderItems(), renderAdd(), renderSettings()];
 
   return (
-    <div onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}
-      style={{ touchAction: "pan-y", fontFamily: lang === "ja" || lang === "zh" || lang === "ko" ? "'Hiragino Sans','Noto Sans JP',sans-serif" : "system-ui,sans-serif", background: "#0f0f13", minHeight: "100vh", color: "#f0ede8", maxWidth: 430, margin: "0 auto" }}>
+    <div style={{ fontFamily: lang === "ja" || lang === "zh" || lang === "ko" ? "'Hiragino Sans','Noto Sans JP',sans-serif" : "system-ui,sans-serif", background: "#0f0f13", minHeight: "100vh", color: "#f0ede8", maxWidth: 430, margin: "0 auto" }}>
 
       {/* Header */}
       <div style={{ background: "linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)", padding: "20px 20px 0", borderBottom: "1px solid #ffffff10" }}>
@@ -944,13 +941,9 @@ export default function App() {
         </div>
       </div>
 
-      {/* Sliding content */}
-      <div style={{ overflow: "hidden" }}>
-        <div style={{ display: "flex", transform: `translateX(calc(${-tabIndex*100}% + ${dragPct}%))`, transition: (animating||dragPct===0) ? "transform 0.38s cubic-bezier(0.25,1,0.5,1)" : "none", willChange: "transform", alignItems: "flex-start" }}>
-          {tabContents.map((content, i) => (
-            <div key={i} style={{ minWidth: "100%", padding: 16, boxSizing: "border-box" }}>{content}</div>
-          ))}
-        </div>
+      {/* Content */}
+      <div style={{ padding: 16 }}>
+        {tabContents[tabIndex]}
       </div>
     </div>
   );
