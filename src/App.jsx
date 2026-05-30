@@ -10,7 +10,7 @@ const TRANSLATIONS = {
     deleteEvent: "🗑 このイベントを削除", editEvent: "イベントを編集", copySuffix: " のコピー", copyEvent: "📋 このイベントをコピー", copyEventTitle: "コピーして新規作成", copyEventConfirm: "コピーして作成",
     items: "アイテム", done: "完了", noItems: "アイテムがありません",
     noItemsHint: "＋ボタンをタップして追加しましょう",
-    storageFull: "容量が足りません。不要なイベントを削除してください。", sortDay: "日程順", sortPrep: "準備方法順", sortName: "名前順", sortQtyDesc: "個数が多い順", sortQtyAsc: "個数が少ない順", sortCustom: "並び替え", sortDone: "完了",
+    storageFull: "容量が足りません。不要なイベントを削除してください。", nameRequired: "イベント名を入力してください", itemNameRequired: "アイテム名を入力してください", qtyRequired: "個数を1以上にしてください", sortDay: "日程順", sortPrep: "準備方法順", sortName: "名前順", sortQtyDesc: "個数が多い順", sortQtyAsc: "個数が少ない順", sortCustom: "並び替え", sortDone: "完了",
     prepAll: "準備: すべて", addTo: (name) => `${name} に追加`,
     itemName: "アイテム名", itemNamePlaceholder: "例：充電器、着替え、パスポート",
     qty: "個数", qtyUnit: "個", days: "何日目に使う？（複数OK）", daysUnit: "日目",
@@ -49,7 +49,7 @@ const TRANSLATIONS = {
     deleteEvent: "🗑 Delete this event", editEvent: "Edit Event", copySuffix: " (Copy)", copyEvent: "📋 Duplicate this event", copyEventTitle: "Duplicate event", copyEventConfirm: "Duplicate & Create",
     items: "items", done: "done", noItems: "No items yet",
     noItemsHint: "Tap the + button to add items",
-    storageFull: "Storage is full. Please delete some events to free up space.", sortDay: "By day", sortPrep: "By prep", sortName: "By name", sortQtyDesc: "Most first", sortQtyAsc: "Least first", sortCustom: "Reorder", sortDone: "Done",
+    storageFull: "Storage is full. Please delete some events to free up space.", nameRequired: "Please enter an event name", itemNameRequired: "Please enter an item name", qtyRequired: "Please set quantity to at least 1", sortDay: "By day", sortPrep: "By prep", sortName: "By name", sortQtyDesc: "Most first", sortQtyAsc: "Least first", sortCustom: "Reorder", sortDone: "Done",
     prepAll: "Prep: All", addTo: (name) => `Add to: ${name}`,
     itemName: "Item Name", itemNamePlaceholder: "e.g. Charger, Clothes, Passport",
     qty: "Quantity", qtyUnit: "", days: "Which day(s)? (multi-select OK)", daysUnit: "",
@@ -88,7 +88,7 @@ const TRANSLATIONS = {
     deleteEvent: "🗑 Supprimer cet événement", editEvent: "Modifier l'événement", copySuffix: " (Copie)", copyEvent: "📋 Dupliquer cet événement", copyEventTitle: "Dupliquer l'événement", copyEventConfirm: "Dupliquer et créer",
     items: "articles", done: "fait", noItems: "Aucun article",
     noItemsHint: "Appuyez sur + pour ajouter des articles",
-    storageFull: "Stockage plein. Veuillez supprimer des événements.", sortDay: "Par jour", sortPrep: "Par préparation", sortName: "Par nom", sortQtyDesc: "Plus grande qté", sortQtyAsc: "Plus petite qté", sortCustom: "Réordonner", sortDone: "Terminer",
+    storageFull: "Stockage plein. Veuillez supprimer des événements.", nameRequired: "Veuillez saisir un nom d'événement", itemNameRequired: "Veuillez saisir un nom d'article", qtyRequired: "Veuillez définir une quantité d'au moins 1", sortDay: "Par jour", sortPrep: "Par préparation", sortName: "Par nom", sortQtyDesc: "Plus grande qté", sortQtyAsc: "Plus petite qté", sortCustom: "Réordonner", sortDone: "Terminer",
     prepAll: "Prép : Tous", addTo: (name) => `Ajouter à : ${name}`,
     itemName: "Nom de l'article", itemNamePlaceholder: "ex : Chargeur, Vêtements, Passeport",
     qty: "Quantité", qtyUnit: "", days: "Quel(s) jour(s) ? (multi-sélection OK)", daysUnit: "",
@@ -127,7 +127,7 @@ const TRANSLATIONS = {
     deleteEvent: "🗑 Excluir este evento", editEvent: "Editar Evento", copySuffix: " (Cópia)", copyEvent: "📋 Duplicar este evento", copyEventTitle: "Duplicar evento", copyEventConfirm: "Duplicar e criar",
     items: "itens", done: "feito", noItems: "Nenhum item ainda",
     noItemsHint: "Toque em + para adicionar itens",
-    storageFull: "Armazenamento cheio. Exclua alguns eventos.", sortDay: "Por dia", sortPrep: "Por preparo", sortName: "Por nome", sortQtyDesc: "Maior qtd", sortQtyAsc: "Menor qtd", sortCustom: "Reordenar", sortDone: "Concluir",
+    storageFull: "Armazenamento cheio. Exclua alguns eventos.", nameRequired: "Por favor, insira um nome de evento", itemNameRequired: "Por favor, insira um nome de item", qtyRequired: "Por favor, defina a quantidade para pelo menos 1", sortDay: "Por dia", sortPrep: "Por preparo", sortName: "Por nome", sortQtyDesc: "Maior qtd", sortQtyAsc: "Menor qtd", sortCustom: "Reordenar", sortDone: "Concluir",
     prepAll: "Prep: Todos", addTo: (name) => `Adicionar a: ${name}`,
     itemName: "Nome do Item", itemNamePlaceholder: "ex: Carregador, Roupas, Passaporte",
     qty: "Quantidade", qtyUnit: "", days: "Qual(is) dia(s)? (múltipla seleção OK)", daysUnit: "",
@@ -166,7 +166,7 @@ const TRANSLATIONS = {
     deleteEvent: "🗑 Eliminar este evento", editEvent: "Editar Evento", copySuffix: " (Copia)", copyEvent: "📋 Duplicar este evento", copyEventTitle: "Duplicar evento", copyEventConfirm: "Duplicar y crear",
     items: "artículos", done: "hecho", noItems: "Sin artículos aún",
     noItemsHint: "Toca + para agregar artículos",
-    storageFull: "Almacenamiento lleno. Elimina algunos eventos.", sortDay: "Por día", sortPrep: "Por preparación", sortName: "Por nombre", sortQtyDesc: "Mayor cant.", sortQtyAsc: "Menor cant.", sortCustom: "Reordenar", sortDone: "Listo",
+    storageFull: "Almacenamiento lleno. Elimina algunos eventos.", nameRequired: "Por favor, ingresa un nombre de evento", itemNameRequired: "Por favor, ingresa un nombre de artículo", qtyRequired: "Por favor, establece la cantidad en al menos 1", sortDay: "Por día", sortPrep: "Por preparación", sortName: "Por nombre", sortQtyDesc: "Mayor cant.", sortQtyAsc: "Menor cant.", sortCustom: "Reordenar", sortDone: "Listo",
     prepAll: "Prep: Todos", addTo: (name) => `Agregar a: ${name}`,
     itemName: "Nombre del Artículo", itemNamePlaceholder: "ej: Cargador, Ropa, Pasaporte",
     qty: "Cantidad", qtyUnit: "", days: "¿Qué día(s)? (múltiple OK)", daysUnit: "",
@@ -205,7 +205,7 @@ const TRANSLATIONS = {
     deleteEvent: "🗑 删除此活动", editEvent: "编辑活动", copySuffix: "（副本）", copyEvent: "📋 复制此活动", copyEventTitle: "复制并新建", copyEventConfirm: "复制并创建",
     items: "件物品", done: "已完成", noItems: "还没有物品",
     noItemsHint: "点击＋按钮添加物品",
-    storageFull: "存储空间不足，请删除一些活动。", sortDay: "按日期", sortPrep: "按准备方式", sortName: "按名称", sortQtyDesc: "数量多→少", sortQtyAsc: "数量少→多", sortCustom: "手动排序", sortDone: "完成",
+    storageFull: "存储空间不足，请删除一些活动。", nameRequired: "请输入活动名称", itemNameRequired: "请输入物品名称", qtyRequired: "请将数量设置为至少1", sortDay: "按日期", sortPrep: "按准备方式", sortName: "按名称", sortQtyDesc: "数量多→少", sortQtyAsc: "数量少→多", sortCustom: "手动排序", sortDone: "完成",
     prepAll: "准备方式: 全部", addTo: (name) => `添加到：${name}`,
     itemName: "物品名称", itemNamePlaceholder: "例：充电器、衣服、护照",
     qty: "数量", qtyUnit: "个", days: "第几天使用？（可多选）", daysUnit: "天",
@@ -244,7 +244,7 @@ const TRANSLATIONS = {
     deleteEvent: "🗑 이 이벤트 삭제", editEvent: "이벤트 편집", copySuffix: " (복사본)", copyEvent: "📋 이 이벤트 복사", copyEventTitle: "복사하여 새로 만들기", copyEventConfirm: "복사하여 만들기",
     items: "개 아이템", done: "완료", noItems: "아이템이 없습니다",
     noItemsHint: "+ 버튼을 탭하여 추가하세요",
-    storageFull: "저장 공간이 부족합니다. 이벤트를 삭제해 주세요.", sortDay: "날짜순", sortPrep: "준비방법순", sortName: "이름순", sortQtyDesc: "수량많은순", sortQtyAsc: "수량적은순", sortCustom: "순서변경", sortDone: "완료",
+    storageFull: "저장 공간이 부족합니다. 이벤트를 삭제해 주세요.", nameRequired: "이벤트 이름을 입력해 주세요", itemNameRequired: "아이템 이름을 입력해 주세요", qtyRequired: "수량을 1 이상으로 설정해 주세요", sortDay: "날짜순", sortPrep: "준비방법순", sortName: "이름순", sortQtyDesc: "수량많은순", sortQtyAsc: "수량적은순", sortCustom: "순서변경", sortDone: "완료",
     prepAll: "준비: 전체", addTo: (name) => `${name}에 추가`,
     itemName: "아이템 이름", itemNamePlaceholder: "예: 충전기, 옷, 여권",
     qty: "수량", qtyUnit: "개", days: "몇 번째 날？（복수 선택 가능）", daysUnit: "일차",
@@ -523,9 +523,9 @@ const sampleEvents = Object.fromEntries(
 
 const inputStyle = { width:"100%", background:"#0f0f13", border:"1px solid #ffffff15", borderRadius:10, padding:"11px 14px", color:"#f0ede8", fontSize:14, marginBottom:8, boxSizing:"border-box", outline:"none" };
 const selectStyle = { background:"#1e2030", border:"1px solid #ffffff10", borderRadius:20, padding:"6px 10px", color:"#aaa", fontSize:11, outline:"none", cursor:"pointer", whiteSpace:"nowrap", flexShrink:0 };
-const lbl = { display:"block", fontSize:11, color:"#555", marginBottom:6, letterSpacing:1, textTransform:"uppercase" };
+const lbl = { display:"block", fontSize:11, color:"#555", marginBottom:3, letterSpacing:1, textTransform:"uppercase" };
 const pillBtn = { background:"linear-gradient(135deg,#2563eb,#3b82f6)", border:"none", borderRadius:20, color:"white", padding:"8px 16px", fontSize:13, fontWeight:600, cursor:"pointer" };
-const card = { background:"#1a1a26", border:"1px solid #ffffff08", borderRadius:16, padding:16, marginBottom:14 };
+const card = { background:"#1a1a26", border:"1px solid #ffffff08", borderRadius:14, padding:12, marginBottom:10 };
 const emptyItem = () => ({ name:"", qty:0, days:[], prep:"have", prepWhere:"", category:"", tags:[] });
 const calcQty = (_cur, n) => Math.min(9999, Math.max(1, n));
 
@@ -761,7 +761,7 @@ const QtyPad = ({ value, setter, t }) => {
       ) : (
         <div
           onClick={() => { setDirectInput(true); setInputVal(value > 0 ? String(value) : ""); }}
-          style={{ background:"#1e2030", borderRadius:12, padding:"10px 14px", marginBottom:8, fontSize:28, fontWeight:700, color:"#f0ede8", textAlign:"right", cursor:"text", display:"flex", justifyContent:"space-between", alignItems:"center" }}
+          style={{ background:"#1e2030", borderRadius:8, padding:"5px 10px", marginBottom:4, fontSize:20, fontWeight:700, color:"#f0ede8", textAlign:"right", cursor:"text", display:"flex", justifyContent:"space-between", alignItems:"center" }}
         >
           <span style={{ fontSize:10, color:"#3b82f6", letterSpacing:1 }}>✎</span>
           <span>{value || "0"}<span style={{ fontSize:13, color:"#555", marginLeft:6 }}>{t.qtyUnit}</span></span>
@@ -770,16 +770,16 @@ const QtyPad = ({ value, setter, t }) => {
       {/* 1〜9・0・⌫・C */}
       <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:6 }}>
         {QTY_SINGLE.map(n => (
-          <button key={n} onClick={() => pressSingle(n)} style={{ minWidth:38, height:38, borderRadius:10, border:"none", padding:"0 6px", background:"#1e2030", color:"#ccc", fontSize:14, fontWeight:600, cursor:"pointer" }}>{n}</button>
+          <button key={n} onClick={() => pressSingle(n)} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 4px", background:"#1e2030", color:"#ccc", fontSize:13, fontWeight:600, cursor:"pointer" }}>{n}</button>
         ))}
-        <button onClick={backspace} style={{ minWidth:38, height:38, borderRadius:10, border:"none", padding:"0 10px", background:"#2a1a1a", color:"#f87171", fontSize:13, fontWeight:700, cursor:"pointer" }}>⌫</button>
-        <button onClick={() => pressSingle(0)} style={{ minWidth:38, height:38, borderRadius:10, border:"none", padding:"0 6px", background:"#1e2030", color:"#ccc", fontSize:14, fontWeight:600, cursor:"pointer" }}>0</button>
-        <button onClick={() => setter(p => ({ ...p, qty: 0 }))} style={{ minWidth:38, height:38, borderRadius:10, border:"none", padding:"0 10px", background:"#1a1a26", color:"#555", fontSize:11, cursor:"pointer" }}>C</button>
+        <button onClick={backspace} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 8px", background:"#2a1a1a", color:"#f87171", fontSize:12, fontWeight:700, cursor:"pointer" }}>⌫</button>
+        <button onClick={() => pressSingle(0)} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 4px", background:"#1e2030", color:"#ccc", fontSize:13, fontWeight:600, cursor:"pointer" }}>0</button>
+        <button onClick={() => setter(p => ({ ...p, qty: 0 }))} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 8px", background:"#1a1a26", color:"#555", fontSize:10, cursor:"pointer" }}>C</button>
       </div>
       {/* プリセット（上書き） */}
       <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
         {QTY_PRESET.map(n => (
-          <button key={n} onClick={() => pressPreset(n)} style={{ minWidth:38, height:38, borderRadius:10, border:"none", padding:"0 8px", background:"#252840", color:"#888", fontSize:13, fontWeight:600, cursor:"pointer" }}>{n}</button>
+          <button key={n} onClick={() => pressPreset(n)} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 6px", background:"#252840", color:"#888", fontSize:12, fontWeight:600, cursor:"pointer" }}>{n}</button>
         ))}
       </div>
     </div>
@@ -787,18 +787,26 @@ const QtyPad = ({ value, setter, t }) => {
 };
 
 // ── ItemForm ────────────────────────────────────────────
-const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTags, toggleDay, toggleTag, daysLabel, maxDay }) => {
+const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTags, toggleDay, toggleTag, daysLabel, maxDay, error }) => {
   const availableDays = DAY_NUMS.filter(d => d <= (maxDay || DAY_NUMS.length));
-  const baseField = { borderRadius:12, padding:"10px 12px", marginBottom:10, border:"1px solid #ffffff15", transition:"border 0.15s, box-shadow 0.15s" };
+  const baseField = { borderRadius:8, padding:"4px 8px", marginBottom:5, border:"1px solid #ffffff15", transition:"border 0.15s, box-shadow 0.15s" };
+  const errorRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (error && errorRef.current) {
+      errorRef.current.scrollIntoView({ behavior:"smooth", block:"center" });
+    }
+  }, [error]);
 
   return (
   <div>
-    {/* アイテム名 - :focus-within で枠が青くなる */}
+    {/* アイテム名 */}
     <div className="ps-field" style={{ ...baseField }}>
       <div style={{ ...lbl }}>{t.itemName}</div>
       <input value={item.name} onChange={e => setter(p => ({ ...p, name: e.target.value }))} placeholder={t.itemNamePlaceholder}
-        style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"4px 0", fontSize:16 }} />
+        style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"0", fontSize:16 }} />
     </div>
+    {error && <div ref={errorRef} style={{ color:"#f87171", fontSize:13, marginTop:-6, marginBottom:8, padding:"8px 12px", background:"#3a1a1a", borderRadius:8 }}>⚠ {error}</div>}
 
     {/* 個数 - :focus-within で枠が青くなる */}
     <div className="ps-field" style={{ ...baseField }}>
@@ -808,7 +816,7 @@ const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTag
 
     <div style={lbl}>{t.days} {item.days.length>0 && <span style={{ color:"#60a5fa" }}>{daysLabel(item.days)}</span>}</div>
     <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:6 }}>
-      {availableDays.map(d => <button key={d} onClick={() => toggleDay(d, setter)} style={{ width:38, height:38, borderRadius:10, border:"none", background:item.days.includes(d)?"#3b82f6":"#1e2030", color:item.days.includes(d)?"white":"#666", fontSize:14, fontWeight:item.days.includes(d)?700:400, cursor:"pointer" }}>{d}</button>)}
+      {availableDays.map(d => <button key={d} onClick={() => toggleDay(d, setter)} style={{ width:32, height:32, borderRadius:8, border:"none", background:item.days.includes(d)?"#3b82f6":"#1e2030", color:item.days.includes(d)?"white":"#666", fontSize:12, fontWeight:item.days.includes(d)?700:400, cursor:"pointer" }}>{d}</button>)}
     </div>
     <button onClick={() => setter(p => ({ ...p, days:[] }))} style={{ background:"none", border:"1px solid #333", borderRadius:8, color:"#555", fontSize:11, padding:"4px 12px", cursor:"pointer", marginBottom:12 }}>{t.resetDays}</button>
 
@@ -845,10 +853,7 @@ const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTag
     </>}
     <div style={{ display:"flex", gap:8, marginBottom:onDelete?"8px":"0px" }}>
       <button onClick={onCancel} style={{ ...pillBtn, background:"#2a2d3e", flex:1 }}>{t.cancel}</button>
-      <button onClick={onSave} disabled={!item.name.trim() || item.qty === 0}
-        style={{ ...pillBtn, flex:2, opacity:(!item.name.trim()||item.qty===0)?0.4:1, cursor:(!item.name.trim()||item.qty===0)?"not-allowed":"pointer" }}>
-        {t.save}
-      </button>
+      <button onClick={onSave} style={{ ...pillBtn, flex:2 }}>{t.save}</button>
     </div>
     {onDelete && <button onClick={onDelete} style={{ width:"100%", padding:8, borderRadius:8, border:"none", background:"#3a1a1a", color:"#f87171", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.deleteItem}</button>}
   </div>
@@ -890,8 +895,8 @@ const injectGlobalStyle = () => {
     * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
     button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
     button:active { opacity: 0.82; }
-    input, select, textarea { -webkit-appearance: none; font-size: 16px; }
-    input[type="date"] { font-size: 13px; }
+    input, select, textarea { -webkit-appearance: none; font-size: 16px !important; }
+    input[type="date"] { font-size: 16px !important; }
     .ps-field:focus-within { border-color: #3b82f6 !important; box-shadow: 0 0 0 3px rgba(59,130,246,0.12) !important; }
     .ps-field:focus-within label, .ps-field:focus-within .ps-lbl { color: #60a5fa !important; }
   `;
@@ -975,13 +980,17 @@ export default function App() {
   };
 
   const addEventFn = () => {
-    if (!newEvent.name.trim()) return;
+    if (!newEvent.name.trim()) {
+      setNewEvent(p => ({ ...p, _error: t.nameRequired }));
+      setTimeout(() => document.getElementById("new-event-error")?.scrollIntoView({ behavior:"smooth", block:"center" }), 50);
+      return;
+    }
     const ev = { ...newEvent, id:genId(), items:[] };
+    delete ev._error;
     setEvents(p => [...p, ev]);
     setSelectedEventId(ev.id);
     setNewEvent({ name:"", type:"periodic", startDate:"", endDate:"" });
     setShowAddEvent(false);
-    // タブは移動しない、イベントタブのまま
   };
   const saveEditEvent = () => {
     if (!editingEvent?.name.trim()) return;
@@ -1015,8 +1024,19 @@ export default function App() {
   ));
   const toggleDone = (id) => updateItems(items => items.map(i => i.id===id ? { ...i, done:!i.done } : i));
   const deleteItem = (id) => updateItems(items => items.filter(i => i.id!==id));
+  const [addItemError, setAddItemError] = useState("");
   const addItem = () => {
-    if (!newItem.name.trim() || newItem.qty === 0) return;
+    if (!newItem.name.trim()) {
+      setAddItemError(t.itemNameRequired);
+      setTimeout(() => document.getElementById("add-item-error")?.scrollIntoView({ behavior:"smooth", block:"center" }), 50);
+      return;
+    }
+    if (newItem.qty === 0) {
+      setAddItemError(t.qtyRequired);
+      setTimeout(() => document.getElementById("add-item-error")?.scrollIntoView({ behavior:"smooth", block:"center" }), 50);
+      return;
+    }
+    setAddItemError("");
     updateItems(items => [...items, { ...newItem, tags:[...newItem.tags], id:genId(), done:false }]);
     setNewItem(emptyItem()); setShowAddItem(false);
   };
@@ -1106,6 +1126,7 @@ export default function App() {
   }
 
   if (screen==="tutorial") return <TutorialScreen lang={lang} onFinish={() => setScreen("sample")} onSkip={() => setScreen("sample")} />;
+  if (screen==="tutorial-replay") return <TutorialScreen lang={lang} onFinish={() => setScreen("app")} onSkip={() => setScreen("app")} />;
 
   // ── Sample modal ─────────────────────────────────────
   if (screen==="sample") {
@@ -1135,11 +1156,7 @@ export default function App() {
         <div style={card}>
           <div style={{ fontSize:13, fontWeight:700, color:"#60a5fa", marginBottom:12 }}>{t.newEvent}</div>
           <input placeholder={t.eventNamePlaceholder} value={newEvent.name} onChange={e => setNewEvent({ ...newEvent, name:e.target.value })} onFocus={e => e.target.style.border="1.5px solid #3b82f6"} onBlur={e => e.target.style.border="1px solid #ffffff15"} style={inputStyle} />
-          <div style={{ display:"flex", gap:8, marginBottom:8 }}>
-            {["periodic","oneTime"].map(type => (
-              <button key={type} onClick={() => setNewEvent({ ...newEvent, type })} style={{ flex:1, padding:8, borderRadius:8, border:"none", background:newEvent.type===type?"#3b82f6":"#2a2d3e", color:newEvent.type===type?"white":"#888", fontSize:13, fontWeight:600, cursor:"pointer" }}>{type==="periodic"?t.periodic:t.oneTime}</button>
-            ))}
-          </div>
+          {newEvent._error && <div id="new-event-error" style={{ color:"#f87171", fontSize:12, marginBottom:8, marginTop:-4 }}>⚠ {newEvent._error}</div>}
           <DateRangePicker startDate={newEvent.startDate} endDate={newEvent.endDate} onChangeRange={(s,e) => setNewEvent(p => ({ ...p, startDate:s, endDate:e }))} t={t} lang={lang} />
           <div style={{ display:"flex", gap:8, marginTop:4 }}>
             <button onClick={() => setShowAddEvent(false)} style={{ ...pillBtn, background:"#2a2d3e", flex:1 }}>{t.cancel}</button>
@@ -1245,7 +1262,7 @@ export default function App() {
       </div>
       {filteredItems.length===0&&selectedEvent && <div style={{ textAlign:"center", color:"#444", padding:40, fontSize:14 }}>{t.noItems}<br /><span style={{ fontSize:12, color:"#333" }}>{t.noItemsHint}</span></div>}
       {filteredItems.map((item, idx) => (
-        <div key={item.id} style={{ background:item.done&&!isReordering?"#111":"#1a1a26", border:"1px solid "+(item.done&&!isReordering?"#ffffff05":"#ffffff0a"), borderRadius:12, padding:"12px 14px", marginBottom:8, opacity:item.done&&!isReordering?0.5:1 }}>
+        <div key={item.id} style={{ background:item.done&&!isReordering?"#111":"#1a1a26", border:"1px solid "+(item.done&&!isReordering?"#ffffff05":"#ffffff0a"), borderRadius:10, padding:"10px 12px", marginBottom:6, opacity:item.done&&!isReordering?0.5:1 }}>
           {editingItem?.id===item.id && !isReordering ? (
             <div>
               <div style={{ fontSize:12, fontWeight:700, color:"#60a5fa", marginBottom:10 }}>{t.editItem}</div>
@@ -1263,7 +1280,7 @@ export default function App() {
                 <button onClick={() => toggleDone(item.id)} style={{ width:44, height:44, borderRadius:"50%", border:item.done?"none":"2px solid #3b82f6", background:item.done?"#3b82f6":"transparent", cursor:"pointer", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center", fontSize:14, color:"white" }}>{item.done?"✓":""}</button>
               )}
               <div style={{ flex:1, minWidth:0 }}>
-                <div style={{ fontSize:15, fontWeight:600, textDecoration:item.done&&!isReordering?"line-through":"none", color:item.done&&!isReordering?"#444":"#f0ede8" }}>
+                <div style={{ fontSize:14, fontWeight:600, textDecoration:item.done&&!isReordering?"line-through":"none", color:item.done&&!isReordering?"#444":"#f0ede8" }}>
                   {item.name}<span style={{ fontSize:12, color:"#666", fontWeight:400, marginLeft:6 }}>×{item.qty}</span>
                 </div>
                 <div style={{ fontSize:11, color:"#555", marginTop:3, display:"flex", gap:5, flexWrap:"wrap", alignItems:"center" }}>
@@ -1289,7 +1306,7 @@ export default function App() {
   const renderSettings = () => (
     <div>
       <div style={{ fontSize:16, fontWeight:700, marginBottom:16 }}>{t.settings}</div>
-      <button onClick={() => setScreen("tutorial")} style={{ width:"100%", marginBottom:14, padding:"16px 20px", borderRadius:16, border:"1px solid #3b82f620", background:"linear-gradient(135deg,#1a2540,#1e2a45)", cursor:"pointer", display:"flex", alignItems:"center", gap:14, textAlign:"left", boxSizing:"border-box" }}>
+      <button onClick={() => setScreen("tutorial-replay")} style={{ width:"100%", marginBottom:14, padding:"16px 20px", borderRadius:16, border:"1px solid #3b82f620", background:"linear-gradient(135deg,#1a2540,#1e2a45)", cursor:"pointer", display:"flex", alignItems:"center", gap:14, textAlign:"left", boxSizing:"border-box" }}>
         <div style={{ fontSize:28, lineHeight:1, flexShrink:0 }}>📖</div>
         <div style={{ flex:1 }}>
           <div style={{ fontSize:14, fontWeight:700, color:"#60a5fa", marginBottom:3 }}>{t.tutorialReplayTitle}</div>
@@ -1340,13 +1357,15 @@ export default function App() {
       {/* アイテム追加モーダル */}
       {showAddItem && (
         <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.75)", zIndex:200, display:"flex", alignItems:"flex-end", justifyContent:"center" }}>
-          <div style={{ background:"#1a1a26", borderRadius:"20px 20px 0 0", padding:"20px 16px 32px", width:"100%", maxWidth:430, maxHeight:"90vh", overflowY:"auto", border:"1px solid #ffffff12" }}>
-            <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:16 }}>
-              <div style={{ fontSize:14, fontWeight:700, color:"#60a5fa" }}>{selectedEvent ? t.addTo(selectedEvent.name) : t.selectEvent}</div>
-              <button onClick={() => { setShowAddItem(false); setNewItem(emptyItem()); }} style={{ background:"#2a2d3e", border:"none", borderRadius:8, color:"#888", fontSize:14, cursor:"pointer", padding:"6px 10px" }}>✕</button>
+          <div style={{ background:"#1a1a26", borderRadius:"20px 20px 0 0", padding:"10px 14px 24px", width:"100%", maxWidth:430, maxHeight:"95vh", overflowY:"auto", border:"1px solid #ffffff12" }}>
+            <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:8 }}>
+              <div style={{ fontSize:13, fontWeight:700, color:"#60a5fa" }}>{selectedEvent ? t.addTo(selectedEvent.name) : t.selectEvent}</div>
+              <button onClick={() => { setShowAddItem(false); setNewItem(emptyItem()); }} style={{ background:"#2a2d3e", border:"none", borderRadius:8, color:"#888", fontSize:13, cursor:"pointer", padding:"4px 8px" }}>✕</button>
             </div>
             {selectedEvent
-              ? <ItemForm item={newItem} setter={setNewItem} onSave={addItem} onCancel={() => { setShowAddItem(false); setNewItem(emptyItem()); }} t={t} useCat={useCat} userTags={userTags} toggleDay={toggleDay} toggleTag={toggleTag} daysLabel={daysLabel} maxDay={tripDays(selectedEvent)} />
+              ? <>
+                  <ItemForm item={newItem} setter={setNewItem} onSave={addItem} onCancel={() => { setShowAddItem(false); setNewItem(emptyItem()); setAddItemError(""); }} t={t} useCat={useCat} userTags={userTags} toggleDay={toggleDay} toggleTag={toggleTag} daysLabel={daysLabel} maxDay={tripDays(selectedEvent)} error={addItemError} />
+                </>
               : <div style={{ textAlign:"center", color:"#555", padding:40, fontSize:14 }}>{t.selectEventHint}</div>
             }
           </div>
@@ -1378,7 +1397,7 @@ export default function App() {
             const isItemsTab = i === 1;
             const disabled = isItemsTab && !selectedEventId;
             return (
-              <button key={i} onClick={() => { if (!disabled) setTabIndex(i); }} style={{ flex:1, background:"none", border:"none", color: disabled ? "#333" : tabIndex===i?"#60a5fa":"#555", padding:"10px 2px", fontSize:11, fontWeight:tabIndex===i?700:400, borderBottom:tabIndex===i?"2px solid #3b82f6":"2px solid transparent", cursor:disabled?"not-allowed":"pointer" }}>{tab}</button>
+              <button key={i} onClick={() => { if (!disabled) setTabIndex(i); }} style={{ flex:1, background:"none", border:"none", color: disabled ? "#333" : tabIndex===i?"#60a5fa":"#555", padding:"8px 2px", fontSize:11, fontWeight:tabIndex===i?700:400, borderBottom:tabIndex===i?"2px solid #3b82f6":"2px solid transparent", cursor:disabled?"not-allowed":"pointer" }}>{tab}</button>
             );
           })}
         </div>
