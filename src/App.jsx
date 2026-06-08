@@ -7,7 +7,7 @@ const TRANSLATIONS = {
     addEvent: "＋ イベント", addItem: "＋ 追加", newEvent: "新しいイベント",
     eventName: "イベント名", eventNamePlaceholder: "例：実家への帰省",
     periodic: "定期", oneTime: "単発", cancel: "キャンセル", create: "作成", save: "保存",
-    deleteEvent: "🗑 このイベントを削除", editEvent: "イベントを編集", copySuffix: " のコピー", copyEvent: "📋 このイベントをコピー", copyEventTitle: "コピーして新規作成", copyEventConfirm: "コピーして作成",
+    deleteEvent: "🗑 このイベントを削除", editEvent: "イベントを編集", copySuffix: " のコピー", viewItems: "持ち物を見る", copyEvent: "📋 このイベントをコピー", copyEventTitle: "コピーして新規作成", copyEventConfirm: "コピーして作成",
     items: "アイテム", done: "完了", noItems: "アイテムがありません",
     noItemsHint: "＋ボタンをタップして追加しましょう",
     storageFull: "容量が足りません。不要なイベントを削除してください。", nameRequired: "イベント名を入力してください", itemNameRequired: "アイテム名を入力してください", qtyRequired: "個数を1以上にしてください", sortDay: "日程順", sortPrep: "準備方法順", sortName: "名前順", sortQtyDesc: "個数が多い順", sortQtyAsc: "個数が少ない順", sortCustom: "並び替え", sortDone: "完了",
@@ -46,7 +46,7 @@ const TRANSLATIONS = {
     addEvent: "+ Event", addItem: "+ Add", newEvent: "New Event",
     eventName: "Event Name", eventNamePlaceholder: "e.g. Summer vacation",
     periodic: "Recurring", oneTime: "One-time", cancel: "Cancel", create: "Create", save: "Save",
-    deleteEvent: "🗑 Delete this event", editEvent: "Edit Event", copySuffix: " (Copy)", copyEvent: "📋 Duplicate this event", copyEventTitle: "Duplicate event", copyEventConfirm: "Duplicate & Create",
+    deleteEvent: "🗑 Delete this event", editEvent: "Edit Event", copySuffix: " (Copy)", viewItems: "View packing list", copyEvent: "📋 Duplicate this event", copyEventTitle: "Duplicate event", copyEventConfirm: "Duplicate & Create",
     items: "items", done: "done", noItems: "No items yet",
     noItemsHint: "Tap the + button to add items",
     storageFull: "Storage is full. Please delete some events to free up space.", nameRequired: "Please enter an event name", itemNameRequired: "Please enter an item name", qtyRequired: "Please set quantity to at least 1", sortDay: "By day", sortPrep: "By prep", sortName: "By name", sortQtyDesc: "Most first", sortQtyAsc: "Least first", sortCustom: "Reorder", sortDone: "Done",
@@ -85,7 +85,7 @@ const TRANSLATIONS = {
     addEvent: "+ Événement", addItem: "+ Ajouter", newEvent: "Nouvel événement",
     eventName: "Nom de l'événement", eventNamePlaceholder: "ex : Vacances d'été",
     periodic: "Récurrent", oneTime: "Unique", cancel: "Annuler", create: "Créer", save: "Enregistrer",
-    deleteEvent: "🗑 Supprimer cet événement", editEvent: "Modifier l'événement", copySuffix: " (Copie)", copyEvent: "📋 Dupliquer cet événement", copyEventTitle: "Dupliquer l'événement", copyEventConfirm: "Dupliquer et créer",
+    deleteEvent: "🗑 Supprimer cet événement", editEvent: "Modifier l'événement", copySuffix: " (Copie)", viewItems: "Voir la liste", copyEvent: "📋 Dupliquer cet événement", copyEventTitle: "Dupliquer l'événement", copyEventConfirm: "Dupliquer et créer",
     items: "articles", done: "fait", noItems: "Aucun article",
     noItemsHint: "Appuyez sur + pour ajouter des articles",
     storageFull: "Stockage plein. Veuillez supprimer des événements.", nameRequired: "Veuillez saisir un nom d'événement", itemNameRequired: "Veuillez saisir un nom d'article", qtyRequired: "Veuillez définir une quantité d'au moins 1", sortDay: "Par jour", sortPrep: "Par préparation", sortName: "Par nom", sortQtyDesc: "Plus grande qté", sortQtyAsc: "Plus petite qté", sortCustom: "Réordonner", sortDone: "Terminer",
@@ -124,7 +124,7 @@ const TRANSLATIONS = {
     addEvent: "+ Evento", addItem: "+ Adicionar", newEvent: "Novo Evento",
     eventName: "Nome do Evento", eventNamePlaceholder: "ex: Férias de verão",
     periodic: "Recorrente", oneTime: "Único", cancel: "Cancelar", create: "Criar", save: "Salvar",
-    deleteEvent: "🗑 Excluir este evento", editEvent: "Editar Evento", copySuffix: " (Cópia)", copyEvent: "📋 Duplicar este evento", copyEventTitle: "Duplicar evento", copyEventConfirm: "Duplicar e criar",
+    deleteEvent: "🗑 Excluir este evento", editEvent: "Editar Evento", copySuffix: " (Cópia)", viewItems: "Ver a lista", copyEvent: "📋 Duplicar este evento", copyEventTitle: "Duplicar evento", copyEventConfirm: "Duplicar e criar",
     items: "itens", done: "feito", noItems: "Nenhum item ainda",
     noItemsHint: "Toque em + para adicionar itens",
     storageFull: "Armazenamento cheio. Exclua alguns eventos.", nameRequired: "Por favor, insira um nome de evento", itemNameRequired: "Por favor, insira um nome de item", qtyRequired: "Por favor, defina a quantidade para pelo menos 1", sortDay: "Por dia", sortPrep: "Por preparo", sortName: "Por nome", sortQtyDesc: "Maior qtd", sortQtyAsc: "Menor qtd", sortCustom: "Reordenar", sortDone: "Concluir",
@@ -163,7 +163,7 @@ const TRANSLATIONS = {
     addEvent: "+ Evento", addItem: "+ Agregar", newEvent: "Nuevo Evento",
     eventName: "Nombre del Evento", eventNamePlaceholder: "ej: Vacaciones de verano",
     periodic: "Recurrente", oneTime: "Único", cancel: "Cancelar", create: "Crear", save: "Guardar",
-    deleteEvent: "🗑 Eliminar este evento", editEvent: "Editar Evento", copySuffix: " (Copia)", copyEvent: "📋 Duplicar este evento", copyEventTitle: "Duplicar evento", copyEventConfirm: "Duplicar y crear",
+    deleteEvent: "🗑 Eliminar este evento", editEvent: "Editar Evento", copySuffix: " (Copia)", viewItems: "Ver la lista", copyEvent: "📋 Duplicar este evento", copyEventTitle: "Duplicar evento", copyEventConfirm: "Duplicar y crear",
     items: "artículos", done: "hecho", noItems: "Sin artículos aún",
     noItemsHint: "Toca + para agregar artículos",
     storageFull: "Almacenamiento lleno. Elimina algunos eventos.", nameRequired: "Por favor, ingresa un nombre de evento", itemNameRequired: "Por favor, ingresa un nombre de artículo", qtyRequired: "Por favor, establece la cantidad en al menos 1", sortDay: "Por día", sortPrep: "Por preparación", sortName: "Por nombre", sortQtyDesc: "Mayor cant.", sortQtyAsc: "Menor cant.", sortCustom: "Reordenar", sortDone: "Listo",
@@ -202,7 +202,7 @@ const TRANSLATIONS = {
     addEvent: "＋ 活动", addItem: "＋ 添加", newEvent: "新活动",
     eventName: "活动名称", eventNamePlaceholder: "例：暑假旅行",
     periodic: "定期", oneTime: "单次", cancel: "取消", create: "创建", save: "保存",
-    deleteEvent: "🗑 删除此活动", editEvent: "编辑活动", copySuffix: "（副本）", copyEvent: "📋 复制此活动", copyEventTitle: "复制并新建", copyEventConfirm: "复制并创建",
+    deleteEvent: "🗑 删除此活动", editEvent: "编辑活动", copySuffix: "（副本）", viewItems: "查看清单", copyEvent: "📋 复制此活动", copyEventTitle: "复制并新建", copyEventConfirm: "复制并创建",
     items: "件物品", done: "已完成", noItems: "还没有物品",
     noItemsHint: "点击＋按钮添加物品",
     storageFull: "存储空间不足，请删除一些活动。", nameRequired: "请输入活动名称", itemNameRequired: "请输入物品名称", qtyRequired: "请将数量设置为至少1", sortDay: "按日期", sortPrep: "按准备方式", sortName: "按名称", sortQtyDesc: "数量多→少", sortQtyAsc: "数量少→多", sortCustom: "手动排序", sortDone: "完成",
@@ -241,7 +241,7 @@ const TRANSLATIONS = {
     addEvent: "＋ 이벤트", addItem: "＋ 추가", newEvent: "새 이벤트",
     eventName: "이벤트 이름", eventNamePlaceholder: "예: 여름 휴가",
     periodic: "정기", oneTime: "단발", cancel: "취소", create: "만들기", save: "저장",
-    deleteEvent: "🗑 이 이벤트 삭제", editEvent: "이벤트 편집", copySuffix: " (복사본)", copyEvent: "📋 이 이벤트 복사", copyEventTitle: "복사하여 새로 만들기", copyEventConfirm: "복사하여 만들기",
+    deleteEvent: "🗑 이 이벤트 삭제", editEvent: "이벤트 편집", copySuffix: " (복사본)", viewItems: "짐 목록 보기", copyEvent: "📋 이 이벤트 복사", copyEventTitle: "복사하여 새로 만들기", copyEventConfirm: "복사하여 만들기",
     items: "개 아이템", done: "완료", noItems: "아이템이 없습니다",
     noItemsHint: "+ 버튼을 탭하여 추가하세요",
     storageFull: "저장 공간이 부족합니다. 이벤트를 삭제해 주세요.", nameRequired: "이벤트 이름을 입력해 주세요", itemNameRequired: "아이템 이름을 입력해 주세요", qtyRequired: "수량을 1 이상으로 설정해 주세요", sortDay: "날짜순", sortPrep: "준비방법순", sortName: "이름순", sortQtyDesc: "수량많은순", sortQtyAsc: "수량적은순", sortCustom: "순서변경", sortDone: "완료",
@@ -803,7 +803,7 @@ const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTag
     {/* アイテム名 */}
     <div className="ps-field" style={{ ...baseField }}>
       <div style={{ ...lbl }}>{t.itemName}</div>
-      <input value={item.name} onChange={e => setter(p => ({ ...p, name: e.target.value }))} placeholder={t.itemNamePlaceholder}
+      <input autoFocus value={item.name} onChange={e => setter(p => ({ ...p, name: e.target.value }))} placeholder={t.itemNamePlaceholder}
         style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"0", fontSize:16 }} />
     </div>
     {error && <div ref={errorRef} style={{ color:"#f87171", fontSize:13, marginTop:-6, marginBottom:8, padding:"8px 12px", background:"#3a1a1a", borderRadius:8 }}>⚠ {error}</div>}
@@ -1047,13 +1047,12 @@ export default function App() {
   };
   const resetChecks = (eventId) => setEvents(p => p.map(e => e.id===eventId ? { ...e, items:e.items.map(i => ({ ...i, done:false })) } : e));
   const copyEvent = (ev) => {
-    // コピー確認モーダルを開く（名前・日付を編集してから確定）
-    const suffix = t.copySuffix || "";
-    const baseName = suffix && ev.name.endsWith(suffix) ? ev.name.slice(0, -suffix.length) : ev.name;
-    const newName = (baseName + suffix).slice(0, 50);
+    // モーダルでは元の名前のみ表示（(1)などはつけない）
+    const baseName = ev.name.replace(/ \(\d+\)$/, "");
     setCopyDraft({
       sourceItems: ev.items,
-      name: newName,
+      name: baseName,
+      baseName: baseName, // 保存時の連番計算用
       type: ev.type,
       startDate: ev.startDate || "",
       endDate: ev.endDate || "",
@@ -1063,17 +1062,26 @@ export default function App() {
   const confirmCopy = () => {
     if (!copyDraft) return;
     const maxDay = tripDays(copyDraft);
+    // 連番を計算
+    const baseName = copyDraft.baseName || copyDraft.name.replace(/ \(\d+\)$/, "");
+    const existing = events
+      .map(e => { const m = e.name.match(/^(.+) \((\d+)\)$/); return m && m[1]===baseName ? parseInt(m[2]) : 0; })
+      .filter(n => n > 0);
+    const nextNum = existing.length > 0 ? Math.max(...existing) + 1 : 1;
+    // 名前が変更されていれば連番なしで保存、元のままなら連番をつけて確認
+    const isNameChanged = copyDraft.name !== baseName;
+    const finalName = isNameChanged ? copyDraft.name.slice(0, 50) : `${baseName} (${nextNum})`.slice(0, 50);
+    if (!isNameChanged) {
+      // インラインで表示済みなのでそのまま保存
+    }
     const copied = {
       id: genId(),
-      name: copyDraft.name,
+      name: finalName,
       type: copyDraft.type,
       startDate: copyDraft.startDate,
       endDate: copyDraft.endDate,
       items: copyDraft.sourceItems.map(i => ({
-        ...i,
-        id: genId(),
-        done: false,
-        tags: [...i.tags],
+        ...i, id: genId(), done: false, tags: [...i.tags],
         days: i.days.filter(d => d <= maxDay),
       })),
     };
@@ -1155,7 +1163,7 @@ export default function App() {
       {showAddEvent && (
         <div style={card}>
           <div style={{ fontSize:13, fontWeight:700, color:"#60a5fa", marginBottom:12 }}>{t.newEvent}</div>
-          <input placeholder={t.eventNamePlaceholder} value={newEvent.name} onChange={e => setNewEvent({ ...newEvent, name:e.target.value })} onFocus={e => e.target.style.border="1.5px solid #3b82f6"} onBlur={e => e.target.style.border="1px solid #ffffff15"} style={inputStyle} />
+          <input autoFocus placeholder={t.eventNamePlaceholder} value={newEvent.name} onChange={e => setNewEvent({ ...newEvent, name:e.target.value })} onFocus={e => e.target.style.border="1.5px solid #3b82f6"} onBlur={e => e.target.style.border="1px solid #ffffff15"} style={inputStyle} />
           {newEvent._error && <div id="new-event-error" style={{ color:"#f87171", fontSize:12, marginBottom:8, marginTop:-4 }}>⚠ {newEvent._error}</div>}
           <DateRangePicker startDate={newEvent.startDate} endDate={newEvent.endDate} onChangeRange={(s,e) => setNewEvent(p => ({ ...p, startDate:s, endDate:e }))} t={t} lang={lang} />
           <div style={{ display:"flex", gap:8, marginTop:4 }}>
@@ -1183,7 +1191,8 @@ export default function App() {
                 <div style={{ flex:1, cursor:"pointer" }} onClick={() => setSelectedEventId(ev.id)}>
                   <div style={{ fontSize:16, fontWeight:700, marginBottom:4 }}>{ev.name}</div>
                   <div style={{ fontSize:12, display:"flex", alignItems:"center", gap:6, flexWrap:"wrap" }}>
-                    <span style={{ background:"#1d4ed840", color:"#60a5fa", padding:"2px 8px", borderRadius:10, fontSize:11 }}>{typeLabel(ev.type)}</span>
+                    {/* 定期バッジの代わりに持ち物ボタン */}
+                    <button onClick={() => { setSelectedEventId(ev.id); setTabIndex(1); }} style={{ background:"#1d4ed840", border:"none", color:"#60a5fa", padding:"2px 10px", borderRadius:10, fontSize:11, cursor:"pointer", fontWeight:600 }}>📋 {t.viewItems}</button>
                     {dateDisplay(ev) && <span style={{ color:"#666" }}>📅 {dateDisplay(ev)}</span>}
                   </div>
                 </div>
@@ -1371,12 +1380,20 @@ export default function App() {
           </div>
         </div>
       )}
-      {/* コピー確認モーダル */}
       {copyDraft && (
         <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.75)", zIndex:200, display:"flex", alignItems:"center", justifyContent:"center", padding:24 }}>
           <div style={{ background:"#1a1a26", borderRadius:20, padding:"24px 20px", width:"100%", maxWidth:360, border:"1px solid #ffffff12" }}>
             <div style={{ fontSize:14, fontWeight:700, color:"#60a5fa", marginBottom:16 }}>{t.copyEventTitle}</div>
             <input value={copyDraft.name} onChange={e => setCopyDraft(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
+            {/* 名前を変えていない場合のみ、入力欄の真下に通知 */}
+            {copyDraft.name === (copyDraft.baseName || "") && (() => {
+              const baseName = copyDraft.baseName || copyDraft.name;
+              const existing = events.map(e => { const m = e.name.match(/^(.+) \((\d+)\)$/); return m && m[1]===baseName ? parseInt(m[2]) : 0; }).filter(n => n > 0);
+              const nextNum = existing.length > 0 ? Math.max(...existing) + 1 : 1;
+              return <div style={{ background:"#1a2540", borderRadius:8, padding:"8px 12px", marginBottom:8, marginTop:-4, fontSize:12, color:"#60a5fa", lineHeight:1.5 }}>
+                💡 タイトルが同じため「{baseName} ({nextNum})」として保存されます
+              </div>;
+            })()}
             <DateRangePicker startDate={copyDraft.startDate} endDate={copyDraft.endDate} onChangeRange={(s,e) => setCopyDraft(p => ({ ...p, startDate:s, endDate:e }))} t={t} lang={lang} />
             <div style={{ display:"flex", gap:8, marginTop:8 }}>
               <button onClick={() => setCopyDraft(null)} style={{ ...pillBtn, background:"#2a2d3e", flex:1 }}>{t.cancel}</button>
