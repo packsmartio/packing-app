@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+　import React, { useState, useMemo, useEffect } from "react";
 
 const TRANSLATIONS = {
   ja: {
@@ -15,8 +15,8 @@ const TRANSLATIONS = {
     itemName: "アイテム名", itemNamePlaceholder: "例：充電器、着替え、パスポート",
     qty: "個数", qtyUnit: "個", days: "何日目に使う？（複数OK）", daysUnit: "日目",
     resetDays: "リセット", prepMethod: "準備方法",
-    prepMethods: ["家にある", "買う", "レンタル"],
-    whereLabel: "どこで買う？", wherePlaceholder: "例：コンビニ、ドラッグストア",
+    prepMethods: ["家にある", "買う", "レンタル", "その他"],
+    whereLabel: "どこで買う？", prepOtherLabel: "詳細（任意）", customPrepLabel: "準備方法を追加", customPrepPlaceholder: "例：現地調達", wherePlaceholder: "例：コンビニ、ドラッグストア",
     category: "カテゴリ", categories: ["衣類", "書類", "電子機器", "日用品", "食べ物", "その他"],
     tags: "オリジナルタグ（複数OK）", addToList: "✓ リストに追加する",
     settings: "設定", useCat: "カテゴリ機能を使う", useCatDesc: "OFFにするとカテゴリが非表示になります",
@@ -54,8 +54,8 @@ const TRANSLATIONS = {
     itemName: "Item Name", itemNamePlaceholder: "e.g. Charger, Clothes, Passport",
     qty: "Quantity", qtyUnit: "", days: "Which day(s)? (multi-select OK)", daysUnit: "",
     resetDays: "Reset", prepMethod: "How to prepare",
-    prepMethods: ["Have it", "Buy it", "Rent it"],
-    whereLabel: "Where to buy?", wherePlaceholder: "e.g. Pharmacy, Supermarket",
+    prepMethods: ["Have it", "Buy it", "Rent it", "Other"],
+    whereLabel: "Where to buy?", prepOtherLabel: "Details (optional)", customPrepLabel: "Add prep method", customPrepPlaceholder: "e.g. Buy locally", wherePlaceholder: "e.g. Pharmacy, Supermarket",
     category: "Category", categories: ["Clothing", "Documents", "Electronics", "Toiletries", "Food", "Other"],
     tags: "Custom Tags (multi-select OK)", addToList: "✓ Add to List",
     settings: "Settings", useCat: "Use Category feature", useCatDesc: "Turn off to hide categories",
@@ -93,8 +93,8 @@ const TRANSLATIONS = {
     itemName: "Nom de l'article", itemNamePlaceholder: "ex : Chargeur, Vêtements, Passeport",
     qty: "Quantité", qtyUnit: "", days: "Quel(s) jour(s) ? (multi-sélection OK)", daysUnit: "",
     resetDays: "Réinitialiser", prepMethod: "Comment préparer",
-    prepMethods: ["J'ai déjà", "Acheter", "Louer"],
-    whereLabel: "Où acheter ?", wherePlaceholder: "ex : Pharmacie, Supermarché",
+    prepMethods: ["J'ai déjà", "Acheter", "Louer", "Autre"],
+    whereLabel: "Où acheter ?", prepOtherLabel: "Détails (optionnel)", customPrepLabel: "Ajouter méthode", customPrepPlaceholder: "ex: Acheter sur place", wherePlaceholder: "ex : Pharmacie, Supermarché",
     category: "Catégorie", categories: ["Vêtements", "Documents", "Électronique", "Toilettes", "Nourriture", "Autre"],
     tags: "Tags personnalisés (multi OK)", addToList: "✓ Ajouter à la liste",
     settings: "Réglages", useCat: "Utiliser les catégories", useCatDesc: "Désactiver pour masquer les catégories",
@@ -132,8 +132,8 @@ const TRANSLATIONS = {
     itemName: "Nome do Item", itemNamePlaceholder: "ex: Carregador, Roupas, Passaporte",
     qty: "Quantidade", qtyUnit: "", days: "Qual(is) dia(s)? (múltipla seleção OK)", daysUnit: "",
     resetDays: "Resetar", prepMethod: "Como preparar",
-    prepMethods: ["Já tenho", "Comprar", "Alugar"],
-    whereLabel: "Onde comprar?", wherePlaceholder: "ex: Farmácia, Supermercado",
+    prepMethods: ["Já tenho", "Comprar", "Alugar", "Outro"],
+    whereLabel: "Onde comprar?", prepOtherLabel: "Detalhes (opcional)", customPrepLabel: "Adicionar método", customPrepPlaceholder: "ex: Comprar localmente", wherePlaceholder: "ex: Farmácia, Supermercado",
     category: "Categoria", categories: ["Roupas", "Documentos", "Eletrônicos", "Higiene", "Comida", "Outro"],
     tags: "Tags personalizadas (multi OK)", addToList: "✓ Adicionar à Lista",
     settings: "Configurações", useCat: "Usar categorias", useCatDesc: "Desative para ocultar categorias",
@@ -171,8 +171,8 @@ const TRANSLATIONS = {
     itemName: "Nombre del Artículo", itemNamePlaceholder: "ej: Cargador, Ropa, Pasaporte",
     qty: "Cantidad", qtyUnit: "", days: "¿Qué día(s)? (múltiple OK)", daysUnit: "",
     resetDays: "Resetear", prepMethod: "Cómo preparar",
-    prepMethods: ["Ya tengo", "Comprar", "Alquilar"],
-    whereLabel: "¿Dónde comprar?", wherePlaceholder: "ej: Farmacia, Supermercado",
+    prepMethods: ["Ya tengo", "Comprar", "Alquilar", "Otro"],
+    whereLabel: "¿Dónde comprar?", prepOtherLabel: "Detalles (opcional)", customPrepLabel: "Agregar método", customPrepPlaceholder: "ej: Comprar localmente", wherePlaceholder: "ej: Farmacia, Supermercado",
     category: "Categoría", categories: ["Ropa", "Documentos", "Electrónica", "Higiene", "Comida", "Otro"],
     tags: "Etiquetas personalizadas (multi OK)", addToList: "✓ Agregar a la Lista",
     settings: "Ajustes", useCat: "Usar categorías", useCatDesc: "Desactivar para ocultar categorías",
@@ -210,8 +210,8 @@ const TRANSLATIONS = {
     itemName: "物品名称", itemNamePlaceholder: "例：充电器、衣服、护照",
     qty: "数量", qtyUnit: "个", days: "第几天使用？（可多选）", daysUnit: "天",
     resetDays: "重置", prepMethod: "准备方式",
-    prepMethods: ["已有", "购买", "租借"],
-    whereLabel: "在哪里买？", wherePlaceholder: "例：超市、药店",
+    prepMethods: ["已有", "购买", "租借", "其他"],
+    whereLabel: "在哪里买？", prepOtherLabel: "详情（可选）", customPrepLabel: "添加准备方式", customPrepPlaceholder: "例：当地购买", wherePlaceholder: "例：超市、药店",
     category: "分类", categories: ["服装", "证件", "电子产品", "日用品", "食品", "其他"],
     tags: "自定义标签（可多选）", addToList: "✓ 添加到清单",
     settings: "设置", useCat: "使用分类功能", useCatDesc: "关闭后隐藏分类",
@@ -249,8 +249,8 @@ const TRANSLATIONS = {
     itemName: "아이템 이름", itemNamePlaceholder: "예: 충전기, 옷, 여권",
     qty: "수량", qtyUnit: "개", days: "몇 번째 날？（복수 선택 가능）", daysUnit: "일차",
     resetDays: "초기화", prepMethod: "준비 방법",
-    prepMethods: ["이미 있음", "구매", "렌탈"],
-    whereLabel: "어디서 살까요?", wherePlaceholder: "예: 편의점, 마트",
+    prepMethods: ["이미 있음", "구매", "렌탈", "기타"],
+    whereLabel: "어디서 살까요?", prepOtherLabel: "세부사항 (선택)", customPrepLabel: "준비방법 추가", customPrepPlaceholder: "예: 현지 구매", wherePlaceholder: "예: 편의점, 마트",
     category: "카테고리", categories: ["의류", "서류", "전자기기", "생활용품", "식품", "기타"],
     tags: "커스텀 태그 (복수 선택 가능)", addToList: "✓ 목록에 추가",
     settings: "설정", useCat: "카테고리 기능 사용", useCatDesc: "끄면 카테고리가 숨겨집니다",
@@ -288,227 +288,100 @@ const LANG_OPTIONS = [
 
 const DAY_NUMS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
 const QTY_NUMS = [1,2,3,4,5,6,7,8,9,10,15,20,30,50,100];
-// ■2 prep内部キー（言語に依存しない）
-const PREP_KEYS = ["have", "buy", "rent"];
-const prepColor = (p) => p==="have" ? "#4ade80" : p==="buy" ? "#fb923c" : "#c084fc";
-// 旧データ（翻訳文字列）との後方互換マッピング
+const PREP_KEYS = ["have", "buy", "rent", "other"];
+const prepColor = (p, customPreps) => {
+  if (p === "have") return "#4ade80";
+  if (p === "buy") return "#fb923c";
+  if (p === "rent") return "#c084fc";
+  if (p === "other") return "#94a3b8";
+  // custom prep method
+  if (customPreps && customPreps.includes(p)) return "#60a5fa";
+  return "#94a3b8";
+};
 const PREP_LEGACY_MAP = {
   "家にある":"have","Have it":"have","J'ai déjà":"have","Já tenho":"have","Ya tengo":"have","已有":"have","이미 있음":"have",
   "買う":"buy","Buy it":"buy","Acheter":"buy","Comprar":"buy","购买":"buy","구매":"buy",
   "レンタル":"rent","Rent it":"rent","Louer":"rent","Alugar":"rent","Alquilar":"rent","租借":"rent","렌탈":"rent",
 };
-const normPrep = (p) => PREP_KEYS.includes(p) ? p : (PREP_LEGACY_MAP[p] || "have");
-const prepLabel = (p, t) => { const idx = PREP_KEYS.indexOf(normPrep(p)); return t.prepMethods[idx] || t.prepMethods[0]; };
+const normPrep = (p, customPreps) => {
+  if (PREP_KEYS.includes(p)) return p;
+  if (customPreps && customPreps.includes(p)) return p;
+  return PREP_LEGACY_MAP[p] || "have";
+};
+const prepLabel = (p, t, customPreps) => {
+  const idx = PREP_KEYS.indexOf(p);
+  if (idx >= 0) return t.prepMethods[idx] || p;
+  if (customPreps && customPreps.includes(p)) return p;
+  const legacyKey = PREP_LEGACY_MAP[p];
+  if (legacyKey) { const i2 = PREP_KEYS.indexOf(legacyKey); return t.prepMethods[i2] || p; }
+  return p;
+};
 
-// Sample data factory — 今日から7日後スタートの5日間旅行
 const makeSample = (lang) => {
   const p = TRANSLATIONS[lang].prepMethods;
   const c = TRANSLATIONS[lang].categories;
-
-  // ■1 ローカル日付でフォーマット（UTCズレ防止）
   const fmtLocal = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
   const base = new Date();
   base.setDate(base.getDate() + 7);
   const startDate = fmtLocal(base);
   const end = new Date(base); end.setDate(base.getDate() + 4);
   const endDate = fmtLocal(end);
-
   const itemSets = {
     ja: [
-      { id:1,  name:"Tシャツ",                     qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[0], tags:[], done:false },
-      { id:2,  name:"ズボン / ショーツ",            qty:2, days:[1,3,5],     prep:"have", prepWhere:"",              category:c[0], tags:[], done:false },
-      { id:3,  name:"パジャマ",                     qty:1, days:[1,2,3,4],   prep:"have", prepWhere:"",              category:c[0], tags:[], done:false },
-      { id:4,  name:"下着",                         qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[0], tags:[], done:false },
-      { id:5,  name:"靴下",                         qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[0], tags:[], done:false },
-      { id:6,  name:"羽織り / パーカー",            qty:1, days:[1,5],       prep:"have", prepWhere:"",              category:c[0], tags:[], done:false },
-      { id:7,  name:"パスポート",                   qty:1, days:[1,5],       prep:"have", prepWhere:"",              category:c[1], tags:[], done:false },
-      { id:8,  name:"航空券（印刷 or スマホ）",      qty:1, days:[1,5],      prep:"have", prepWhere:"",              category:c[1], tags:[], done:false },
-      { id:9,  name:"ホテル予約確認書",             qty:1, days:[1],         prep:"have", prepWhere:"",              category:c[1], tags:[], done:false },
-      { id:10, name:"海外旅行保険証",               qty:1, days:[1],         prep:"buy", prepWhere:"ネット申込み",  category:c[1], tags:[], done:false },
-      { id:11, name:"スマートフォン",               qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[2], tags:[], done:false },
-      { id:12, name:"充電器（USB-C）",              qty:1, days:[1],         prep:"have", prepWhere:"",              category:c[2], tags:[], done:false },
-      { id:13, name:"モバイルバッテリー",           qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[2], tags:[], done:false },
-      { id:14, name:"変換プラグ",                   qty:1, days:[1],         prep:"buy", prepWhere:"家電量販店",    category:c[2], tags:[], done:false },
-      { id:15, name:"イヤホン",                    qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[2], tags:[], done:false },
-      { id:16, name:"歯ブラシ・歯磨き粉",          qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[3], tags:[], done:false },
-      { id:17, name:"シャンプー",                  qty:1, days:[1,2,3,4],   prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
-      { id:18, name:"洗顔料・化粧水",              qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[3], tags:[], done:false },
+      { id:1,  name:"Tシャツ", qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:2,  name:"ズボン / ショーツ", qty:2, days:[1,3,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:3,  name:"パジャマ", qty:1, days:[1,2,3,4], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:4,  name:"下着", qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:5,  name:"靴下", qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:6,  name:"羽織り / パーカー", qty:1, days:[1,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:7,  name:"パスポート", qty:1, days:[1,5], prep:"have", prepWhere:"", category:c[1], tags:[], done:false },
+      { id:8,  name:"航空券（印刷 or スマホ）", qty:1, days:[1,5], prep:"have", prepWhere:"", category:c[1], tags:[], done:false },
+      { id:9,  name:"ホテル予約確認書", qty:1, days:[1], prep:"have", prepWhere:"", category:c[1], tags:[], done:false },
+      { id:10, name:"海外旅行保険証", qty:1, days:[1], prep:"buy", prepWhere:"ネット申込み", category:c[1], tags:[], done:false },
+      { id:11, name:"スマートフォン", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:12, name:"充電器（USB-C）", qty:1, days:[1], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:13, name:"モバイルバッテリー", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:14, name:"変換プラグ", qty:1, days:[1], prep:"buy", prepWhere:"家電量販店", category:c[2], tags:[], done:false },
+      { id:15, name:"イヤホン", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:16, name:"歯ブラシ・歯磨き粉", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[3], tags:[], done:false },
+      { id:17, name:"シャンプー", qty:1, days:[1,2,3,4], prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
+      { id:18, name:"洗顔料・化粧水", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[3], tags:[], done:false },
       { id:19, name:"コンタクトレンズ（1日用×5）", qty:5, days:[1,2,3,4,5], prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
-      { id:20, name:"コンタクト洗浄液",            qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
-      { id:21, name:"日焼け止め",                  qty:1, days:[2,3,4],     prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
-      { id:22, name:"常備薬（頭痛・胃薬）",        qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
-      { id:23, name:"エコバッグ",                  qty:1, days:[2,3,4],     prep:"have", prepWhere:"",              category:c[3], tags:[], done:false },
-      { id:24, name:"現地通貨（両替）",             qty:1, days:[1],         prep:"buy", prepWhere:"空港両替所",    category:c[5], tags:[], done:false },
-      { id:25, name:"折りたたみ傘",               qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",              category:c[5], tags:[], done:false },
-      { id:26, name:"南京錠",                      qty:1, days:[1],         prep:"have", prepWhere:"",              category:c[5], tags:[], done:false },
+      { id:20, name:"コンタクト洗浄液", qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
+      { id:21, name:"日焼け止め", qty:1, days:[2,3,4], prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
+      { id:22, name:"常備薬（頭痛・胃薬）", qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"ドラッグストア", category:c[3], tags:[], done:false },
+      { id:23, name:"エコバッグ", qty:1, days:[2,3,4], prep:"have", prepWhere:"", category:c[3], tags:[], done:false },
+      { id:24, name:"現地通貨（両替）", qty:1, days:[1], prep:"buy", prepWhere:"空港両替所", category:c[5], tags:[], done:false },
+      { id:25, name:"折りたたみ傘", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[5], tags:[], done:false },
+      { id:26, name:"南京錠", qty:1, days:[1], prep:"have", prepWhere:"", category:c[5], tags:[], done:false },
     ],
     en: [
-      { id:1,  name:"T-shirts",                    qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[0], tags:[], done:false },
-      { id:2,  name:"Shorts / Pants",              qty:2, days:[1,3,5],     prep:"have", prepWhere:"",                  category:c[0], tags:[], done:false },
-      { id:3,  name:"Pajamas",                     qty:1, days:[1,2,3,4],   prep:"have", prepWhere:"",                  category:c[0], tags:[], done:false },
-      { id:4,  name:"Underwear",                   qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[0], tags:[], done:false },
-      { id:5,  name:"Socks",                       qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[0], tags:[], done:false },
-      { id:6,  name:"Light jacket / hoodie",       qty:1, days:[1,5],       prep:"have", prepWhere:"",                  category:c[0], tags:[], done:false },
-      { id:7,  name:"Passport",                    qty:1, days:[1,5],       prep:"have", prepWhere:"",                  category:c[1], tags:[], done:false },
-      { id:8,  name:"Flight tickets (print/phone)",qty:1, days:[1,5],       prep:"have", prepWhere:"",                  category:c[1], tags:[], done:false },
-      { id:9,  name:"Hotel confirmation",          qty:1, days:[1],         prep:"have", prepWhere:"",                  category:c[1], tags:[], done:false },
-      { id:10, name:"Travel insurance",            qty:1, days:[1],         prep:"buy", prepWhere:"Online",            category:c[1], tags:[], done:false },
-      { id:11, name:"Smartphone",                  qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[2], tags:[], done:false },
-      { id:12, name:"Charger (USB-C)",             qty:1, days:[1],         prep:"have", prepWhere:"",                  category:c[2], tags:[], done:false },
-      { id:13, name:"Power bank",                  qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[2], tags:[], done:false },
-      { id:14, name:"Travel adapter",              qty:1, days:[1],         prep:"buy", prepWhere:"Electronics store", category:c[2], tags:[], done:false },
-      { id:15, name:"Earphones",                   qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[2], tags:[], done:false },
-      { id:16, name:"Toothbrush & toothpaste",     qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[3], tags:[], done:false },
-      { id:17, name:"Shampoo & conditioner",       qty:1, days:[1,2,3,4],   prep:"buy", prepWhere:"Pharmacy",          category:c[3], tags:[], done:false },
-      { id:18, name:"Face wash & moisturizer",     qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[3], tags:[], done:false },
-      { id:19, name:"Contact lenses (x5 daily)",   qty:5, days:[1,2,3,4,5], prep:"buy", prepWhere:"Pharmacy",          category:c[3], tags:[], done:false },
-      { id:20, name:"Contact lens solution",       qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"Pharmacy",          category:c[3], tags:[], done:false },
-      { id:21, name:"Sunscreen",                   qty:1, days:[2,3,4],     prep:"buy", prepWhere:"Pharmacy",          category:c[3], tags:[], done:false },
-      { id:22, name:"Medicine (pain/stomach)",      qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"Pharmacy",          category:c[3], tags:[], done:false },
-      { id:23, name:"Reusable bag",                qty:1, days:[2,3,4],     prep:"have", prepWhere:"",                  category:c[3], tags:[], done:false },
-      { id:24, name:"Local currency (exchange)",   qty:1, days:[1],         prep:"buy", prepWhere:"Airport exchange",  category:c[5], tags:[], done:false },
-      { id:25, name:"Compact umbrella",            qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",                  category:c[5], tags:[], done:false },
-      { id:26, name:"Padlock",                     qty:1, days:[1],         prep:"have", prepWhere:"",                  category:c[5], tags:[], done:false },
-    ],
-    fr: [
-      { id:1,  name:"T-shirts",          qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:2,  name:"Shorts / Pantalons",qty:2, days:[1,3,5],     prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:3,  name:"Pyjamas",           qty:1, days:[1,2,3,4],   prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:4,  name:"Sous-vêtements",    qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:5,  name:"Chaussettes",       qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:6,  name:"Veste légère",      qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:7,  name:"Passeport",         qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:8,  name:"Billets d'avion",   qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:9,  name:"Confirmation hôtel",qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:10, name:"Assurance voyage",  qty:1, days:[1],         prep:"buy",  prepWhere:"En ligne",  category:c[1], tags:[], done:false },
-      { id:11, name:"Smartphone",        qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:12, name:"Chargeur (USB-C)",  qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:13, name:"Batterie externe",  qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:14, name:"Adaptateur voyage", qty:1, days:[1],         prep:"buy",  prepWhere:"Électronique", category:c[2], tags:[], done:false },
-      { id:15, name:"Écouteurs",         qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:16, name:"Brosse à dents",    qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:17, name:"Shampooing",        qty:1, days:[1,2,3,4],   prep:"buy",  prepWhere:"Pharmacie", category:c[3], tags:[], done:false },
-      { id:18, name:"Crème visage",      qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:19, name:"Lentilles (×5j)",   qty:5, days:[1,2,3,4,5], prep:"buy",  prepWhere:"Pharmacie", category:c[3], tags:[], done:false },
-      { id:20, name:"Solution lentilles",qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"Pharmacie", category:c[3], tags:[], done:false },
-      { id:21, name:"Crème solaire",     qty:1, days:[2,3,4],     prep:"buy",  prepWhere:"Pharmacie", category:c[3], tags:[], done:false },
-      { id:22, name:"Médicaments",       qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"Pharmacie", category:c[3], tags:[], done:false },
-      { id:23, name:"Sac réutilisable",  qty:1, days:[2,3,4],     prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:24, name:"Monnaie locale",    qty:1, days:[1],         prep:"buy",  prepWhere:"Bureau de change", category:c[5], tags:[], done:false },
-      { id:25, name:"Parapluie compact", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[5], tags:[], done:false },
-      { id:26, name:"Cadenas",           qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[5], tags:[], done:false },
-    ],
-    pt: [
-      { id:1,  name:"Camisetas",         qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:2,  name:"Shorts / Calças",   qty:2, days:[1,3,5],     prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:3,  name:"Pijama",            qty:1, days:[1,2,3,4],   prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:4,  name:"Roupas íntimas",    qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:5,  name:"Meias",             qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:6,  name:"Jaqueta leve",      qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:7,  name:"Passaporte",        qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:8,  name:"Passagem aérea",    qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:9,  name:"Confirmação hotel", qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:10, name:"Seguro viagem",     qty:1, days:[1],         prep:"buy",  prepWhere:"Online",    category:c[1], tags:[], done:false },
-      { id:11, name:"Smartphone",        qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:12, name:"Carregador (USB-C)",qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:13, name:"Carregador portátil",qty:1,days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:14, name:"Adaptador viagem",  qty:1, days:[1],         prep:"buy",  prepWhere:"Eletrônicos", category:c[2], tags:[], done:false },
-      { id:15, name:"Fones de ouvido",   qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:16, name:"Escova de dentes",  qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:17, name:"Shampoo",           qty:1, days:[1,2,3,4],   prep:"buy",  prepWhere:"Farmácia",  category:c[3], tags:[], done:false },
-      { id:18, name:"Creme facial",      qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:19, name:"Lentes de contato (×5)", qty:5, days:[1,2,3,4,5], prep:"buy", prepWhere:"Farmácia", category:c[3], tags:[], done:false },
-      { id:20, name:"Solução p/ lentes", qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"Farmácia",  category:c[3], tags:[], done:false },
-      { id:21, name:"Protetor solar",    qty:1, days:[2,3,4],     prep:"buy",  prepWhere:"Farmácia",  category:c[3], tags:[], done:false },
-      { id:22, name:"Remédios",          qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"Farmácia",  category:c[3], tags:[], done:false },
-      { id:23, name:"Sacola reutilizável",qty:1,days:[2,3,4],     prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:24, name:"Moeda local",       qty:1, days:[1],         prep:"buy",  prepWhere:"Casa de câmbio", category:c[5], tags:[], done:false },
-      { id:25, name:"Guarda-chuva",      qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[5], tags:[], done:false },
-      { id:26, name:"Cadeado",           qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[5], tags:[], done:false },
-    ],
-    es: [
-      { id:1,  name:"Camisetas",         qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:2,  name:"Shorts / Pantalones",qty:2,days:[1,3,5],     prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:3,  name:"Pijama",            qty:1, days:[1,2,3,4],   prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:4,  name:"Ropa interior",     qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:5,  name:"Calcetines",        qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:6,  name:"Chaqueta ligera",   qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[0], tags:[], done:false },
-      { id:7,  name:"Pasaporte",         qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:8,  name:"Billetes de avión", qty:1, days:[1,5],       prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:9,  name:"Reserva de hotel",  qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[1], tags:[], done:false },
-      { id:10, name:"Seguro de viaje",   qty:1, days:[1],         prep:"buy",  prepWhere:"Online",    category:c[1], tags:[], done:false },
-      { id:11, name:"Smartphone",        qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:12, name:"Cargador (USB-C)",  qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:13, name:"Batería portátil",  qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:14, name:"Adaptador de viaje",qty:1, days:[1],         prep:"buy",  prepWhere:"Electrónica", category:c[2], tags:[], done:false },
-      { id:15, name:"Auriculares",       qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[2], tags:[], done:false },
-      { id:16, name:"Cepillo de dientes",qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:17, name:"Champú",            qty:1, days:[1,2,3,4],   prep:"buy",  prepWhere:"Farmacia",  category:c[3], tags:[], done:false },
-      { id:18, name:"Crema facial",      qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:19, name:"Lentillas (×5 días)",qty:5,days:[1,2,3,4,5], prep:"buy",  prepWhere:"Farmacia",  category:c[3], tags:[], done:false },
-      { id:20, name:"Solución lentillas",qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"Farmacia",  category:c[3], tags:[], done:false },
-      { id:21, name:"Protector solar",   qty:1, days:[2,3,4],     prep:"buy",  prepWhere:"Farmacia",  category:c[3], tags:[], done:false },
-      { id:22, name:"Medicamentos",      qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"Farmacia",  category:c[3], tags:[], done:false },
-      { id:23, name:"Bolsa reutilizable",qty:1, days:[2,3,4],     prep:"have", prepWhere:"",          category:c[3], tags:[], done:false },
-      { id:24, name:"Moneda local",      qty:1, days:[1],         prep:"buy",  prepWhere:"Casa de cambio", category:c[5], tags:[], done:false },
-      { id:25, name:"Paraguas compacto", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",          category:c[5], tags:[], done:false },
-      { id:26, name:"Candado",           qty:1, days:[1],         prep:"have", prepWhere:"",          category:c[5], tags:[], done:false },
-    ],
-    zh: [
-      { id:1,  name:"T恤",              qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[0], tags:[], done:false },
-      { id:2,  name:"短裤 / 长裤",      qty:2, days:[1,3,5],     prep:"have", prepWhere:"",     category:c[0], tags:[], done:false },
-      { id:3,  name:"睡衣",             qty:1, days:[1,2,3,4],   prep:"have", prepWhere:"",     category:c[0], tags:[], done:false },
-      { id:4,  name:"内衣裤",           qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[0], tags:[], done:false },
-      { id:5,  name:"袜子",             qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[0], tags:[], done:false },
-      { id:6,  name:"薄外套",           qty:1, days:[1,5],       prep:"have", prepWhere:"",     category:c[0], tags:[], done:false },
-      { id:7,  name:"护照",             qty:1, days:[1,5],       prep:"have", prepWhere:"",     category:c[1], tags:[], done:false },
-      { id:8,  name:"机票（打印/手机）", qty:1, days:[1,5],      prep:"have", prepWhere:"",     category:c[1], tags:[], done:false },
-      { id:9,  name:"酒店预订确认单",   qty:1, days:[1],         prep:"have", prepWhere:"",     category:c[1], tags:[], done:false },
-      { id:10, name:"旅行保险",         qty:1, days:[1],         prep:"buy",  prepWhere:"网上", category:c[1], tags:[], done:false },
-      { id:11, name:"智能手机",         qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[2], tags:[], done:false },
-      { id:12, name:"充电器（USB-C）",  qty:1, days:[1],         prep:"have", prepWhere:"",     category:c[2], tags:[], done:false },
-      { id:13, name:"移动电源",         qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[2], tags:[], done:false },
-      { id:14, name:"旅行转换插头",     qty:1, days:[1],         prep:"buy",  prepWhere:"电器店", category:c[2], tags:[], done:false },
-      { id:15, name:"耳机",             qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[2], tags:[], done:false },
-      { id:16, name:"牙刷 & 牙膏",     qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[3], tags:[], done:false },
-      { id:17, name:"洗发水",           qty:1, days:[1,2,3,4],   prep:"buy",  prepWhere:"药店", category:c[3], tags:[], done:false },
-      { id:18, name:"洁面乳 & 护肤水",  qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[3], tags:[], done:false },
-      { id:19, name:"隐形眼镜（×5天）", qty:5, days:[1,2,3,4,5], prep:"buy",  prepWhere:"药店", category:c[3], tags:[], done:false },
-      { id:20, name:"隐形眼镜护理液",   qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"药店", category:c[3], tags:[], done:false },
-      { id:21, name:"防晒霜",           qty:1, days:[2,3,4],     prep:"buy",  prepWhere:"药店", category:c[3], tags:[], done:false },
-      { id:22, name:"常备药",           qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"药店", category:c[3], tags:[], done:false },
-      { id:23, name:"环保购物袋",       qty:1, days:[2,3,4],     prep:"have", prepWhere:"",     category:c[3], tags:[], done:false },
-      { id:24, name:"当地货币（兑换）", qty:1, days:[1],         prep:"buy",  prepWhere:"机场兑换", category:c[5], tags:[], done:false },
-      { id:25, name:"折叠雨伞",         qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",     category:c[5], tags:[], done:false },
-      { id:26, name:"小挂锁",           qty:1, days:[1],         prep:"have", prepWhere:"",     category:c[5], tags:[], done:false },
-    ],
-    ko: [
-      { id:1,  name:"티셔츠",           qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[0], tags:[], done:false },
-      { id:2,  name:"반바지 / 바지",    qty:2, days:[1,3,5],     prep:"have", prepWhere:"",       category:c[0], tags:[], done:false },
-      { id:3,  name:"잠옷",             qty:1, days:[1,2,3,4],   prep:"have", prepWhere:"",       category:c[0], tags:[], done:false },
-      { id:4,  name:"속옷",             qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[0], tags:[], done:false },
-      { id:5,  name:"양말",             qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[0], tags:[], done:false },
-      { id:6,  name:"가벼운 겉옷",      qty:1, days:[1,5],       prep:"have", prepWhere:"",       category:c[0], tags:[], done:false },
-      { id:7,  name:"여권",             qty:1, days:[1,5],       prep:"have", prepWhere:"",       category:c[1], tags:[], done:false },
-      { id:8,  name:"항공권(출력/모바일)",qty:1,days:[1,5],      prep:"have", prepWhere:"",       category:c[1], tags:[], done:false },
-      { id:9,  name:"호텔 예약 확인서", qty:1, days:[1],         prep:"have", prepWhere:"",       category:c[1], tags:[], done:false },
-      { id:10, name:"여행자 보험",      qty:1, days:[1],         prep:"buy",  prepWhere:"온라인", category:c[1], tags:[], done:false },
-      { id:11, name:"스마트폰",         qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[2], tags:[], done:false },
-      { id:12, name:"충전기(USB-C)",    qty:1, days:[1],         prep:"have", prepWhere:"",       category:c[2], tags:[], done:false },
-      { id:13, name:"보조 배터리",      qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[2], tags:[], done:false },
-      { id:14, name:"여행용 어댑터",    qty:1, days:[1],         prep:"buy",  prepWhere:"전자제품 매장", category:c[2], tags:[], done:false },
-      { id:15, name:"이어폰",           qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[2], tags:[], done:false },
-      { id:16, name:"칫솔 & 치약",     qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[3], tags:[], done:false },
-      { id:17, name:"샴푸 & 컨디셔너", qty:1, days:[1,2,3,4],   prep:"buy",  prepWhere:"약국",   category:c[3], tags:[], done:false },
-      { id:18, name:"세안제 & 스킨",   qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[3], tags:[], done:false },
-      { id:19, name:"렌즈(1일용×5개)", qty:5, days:[1,2,3,4,5], prep:"buy",  prepWhere:"약국",   category:c[3], tags:[], done:false },
-      { id:20, name:"렌즈 세정액",      qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"약국",   category:c[3], tags:[], done:false },
-      { id:21, name:"선크림",           qty:1, days:[2,3,4],     prep:"buy",  prepWhere:"약국",   category:c[3], tags:[], done:false },
-      { id:22, name:"상비약",           qty:1, days:[1,2,3,4,5], prep:"buy",  prepWhere:"약국",   category:c[3], tags:[], done:false },
-      { id:23, name:"에코백",           qty:1, days:[2,3,4],     prep:"have", prepWhere:"",       category:c[3], tags:[], done:false },
-      { id:24, name:"현지 화폐(환전)",  qty:1, days:[1],         prep:"buy",  prepWhere:"공항 환전소", category:c[5], tags:[], done:false },
-      { id:25, name:"접이식 우산",      qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"",       category:c[5], tags:[], done:false },
-      { id:26, name:"자물쇠",           qty:1, days:[1],         prep:"have", prepWhere:"",       category:c[5], tags:[], done:false },
+      { id:1, name:"T-shirts", qty:4, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:2, name:"Shorts / Pants", qty:2, days:[1,3,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:3, name:"Pajamas", qty:1, days:[1,2,3,4], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:4, name:"Underwear", qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:5, name:"Socks", qty:5, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:6, name:"Light jacket / hoodie", qty:1, days:[1,5], prep:"have", prepWhere:"", category:c[0], tags:[], done:false },
+      { id:7, name:"Passport", qty:1, days:[1,5], prep:"have", prepWhere:"", category:c[1], tags:[], done:false },
+      { id:8, name:"Flight tickets (print/phone)", qty:1, days:[1,5], prep:"have", prepWhere:"", category:c[1], tags:[], done:false },
+      { id:9, name:"Hotel confirmation", qty:1, days:[1], prep:"have", prepWhere:"", category:c[1], tags:[], done:false },
+      { id:10, name:"Travel insurance", qty:1, days:[1], prep:"buy", prepWhere:"Online", category:c[1], tags:[], done:false },
+      { id:11, name:"Smartphone", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:12, name:"Charger (USB-C)", qty:1, days:[1], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:13, name:"Power bank", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:14, name:"Travel adapter", qty:1, days:[1], prep:"buy", prepWhere:"Electronics store", category:c[2], tags:[], done:false },
+      { id:15, name:"Earphones", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[2], tags:[], done:false },
+      { id:16, name:"Toothbrush & toothpaste", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[3], tags:[], done:false },
+      { id:17, name:"Shampoo & conditioner", qty:1, days:[1,2,3,4], prep:"buy", prepWhere:"Pharmacy", category:c[3], tags:[], done:false },
+      { id:18, name:"Face wash & moisturizer", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[3], tags:[], done:false },
+      { id:19, name:"Contact lenses (x5 daily)", qty:5, days:[1,2,3,4,5], prep:"buy", prepWhere:"Pharmacy", category:c[3], tags:[], done:false },
+      { id:20, name:"Contact lens solution", qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"Pharmacy", category:c[3], tags:[], done:false },
+      { id:21, name:"Sunscreen", qty:1, days:[2,3,4], prep:"buy", prepWhere:"Pharmacy", category:c[3], tags:[], done:false },
+      { id:22, name:"Medicine (pain/stomach)", qty:1, days:[1,2,3,4,5], prep:"buy", prepWhere:"Pharmacy", category:c[3], tags:[], done:false },
+      { id:23, name:"Reusable bag", qty:1, days:[2,3,4], prep:"have", prepWhere:"", category:c[3], tags:[], done:false },
+      { id:24, name:"Local currency (exchange)", qty:1, days:[1], prep:"buy", prepWhere:"Airport exchange", category:c[5], tags:[], done:false },
+      { id:25, name:"Compact umbrella", qty:1, days:[1,2,3,4,5], prep:"have", prepWhere:"", category:c[5], tags:[], done:false },
+      { id:26, name:"Padlock", qty:1, days:[1], prep:"have", prepWhere:"", category:c[5], tags:[], done:false },
     ],
   };
   const langItems = (itemSets[lang] || itemSets["en"]).map(i => ({ ...i }));
@@ -521,31 +394,32 @@ const sampleEvents = Object.fromEntries(
   ["ja","en","fr","pt","es","zh","ko"].map(l => [l, makeSample(l)])
 );
 
-const inputStyle = { width:"100%", background:"#0f0f13", border:"1px solid #ffffff15", borderRadius:10, padding:"11px 14px", color:"#f0ede8", fontSize:14, marginBottom:8, boxSizing:"border-box", outline:"none" };
+const inputStyle = { width:"100%", background:"#0f0f13", border:"1px solid #ffffff15", borderRadius:10, padding:"9px 12px", color:"#f0ede8", fontSize:16, marginBottom:6, boxSizing:"border-box", outline:"none" };
 const selectStyle = { background:"#1e2030", border:"1px solid #ffffff10", borderRadius:20, padding:"6px 10px", color:"#aaa", fontSize:11, outline:"none", cursor:"pointer", whiteSpace:"nowrap", flexShrink:0 };
 const lbl = { display:"block", fontSize:11, color:"#555", marginBottom:3, letterSpacing:1, textTransform:"uppercase" };
 const pillBtn = { background:"linear-gradient(135deg,#2563eb,#3b82f6)", border:"none", borderRadius:20, color:"white", padding:"8px 16px", fontSize:13, fontWeight:600, cursor:"pointer" };
 const card = { background:"#1a1a26", border:"1px solid #ffffff08", borderRadius:14, padding:12, marginBottom:10 };
 const emptyItem = () => ({ name:"", qty:0, days:[], prep:"have", prepWhere:"", category:"", tags:[] });
-const calcQty = (_cur, n) => Math.min(9999, Math.max(1, n));
 
-// ── DateRangePicker（カレンダーUI） ────────────────────
 const WEEKDAYS_JA = ["日","月","火","水","木","金","土"];
 const WEEKDAYS_EN = ["Su","Mo","Tu","We","Th","Fr","Sa"];
 const DateRangePicker = ({ startDate, endDate, onChangeRange, t, lang }) => {
-  // ■1 今日をローカルYYYY-MM-DD文字列で取得（タイムゾーン安全）
   const todayStr = (() => {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
   })();
   const initYear = startDate ? parseInt(startDate.slice(0,4)) : parseInt(todayStr.slice(0,4));
   const initMonth = startDate ? parseInt(startDate.slice(5,7))-1 : parseInt(todayStr.slice(5,7))-1;
-  // ④ 年月を1オブジェクトで管理（アトミック更新でズレ防止）
   const [viewDate, setViewDate] = useState({ year: initYear, month: initMonth });
+
+  useEffect(() => {
+    if (startDate) {
+      setViewDate({ year: parseInt(startDate.slice(0,4)), month: parseInt(startDate.slice(5,7))-1 });
+    }
+  }, [startDate]);
   const viewYear = viewDate.year;
   const viewMonth = viewDate.month;
   const [selecting, setSelecting] = useState("start");
-
   const fmt = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
   const monthLabel = () => {
     const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -553,29 +427,21 @@ const DateRangePicker = ({ startDate, endDate, onChangeRange, t, lang }) => {
     if (lang === "ko") return `${viewYear}년 ${viewMonth+1}월`;
     return `${names[viewMonth]} ${viewYear}`;
   };
-  const prevMonth = () => setViewDate(({ year, month }) =>
-    month === 0 ? { year: year-1, month: 11 } : { year, month: month-1 }
-  );
-  const nextMonth = () => setViewDate(({ year, month }) =>
-    month === 11 ? { year: year+1, month: 0 } : { year, month: month+1 }
-  );
-
+  const prevMonth = () => setViewDate(({ year, month }) => month === 0 ? { year: year-1, month: 11 } : { year, month: month-1 });
+  const nextMonth = () => setViewDate(({ year, month }) => month === 11 ? { year: year+1, month: 0 } : { year, month: month+1 });
   const firstDay = new Date(viewYear, viewMonth, 1).getDay();
   const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
   const cells = [];
   for (let i=0;i<firstDay;i++) cells.push(null);
   for (let d=1;d<=daysInMonth;d++) cells.push(d);
-
   const handleDay = (d) => {
     if (!d) return;
     const clicked = fmt(new Date(viewYear, viewMonth, d));
     if (selecting === "start") {
-      // 出発日選択：endDateがclickedより前なら同時にクリア
       onChangeRange(clicked, endDate && clicked > endDate ? "" : endDate);
       setSelecting("end");
     } else {
       if (startDate && clicked < startDate) {
-        // 帰宅日が出発日より前：出発日として扱いendをクリア
         onChangeRange(clicked, "");
         setSelecting("end");
       } else {
@@ -584,23 +450,11 @@ const DateRangePicker = ({ startDate, endDate, onChangeRange, t, lang }) => {
       }
     }
   };
-
-  // ■1 文字列比較のみでタイムゾーン非依存
   const cellStr = (d) => d ? `${viewYear}-${String(viewMonth+1).padStart(2,"0")}-${String(d).padStart(2,"0")}` : "";
   const isStart = (d) => !!d && cellStr(d) === startDate;
   const isEnd = (d) => !!d && cellStr(d) === endDate;
-  const inRange = (d) => {
-    if (!d || !startDate || !endDate) return false;
-    const s = cellStr(d);
-    return s > startDate && s < endDate;
-  };
-  const isPast = (d) => {
-    if (!d) return false;
-    const s = cellStr(d);
-    if (s === startDate || s === endDate) return false;
-    return s < todayStr;
-  };
-
+  const inRange = (d) => { if (!d || !startDate || !endDate) return false; const s = cellStr(d); return s > startDate && s < endDate; };
+  const isPast = (d) => { if (!d) return false; const s = cellStr(d); if (s === startDate || s === endDate) return false; return s < todayStr; };
   const fmtDisplay = (s) => {
     if (!s) return "—";
     const mo = parseInt(s.slice(5,7))-1, dy = parseInt(s.slice(8,10));
@@ -609,12 +463,9 @@ const DateRangePicker = ({ startDate, endDate, onChangeRange, t, lang }) => {
     const names=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     return `${names[mo]} ${dy}`;
   };
-
   const wdays = (lang==="ja"||lang==="zh"||lang==="ko") ? WEEKDAYS_JA : WEEKDAYS_EN;
-
   return (
     <div style={{ background:"#0f0f13", border:"1px solid #ffffff15", borderRadius:14, padding:"14px 12px", marginBottom:8 }}>
-      {/* 選択状態バー */}
       <div style={{ display:"flex", gap:8, marginBottom:14 }}>
         {["start","end"].map(mode => {
           const isActive = selecting===mode;
@@ -628,44 +479,24 @@ const DateRangePicker = ({ startDate, endDate, onChangeRange, t, lang }) => {
           );
         })}
       </div>
-      {/* 月ナビ */}
       <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:10 }}>
         <button onClick={prevMonth} style={{ background:"none", border:"none", color:"#60a5fa", fontSize:18, cursor:"pointer", padding:"0 8px" }}>‹</button>
         <div style={{ fontSize:14, fontWeight:700, color:"#f0ede8" }}>{monthLabel()}</div>
         <button onClick={nextMonth} style={{ background:"none", border:"none", color:"#60a5fa", fontSize:18, cursor:"pointer", padding:"0 8px" }}>›</button>
       </div>
-      {/* 曜日ヘッダー */}
       <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", marginBottom:4 }}>
         {wdays.map((w,i) => <div key={i} style={{ textAlign:"center", fontSize:10, color: i===0?"#f87171":i===6?"#60a5fa":"#555", paddingBottom:4 }}>{w}</div>)}
       </div>
-      {/* 日付グリッド */}
       <div style={{ display:"grid", gridTemplateColumns:"repeat(7,1fr)", gap:"2px 0" }}>
         {cells.map((d,i) => {
           const start = isStart(d), end = isEnd(d), range = inRange(d), past = isPast(d);
           const isEdge = start||end;
           return (
             <div key={i} style={{ position:"relative", display:"flex", alignItems:"center", justifyContent:"center" }}>
-              {/* レンジ背景 */}
               {(range||(start&&endDate)||(end&&startDate)) && d && (
-                <div style={{
-                  position:"absolute", top:2, bottom:2,
-                  left: start ? "50%" : "0",
-                  right: end ? "50%" : "0",
-                  background:"#1d4ed840",
-                }} />
+                <div style={{ position:"absolute", top:2, bottom:2, left: start ? "50%" : "0", right: end ? "50%" : "0", background:"#1d4ed840" }} />
               )}
-              <button
-                onClick={() => handleDay(d)}
-                disabled={!d||past}
-                style={{
-                  position:"relative", zIndex:1,
-                  width:34, height:34, borderRadius:"50%", border:"none",
-                  background: isEdge ? "#3b82f6" : "transparent",
-                  color: !d ? "transparent" : past ? "#333" : isEdge ? "white" : "#f0ede8",
-                  fontSize:13, fontWeight: isEdge?700:400,
-                  cursor: !d||past ? "default" : "pointer",
-                }}
-              >{d||""}</button>
+              <button onClick={() => handleDay(d)} disabled={!d||past} style={{ position:"relative", zIndex:1, width:34, height:34, borderRadius:"50%", border:"none", background: isEdge ? "#3b82f6" : "transparent", color: !d ? "transparent" : past ? "#333" : isEdge ? "white" : "#f0ede8", fontSize:13, fontWeight: isEdge?700:400, cursor: !d||past ? "default" : "pointer" }}>{d||""}</button>
             </div>
           );
         })}
@@ -674,8 +505,6 @@ const DateRangePicker = ({ startDate, endDate, onChangeRange, t, lang }) => {
   );
 };
 
-
-// ── TutorialScreen ─────────────────────────────────────
 const TutorialScreen = ({ lang, onFinish, onSkip }) => {
   const [step, setStep] = useState(0);
   const [animating, setAnimating] = useState(false);
@@ -699,31 +528,27 @@ const TutorialScreen = ({ lang, onFinish, onSkip }) => {
       <div style={{ display:"flex", gap:8, marginBottom:40 }}>
         {steps.map((_, i) => <div key={i} style={{ width:i===step?24:8, height:8, borderRadius:4, background:i===step?color:"#ffffff15", transition:"all 0.3s ease" }} />)}
       </div>
-      <div style={{ width:"100%", maxWidth:340, background:"#1a1a26", border:`1px solid ${color}25`, borderRadius:24, padding:"36px 28px 32px", textAlign:"center", opacity:animating?0:1, transform:animating?"translateY(8px)":"translateY(0)", transition:"opacity 0.18s ease, transform 0.18s ease" }}>
+      <div style={{ width:"100%", maxWidth:340, background:"#1a1a26", borderRadius:24, padding:"36px 28px 32px", textAlign:"center", opacity:animating?0:1, transform:animating?"translateY(8px)":"translateY(0)", transition:"opacity 0.18s ease, transform 0.18s ease" }}>
         <div style={{ fontSize:64, marginBottom:20, lineHeight:1 }}>{current.emoji}</div>
         <div style={{ fontSize:10, letterSpacing:3, textTransform:"uppercase", color, fontWeight:700, marginBottom:10 }}>{step+1} / {total}</div>
         <div style={{ fontSize:22, fontWeight:800, color:"#f0ede8", marginBottom:14, lineHeight:1.3 }}>{current.title}</div>
         <div style={{ fontSize:14, color:"rgba(255,255,255,0.55)", lineHeight:1.75, marginBottom:20 }}>{current.desc}</div>
-        <div style={{ display:"inline-block", background:`${color}18`, border:`1px solid ${color}30`, borderRadius:20, padding:"7px 16px", fontSize:12, color, fontWeight:600 }}>💡 {current.hint}</div>
+        <div style={{ display:"inline-block", background:color+"18", borderRadius:20, padding:"7px 16px", fontSize:12, color, fontWeight:600 }}>💡 {current.hint}</div>
       </div>
-      <button onClick={goNext} style={{ marginTop:28, width:"100%", maxWidth:340, padding:"17px 0", borderRadius:40, background:`linear-gradient(135deg,${color},${color}bb)`, color:"white", fontSize:16, fontWeight:700, border:"none", cursor:"pointer", boxShadow:`0 8px 24px ${color}35` }}>
-        {isLast ? t.tutorialStart : `${t.tutorialNext} →`}
+      <button onClick={goNext} style={{ marginTop:28, width:"100%", maxWidth:340, padding:"17px 0", borderRadius:40, background:"linear-gradient(135deg,"+color+","+color+"bb)", color:"white", fontSize:16, fontWeight:700, border:"none", cursor:"pointer" }}>
+        {isLast ? t.tutorialStart : t.tutorialNext + " →"}
       </button>
     </div>
   );
 };
 
-// ── QtyPad ─────────────────────────────────────────────
-// 1〜9・0は電卓方式で桁追加、10以上のプリセットはそのまま上書き
 const QTY_SINGLE = [1,2,3,4,5,6,7,8,9];
 const QTY_PRESET = [10,15,20,30,50,100];
 const QtyPad = ({ value, setter, t }) => {
   const [directInput, setDirectInput] = useState(false);
   const [inputVal, setInputVal] = useState("");
-
   const pressSingle = (n) => {
     setter(p => {
-      // qty=0のときは桁追加でなく直接その数字に（05問題を解消）
       const base = p.qty === 0 ? "" : String(p.qty);
       const next = Math.min(9999, parseInt(base + String(n), 10) || n);
       return { ...p, qty: next };
@@ -742,32 +567,22 @@ const QtyPad = ({ value, setter, t }) => {
     setDirectInput(false);
     setInputVal("");
   };
-
   return (
     <div>
-      {/* 表示エリア：タップで直接入力モードに */}
       {directInput ? (
-        <input
-          autoFocus
-          type="text"
-          inputMode="decimal"
-          pattern="[0-9]*"
-          value={inputVal}
+        <input autoFocus type="text" inputMode="decimal" pattern="[0-9]*" value={inputVal}
           onChange={e => setInputVal(e.target.value)}
           onBlur={() => commitDirect(inputVal)}
           onKeyDown={e => { if (e.key==="Enter") commitDirect(inputVal); if (e.key==="Escape") setDirectInput(false); }}
           style={{ ...inputStyle, marginBottom:8, fontSize:28, fontWeight:700, textAlign:"right", background:"#1e2030", border:"2px solid #3b82f6", borderRadius:12, padding:"10px 14px" }}
         />
       ) : (
-        <div
-          onClick={() => { setDirectInput(true); setInputVal(value > 0 ? String(value) : ""); }}
-          style={{ background:"#1e2030", borderRadius:8, padding:"5px 10px", marginBottom:4, fontSize:20, fontWeight:700, color:"#f0ede8", textAlign:"right", cursor:"text", display:"flex", justifyContent:"space-between", alignItems:"center" }}
-        >
+        <div onClick={() => { setDirectInput(true); setInputVal(value > 0 ? String(value) : ""); }}
+          style={{ background:"#1e2030", borderRadius:8, padding:"5px 10px", marginBottom:4, fontSize:20, fontWeight:700, color:"#f0ede8", textAlign:"right", cursor:"text", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <span style={{ fontSize:10, color:"#3b82f6", letterSpacing:1 }}>✎</span>
           <span>{value || "0"}<span style={{ fontSize:13, color:"#555", marginLeft:6 }}>{t.qtyUnit}</span></span>
         </div>
       )}
-      {/* 1〜9・0・⌫・C */}
       <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:6 }}>
         {QTY_SINGLE.map(n => (
           <button key={n} onClick={() => pressSingle(n)} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 4px", background:"#1e2030", color:"#ccc", fontSize:13, fontWeight:600, cursor:"pointer" }}>{n}</button>
@@ -776,7 +591,6 @@ const QtyPad = ({ value, setter, t }) => {
         <button onClick={() => pressSingle(0)} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 4px", background:"#1e2030", color:"#ccc", fontSize:13, fontWeight:600, cursor:"pointer" }}>0</button>
         <button onClick={() => setter(p => ({ ...p, qty: 0 }))} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 8px", background:"#1a1a26", color:"#555", fontSize:10, cursor:"pointer" }}>C</button>
       </div>
-      {/* プリセット（上書き） */}
       <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
         {QTY_PRESET.map(n => (
           <button key={n} onClick={() => pressPreset(n)} style={{ minWidth:32, height:32, borderRadius:8, border:"none", padding:"0 6px", background:"#252840", color:"#888", fontSize:12, fontWeight:600, cursor:"pointer" }}>{n}</button>
@@ -786,95 +600,86 @@ const QtyPad = ({ value, setter, t }) => {
   );
 };
 
-// ── ItemForm ────────────────────────────────────────────
-const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTags, toggleDay, toggleTag, daysLabel, maxDay, error }) => {
+const ItemForm = ({ item, setter, onSave, onCancel, onDelete, t, useCat, userTags, customPreps, toggleDay, daysLabel, maxDay, error }) => {
   const availableDays = DAY_NUMS.filter(d => d <= (maxDay || DAY_NUMS.length));
   const baseField = { borderRadius:8, padding:"4px 8px", marginBottom:5, border:"1px solid #ffffff15", transition:"border 0.15s, box-shadow 0.15s" };
   const errorRef = React.useRef(null);
-
   React.useEffect(() => {
-    if (error && errorRef.current) {
-      errorRef.current.scrollIntoView({ behavior:"smooth", block:"center" });
-    }
+    if (error && errorRef.current) errorRef.current.scrollIntoView({ behavior:"smooth", block:"center" });
   }, [error]);
-
+  const allPrepKeys = [...PREP_KEYS, ...(customPreps || [])];
+  const allPrepLabels = [...t.prepMethods, ...(customPreps || [])];
   return (
-  <div>
-    {/* アイテム名 */}
-    <div className="ps-field" style={{ ...baseField }}>
-      <div style={{ ...lbl }}>{t.itemName}</div>
-      <input autoFocus value={item.name} onChange={e => setter(p => ({ ...p, name: e.target.value }))} placeholder={t.itemNamePlaceholder}
-        style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"0", fontSize:16 }} />
-    </div>
-    {error && <div ref={errorRef} style={{ color:"#f87171", fontSize:13, marginTop:-6, marginBottom:8, padding:"8px 12px", background:"#3a1a1a", borderRadius:8 }}>⚠ {error}</div>}
-
-    {/* 個数 - :focus-within で枠が青くなる */}
-    <div className="ps-field" style={{ ...baseField }}>
-      <div style={{ ...lbl }}>{t.qty}</div>
-      <QtyPad value={item.qty} setter={setter} t={t} />
-    </div>
-
-    <div style={lbl}>{t.days} {item.days.length>0 && <span style={{ color:"#60a5fa" }}>{daysLabel(item.days)}</span>}</div>
-    <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:6 }}>
-      {availableDays.map(d => <button key={d} onClick={() => toggleDay(d, setter)} style={{ width:32, height:32, borderRadius:8, border:"none", background:item.days.includes(d)?"#3b82f6":"#1e2030", color:item.days.includes(d)?"white":"#666", fontSize:12, fontWeight:item.days.includes(d)?700:400, cursor:"pointer" }}>{d}</button>)}
-    </div>
-    <button onClick={() => setter(p => ({ ...p, days:[] }))} style={{ background:"none", border:"1px solid #333", borderRadius:8, color:"#555", fontSize:11, padding:"4px 12px", cursor:"pointer", marginBottom:12 }}>{t.resetDays}</button>
-
-    <div style={lbl}>{t.prepMethod}</div>
-    <div style={{ display:"flex", gap:8, marginBottom:8 }}>
-      {PREP_KEYS.map((key, idx) => {
-        const active = normPrep(item.prep) === key;
-        return (
-          <button key={key} onClick={() => setter(prev => ({ ...prev, prep:key, prepWhere:"" }))}
-            style={{ flex:1, padding:"9px 4px", borderRadius:10, border:"none", background:active?prepColor(key):"#1e2030", color:active?"#000":"#888", fontSize:11, fontWeight:active?700:400, cursor:"pointer" }}>
-            {t.prepMethods[idx]}
-          </button>
-        );
-      })}
-    </div>
-    {normPrep(item.prep)==="buy" && (
+    <div>
       <div className="ps-field" style={{ ...baseField }}>
-        <input placeholder={t.wherePlaceholder} value={item.prepWhere} onChange={e => setter(p => ({ ...p, prepWhere:e.target.value }))}
-          style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"4px 0" }} />
+        <div style={{ ...lbl }}>{t.itemName}</div>
+        <input value={item.name} onChange={e => setter(p => ({ ...p, name: e.target.value }))} placeholder={t.itemNamePlaceholder}
+          style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"0", fontSize:16 }} />
       </div>
-    )}
-
-    {useCat && <>
-      <div style={lbl}>{t.category}</div>
-      <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginBottom:10 }}>
-        {t.categories.map(c => <button key={c} onClick={() => setter(p => ({ ...p, category:p.category===c?"":c }))} style={{ padding:"7px 14px", borderRadius:20, border:"none", background:item.category===c?"#3b82f6":"#1e2030", color:item.category===c?"white":"#888", fontSize:12, fontWeight:item.category===c?700:400, cursor:"pointer" }}>{c}</button>)}
+      {error && <div ref={errorRef} style={{ color:"#f87171", fontSize:13, marginTop:-6, marginBottom:8, padding:"8px 12px", background:"#3a1a1a", borderRadius:8 }}>⚠ {error}</div>}
+      <div className="ps-field" style={{ ...baseField }}>
+        <div style={{ ...lbl }}>{t.qty}</div>
+        <QtyPad value={item.qty} setter={setter} t={t} />
       </div>
-    </>}
-    {userTags.length>0 && <>
-      <div style={lbl}>{t.tags}</div>
-      <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginBottom:10 }}>
-        {userTags.map(tag => <button key={tag} onClick={() => toggleTag(tag, setter)} style={{ padding:"7px 14px", borderRadius:20, border:"none", background:item.tags.includes(tag)?"#7c3aed":"#1e2030", color:item.tags.includes(tag)?"white":"#888", fontSize:12, fontWeight:item.tags.includes(tag)?700:400, cursor:"pointer" }}>{tag}</button>)}
+      <div style={lbl}>{t.days} {item.days.length>0 && <span style={{ color:"#60a5fa" }}>{daysLabel(item.days)}</span>}</div>
+      <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:6 }}>
+        {availableDays.map(d => <button key={d} onClick={() => toggleDay(d, setter)} style={{ width:32, height:32, borderRadius:8, border:"none", background:item.days.includes(d)?"#3b82f6":"#1e2030", color:item.days.includes(d)?"white":"#666", fontSize:12, fontWeight:item.days.includes(d)?700:400, cursor:"pointer" }}>{d}</button>)}
       </div>
-    </>}
-    <div style={{ display:"flex", gap:8, marginBottom:onDelete?"8px":"0px" }}>
-      <button onClick={onCancel} style={{ ...pillBtn, background:"#2a2d3e", flex:1 }}>{t.cancel}</button>
-      <button onClick={onSave} style={{ ...pillBtn, flex:2 }}>{t.save}</button>
+      <button onClick={() => setter(p => ({ ...p, days:[] }))} style={{ background:"none", border:"1px solid #333", borderRadius:8, color:"#555", fontSize:11, padding:"4px 12px", cursor:"pointer", marginBottom:12 }}>{t.resetDays}</button>
+      <div style={lbl}>{t.prepMethod}</div>
+      <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:8 }}>
+        {allPrepKeys.map((key, idx) => {
+          const active = item.prep === key;
+          const col = prepColor(key, customPreps);
+          return (
+            <button key={key} onClick={() => setter(prev => ({ ...prev, prep:key, prepWhere:"" }))}
+              style={{ padding:"7px 10px", borderRadius:10, border:"none", background:active?col:"#1e2030", color:active?"#000":"#888", fontSize:11, fontWeight:active?700:400, cursor:"pointer" }}>
+              {allPrepLabels[idx] || key}
+            </button>
+          );
+        })}
+      </div>
+      {item.prep === "buy" && (
+        <div className="ps-field" style={{ ...baseField }}>
+          <input placeholder={t.wherePlaceholder} value={item.prepWhere} onChange={e => setter(p => ({ ...p, prepWhere:e.target.value }))}
+            style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"4px 0" }} />
+        </div>
+      )}
+      {(item.prep === "other" || (customPreps && customPreps.includes(item.prep))) && (
+        <div className="ps-field" style={{ ...baseField, marginTop:4 }}>
+          <input placeholder={t.prepOtherLabel || "詳細（任意）"} value={item.prepWhere} onChange={e => setter(p => ({ ...p, prepWhere:e.target.value }))}
+            style={{ ...inputStyle, marginBottom:0, background:"transparent", border:"none", padding:"4px 0" }} />
+        </div>
+      )}
+      {useCat && <>
+        <div style={lbl}>{t.category}</div>
+        <div style={{ display:"flex", gap:6, flexWrap:"wrap", marginBottom:10 }}>
+          {t.categories.map(c => (
+            <button key={c} onClick={() => setter(p => ({ ...p, category:p.category===c?"":c }))}
+              style={{ padding:"7px 14px", borderRadius:20, border:"none", background:item.category===c?"#22c55e":"#1e2030", color:item.category===c?"white":"#888", fontSize:12, fontWeight:item.category===c?700:400, cursor:"pointer" }}>{c}</button>
+          ))}
+          {userTags.map(tag => (
+            <button key={tag} onClick={() => setter(p => ({ ...p, category:p.category===tag?"":tag }))}
+              style={{ padding:"7px 14px", borderRadius:20, border:"none", background:item.category===tag?"#7c3aed":"#1e2030", color:item.category===tag?"white":"#888", fontSize:12, fontWeight:item.category===tag?700:400, cursor:"pointer" }}>{tag}</button>
+          ))}
+        </div>
+      </>}
+      <div style={{ display:"flex", gap:8, marginBottom:onDelete?"8px":"0px" }}>
+        <button onClick={onCancel} style={{ ...pillBtn, background:"#2a2d3e", flex:1 }}>{t.cancel}</button>
+        <button onClick={onSave} style={{ ...pillBtn, flex:2 }}>{t.save}</button>
+      </div>
+      {onDelete && <button onClick={onDelete} style={{ width:"100%", padding:8, borderRadius:8, border:"none", background:"#3a1a1a", color:"#f87171", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.deleteItem}</button>}
     </div>
-    {onDelete && <button onClick={onDelete} style={{ width:"100%", padding:8, borderRadius:8, border:"none", background:"#3a1a1a", color:"#f87171", fontSize:12, fontWeight:600, cursor:"pointer" }}>{t.deleteItem}</button>}
-  </div>
   );
 };
 
-
-// ── Main App ───────────────────────────────────────────
-// localStorage へのアクセスを安全にラップ（シークレットモード対策）
-// ■2 crypto.randomUUID の安全なフォールバック（HTTP環境・旧iOS対応）
 const genIdGlobal = () => {
   try {
-    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
-      return crypto.randomUUID();
-    }
+    if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") return crypto.randomUUID();
   } catch (_) {}
-  // フォールバック: 複数のMath.randomで衝突リスクを最小化
-  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2,9)}-${Math.random().toString(36).slice(2,9)}-${Math.random().toString(36).slice(2,9)}`;
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2,9)}-${Math.random().toString(36).slice(2,9)}`;
 };
 
-// ■3 localStorage 容量オーバー検知付き保存
 const safeSaveWithAlert = (key, value, alertMsg) => {
   try {
     localStorage.setItem(key, JSON.stringify(value));
@@ -885,7 +690,6 @@ const safeSaveWithAlert = (key, value, alertMsg) => {
   }
 };
 
-// ■2 iOS タップハイライト除去 & フォーカスリング統一（App内useEffectで呼ぶ）
 const injectGlobalStyle = () => {
   if (typeof document === "undefined") return;
   if (document.getElementById("ps-global-style")) return;
@@ -896,9 +700,7 @@ const injectGlobalStyle = () => {
     button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
     button:active { opacity: 0.82; }
     input, select, textarea { -webkit-appearance: none; font-size: 16px !important; }
-    input[type="date"] { font-size: 16px !important; }
     .ps-field:focus-within { border-color: #3b82f6 !important; box-shadow: 0 0 0 3px rgba(59,130,246,0.12) !important; }
-    .ps-field:focus-within label, .ps-field:focus-within .ps-lbl { color: #60a5fa !important; }
   `;
   document.head.appendChild(s);
 };
@@ -912,14 +714,11 @@ const safeCheck = (key) => {
 };
 
 export default function App() {
-  // ■1 遅延初期化（アロー関数）で初回のみ実行
-  // ■4 シークレットモード対策済みの safeLoad/safeSave を使用
   const isFirstTime = !safeCheck("ps_onboarded");
   const [lang, setLang] = useState(() => safeLoad("ps_lang", "ja"));
   const [screen, setScreen] = useState(isFirstTime ? "lang" : "app");
   const [selectedLang, setSelectedLang] = useState(() => safeLoad("ps_lang", "ja"));
   const t = TRANSLATIONS[lang] || TRANSLATIONS["en"];
-
   const [events, setEvents] = useState(() => safeLoad("ps_events", []));
   const [selectedEventId, setSelectedEventId] = useState(() => safeLoad("ps_selectedId", null));
   const [tabIndex, setTabIndex] = useState(0);
@@ -930,16 +729,17 @@ export default function App() {
   const [showAddItem, setShowAddItem] = useState(false);
   const [newEvent, setNewEvent] = useState({ name:"", type:"periodic", startDate:"", endDate:"" });
   const [editingEvent, setEditingEvent] = useState(null);
-  const [copyDraft, setCopyDraft] = useState(null); // コピー確認モーダル用
+  const [copyDraft, setCopyDraft] = useState(null);
   const [newItem, setNewItem] = useState(() => emptyItem());
   const [editingItem, setEditingItem] = useState(null);
   const [useCat, setUseCat] = useState(() => safeLoad("ps_useCat", true));
   const [userTags, setUserTags] = useState(() => safeLoad("ps_userTags", []));
+  const [customPreps, setCustomPreps] = useState(() => safeLoad("ps_customPreps", []));
   const [newTagInput, setNewTagInput] = useState("");
+  const [newPrepInput, setNewPrepInput] = useState("");
+  const [addItemError, setAddItemError] = useState("");
 
   useEffect(() => { injectGlobalStyle(); }, []);
-
-  // ⑤ モーダル表示中はbodyのスクロールを止める（iOS scroll chaining防止）
   useEffect(() => {
     const isModalOpen = showAddItem || !!copyDraft;
     document.body.style.overflow = isModalOpen ? "hidden" : "";
@@ -950,17 +750,23 @@ export default function App() {
   useEffect(() => { safeSave("ps_lang", lang); }, [lang]);
   useEffect(() => { safeSave("ps_useCat", useCat); }, [useCat]);
   useEffect(() => { safeSave("ps_userTags", userTags, (TRANSLATIONS[lang]||TRANSLATIONS["en"]).storageFull); }, [userTags, lang]);
-  // ①言語変更時のnewItemリセットはuseEffectではなくonClick内で行う（意図しないリセット防止）
+  useEffect(() => { safeSave("ps_customPreps", customPreps); }, [customPreps]);
 
   const selectedEvent = events.find(e => e.id === selectedEventId);
   const filteredItems = useMemo(() => {
     const ev = events.find(e => e.id === selectedEventId);
     if (!ev) return [];
     let items = [...ev.items];
-    if (filterPrep !== "all") items = items.filter(i => normPrep(i.prep) === filterPrep);
+    if (filterPrep !== "all") items = items.filter(i => { const n = normPrep(i.prep, customPreps); return filterPrep === "other" ? (n === "other" || (customPreps && customPreps.includes(i.prep))) : n === filterPrep; });
     items.sort((a, b) =>
       sortBy==="day" ? (a.days[0]||99)-(b.days[0]||99) :
-      sortBy==="prep" ? a.prep.localeCompare(b.prep) :
+      sortBy==="prep" ? (() => {
+        const order = { have:0, buy:1, rent:2, other:3 };
+        const keyA = order[a.prep] !== undefined ? a.prep : "other";
+        const keyB = order[b.prep] !== undefined ? b.prep : "other";
+        const diff = (order[keyA]??3) - (order[keyB]??3);
+        return diff !== 0 ? diff : a.prep.localeCompare(b.prep);
+      })() :
       sortBy==="name" ? a.name.localeCompare(b.name) :
       sortBy==="qtyDesc" ? b.qty-a.qty :
       sortBy==="qtyAsc" ? a.qty-b.qty : 0
@@ -970,7 +776,6 @@ export default function App() {
 
   const genId = genIdGlobal;
 
-  // 旅行日数を計算するユーティリティ（DRY: saveEditEvent/confirmCopy/ItemFormで共用）
   const tripDays = (ev) => {
     if (!ev || isPeriodicType(ev.type) || !ev.startDate || !ev.endDate) return DAY_NUMS.length;
     const [ey,em,ed] = ev.endDate.split("-").map(Number);
@@ -994,18 +799,11 @@ export default function App() {
   };
   const saveEditEvent = () => {
     if (!editingEvent?.name.trim()) return;
-    // ④ 定期イベントに変更された場合は日付をクリア
-    const cleanedEvent = isPeriodicType(editingEvent.type)
-      ? { ...editingEvent, startDate: "", endDate: "" }
-      : editingEvent;
+    const cleanedEvent = isPeriodicType(editingEvent.type) ? { ...editingEvent, startDate: "", endDate: "" } : editingEvent;
     const maxDay = tripDays(cleanedEvent);
     setEvents(p => p.map(e => {
       if (e.id !== editingEvent.id) return e;
-      const updatedItems = e.items.map(i => ({
-        ...i,
-        tags: [...i.tags],
-        days: i.days.filter(d => d <= maxDay),
-      }));
+      const updatedItems = e.items.map(i => ({ ...i, tags: [...i.tags], days: i.days.filter(d => d <= maxDay) }));
       return { ...e, ...cleanedEvent, items: updatedItems };
     }));
     setEditingEvent(null);
@@ -1013,10 +811,7 @@ export default function App() {
   const deleteEvent = (id) => {
     const remaining = events.filter(e => e.id!==id);
     setEvents(remaining);
-    if (selectedEventId===id) {
-      setSelectedEventId(remaining[0]?.id||null);
-      setTabIndex(0); // イベントタブに戻す
-    }
+    if (selectedEventId===id) { setSelectedEventId(remaining[0]?.id||null); setTabIndex(0); }
     setEditingEvent(null);
   };
   const updateItems = (fn) => setEvents(p => p.map(e =>
@@ -1024,7 +819,6 @@ export default function App() {
   ));
   const toggleDone = (id) => updateItems(items => items.map(i => i.id===id ? { ...i, done:!i.done } : i));
   const deleteItem = (id) => updateItems(items => items.filter(i => i.id!==id));
-  const [addItemError, setAddItemError] = useState("");
   const addItem = () => {
     if (!newItem.name.trim()) {
       setAddItemError(t.itemNameRequired);
@@ -1033,7 +827,6 @@ export default function App() {
     }
     if (newItem.qty === 0) {
       setAddItemError(t.qtyRequired);
-      setTimeout(() => document.getElementById("add-item-error")?.scrollIntoView({ behavior:"smooth", block:"center" }), 50);
       return;
     }
     setAddItemError("");
@@ -1047,61 +840,32 @@ export default function App() {
   };
   const resetChecks = (eventId) => setEvents(p => p.map(e => e.id===eventId ? { ...e, items:e.items.map(i => ({ ...i, done:false })) } : e));
   const copyEvent = (ev) => {
-    // モーダルでは元の名前のみ表示（(1)などはつけない）
     const baseName = ev.name.replace(/ \(\d+\)$/, "");
-    setCopyDraft({
-      sourceItems: ev.items,
-      name: baseName,
-      baseName: baseName, // 保存時の連番計算用
-      type: ev.type,
-      startDate: ev.startDate || "",
-      endDate: ev.endDate || "",
-    });
+    setCopyDraft({ sourceItems: ev.items, name: baseName, baseName: baseName, type: ev.type, startDate: ev.startDate || "", endDate: ev.endDate || "" });
     setEditingEvent(null);
   };
   const confirmCopy = () => {
     if (!copyDraft) return;
     const maxDay = tripDays(copyDraft);
-    // 連番を計算
     const baseName = copyDraft.baseName || copyDraft.name.replace(/ \(\d+\)$/, "");
-    const existing = events
-      .map(e => { const m = e.name.match(/^(.+) \((\d+)\)$/); return m && m[1]===baseName ? parseInt(m[2]) : 0; })
-      .filter(n => n > 0);
+    const existing = events.map(e => { const m = e.name.match(/^(.+) \((\d+)\)$/); return m && m[1]===baseName ? parseInt(m[2]) : 0; }).filter(n => n > 0);
     const nextNum = existing.length > 0 ? Math.max(...existing) + 1 : 1;
-    // 名前が変更されていれば連番なしで保存、元のままなら連番をつけて確認
     const isNameChanged = copyDraft.name !== baseName;
     const finalName = isNameChanged ? copyDraft.name.slice(0, 50) : `${baseName} (${nextNum})`.slice(0, 50);
-    if (!isNameChanged) {
-      // インラインで表示済みなのでそのまま保存
-    }
     const copied = {
-      id: genId(),
-      name: finalName,
-      type: copyDraft.type,
-      startDate: copyDraft.startDate,
-      endDate: copyDraft.endDate,
-      items: copyDraft.sourceItems.map(i => ({
-        ...i, id: genId(), done: false, tags: [...i.tags],
-        days: i.days.filter(d => d <= maxDay),
-      })),
+      id: genId(), name: finalName, type: copyDraft.type, startDate: copyDraft.startDate, endDate: copyDraft.endDate,
+      items: copyDraft.sourceItems.map(i => ({ ...i, id: genId(), done: false, tags: [...i.tags], days: i.days.filter(d => d <= maxDay) })),
     };
     setEvents(p => [...p, copied]);
     setSelectedEventId(copied.id);
     setCopyDraft(null);
   };
-  // ■2 内部キー "periodic" で判定（旧データの表示文言にも後方互換で対応）
   const isPeriodicType = (type) => type === "periodic" || ["定期","Recurring","Récurrent","Recorrente","Recurrente","정기"].includes(type);
-  // ■2 表示用ラベルを翻訳から取得
   const typeLabel = (type) => isPeriodicType(type) ? t.periodic : t.oneTime;
   const toggleDay = (d, setter) => setter(p => ({ ...p, days: p.days.includes(d) ? p.days.filter(x=>x!==d).sort((a,b)=>a-b) : [...p.days,d].sort((a,b)=>a-b) }));
   const toggleTag = (tag, setter) => setter(p => ({ ...p, tags: p.tags.includes(tag) ? p.tags.filter(tg=>tg!==tag) : [...p.tags,tag] }));
   const daysLabel = (days) => !days?.length ? "—" : days.map(d => lang==="ja"?`${d}${t.daysUnit}`:lang==="ko"?`${d}${t.daysUnit}`:lang==="zh"?`第${d}${t.daysUnit}`:`Day ${d}`).join(", ");
-  const dateDisplay = (ev) => {
-    if (ev.startDate && ev.endDate) return t.dateRange(ev.startDate, ev.endDate);
-    if (ev.startDate) return ev.startDate;
-    return "";
-  };
-  // ■3 イベントの旅行日数を計算（単発イベントで両日付がある場合のみ）
+  const dateDisplay = (ev) => { if (ev.startDate && ev.endDate) return t.dateRange(ev.startDate, ev.endDate); if (ev.startDate) return ev.startDate; return ""; };
   const applySampleAndGo = (langCode) => {
     const sample = sampleEvents[langCode] || sampleEvents["en"];
     setEvents(sample); safeSave("ps_events", sample, (TRANSLATIONS[langCode]||TRANSLATIONS["en"]).storageFull);
@@ -1109,7 +873,6 @@ export default function App() {
     setScreen("app");
   };
 
-  // ── Lang select ──────────────────────────────────────
   if (screen === "lang") {
     return (
       <div style={{ background:"#0f0f13", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24, fontFamily:"system-ui,sans-serif" }}>
@@ -1136,7 +899,6 @@ export default function App() {
   if (screen==="tutorial") return <TutorialScreen lang={lang} onFinish={() => setScreen("sample")} onSkip={() => setScreen("sample")} />;
   if (screen==="tutorial-replay") return <TutorialScreen lang={lang} onFinish={() => setScreen("app")} onSkip={() => setScreen("app")} />;
 
-  // ── Sample modal ─────────────────────────────────────
   if (screen==="sample") {
     return (
       <div style={{ background:"#0f0f13", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24, fontFamily:lang==="ja"||lang==="zh"||lang==="ko"?"'Hiragino Sans','Noto Sans JP',sans-serif":"system-ui,sans-serif" }}>
@@ -1151,19 +913,22 @@ export default function App() {
     );
   }
 
-  // ── Tab: Events ──────────────────────────────────────
-  const renderEvents = () => {
-    const sortedEvents = [...events].sort((a, b) => {
-      const da = a.startDate || a.nextDate || "";
-      const db = b.startDate || b.nextDate || "";
-      return db.localeCompare(da);
-    });
-    return (
+  const sortedEvents = [...events].sort((a, b) => {
+    const da = a.startDate || a.nextDate || "";
+    const db = b.startDate || b.nextDate || "";
+    return db.localeCompare(da);
+  });
+
+  const renderEvents = () => (
     <div>
       {showAddEvent && (
         <div style={card}>
           <div style={{ fontSize:13, fontWeight:700, color:"#60a5fa", marginBottom:12 }}>{t.newEvent}</div>
-          <input autoFocus placeholder={t.eventNamePlaceholder} value={newEvent.name} onChange={e => setNewEvent({ ...newEvent, name:e.target.value })} onFocus={e => e.target.style.border="1.5px solid #3b82f6"} onBlur={e => e.target.style.border="1px solid #ffffff15"} style={inputStyle} />
+          <input autoFocus placeholder={t.eventNamePlaceholder} value={newEvent.name}
+            onChange={e => setNewEvent({ ...newEvent, name:e.target.value })}
+            onFocus={e => { e.target.style.border="1.5px solid #3b82f6"; }}
+            onBlur={e => { e.target.style.border="1px solid #ffffff15"; }}
+            style={inputStyle} />
           {newEvent._error && <div id="new-event-error" style={{ color:"#f87171", fontSize:12, marginBottom:8, marginTop:-4 }}>⚠ {newEvent._error}</div>}
           <DateRangePicker startDate={newEvent.startDate} endDate={newEvent.endDate} onChangeRange={(s,e) => setNewEvent(p => ({ ...p, startDate:s, endDate:e }))} t={t} lang={lang} />
           <div style={{ display:"flex", gap:8, marginTop:4 }}>
@@ -1177,7 +942,10 @@ export default function App() {
           {editingEvent?.id===ev.id ? (
             <div>
               <div style={{ fontSize:12, fontWeight:700, color:"#60a5fa", marginBottom:10 }}>{t.editEvent}</div>
-              <input value={editingEvent.name} onChange={e => setEditingEvent({ ...editingEvent, name:e.target.value })} onFocus={e => e.target.style.border="1.5px solid #3b82f6"} onBlur={e => e.target.style.border="1px solid #ffffff15"} style={inputStyle} />
+              <input value={editingEvent.name} onChange={e => setEditingEvent({ ...editingEvent, name:e.target.value })}
+                onFocus={e => { e.target.style.border="1.5px solid #3b82f6"; }}
+                onBlur={e => { e.target.style.border="1px solid #ffffff15"; }}
+                style={inputStyle} />
               <DateRangePicker startDate={editingEvent.startDate||""} endDate={editingEvent.endDate||""} onChangeRange={(s,e) => setEditingEvent(p => ({ ...p, startDate:s, endDate:e }))} t={t} lang={lang} />
               <div style={{ display:"flex", gap:8, marginBottom:8, marginTop:4 }}>
                 <button onClick={() => setEditingEvent(null)} style={{ ...pillBtn, background:"#2a2d3e", flex:1 }}>{t.cancel}</button>
@@ -1188,10 +956,9 @@ export default function App() {
           ) : (
             <div>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:isPeriodicType(ev.type)&&ev.items.some(i=>i.done)?10:0 }}>
-                <div style={{ flex:1, cursor:"pointer" }} onClick={() => setSelectedEventId(ev.id)}>
+                <div style={{ flex:1, cursor:"pointer" }} onClick={() => setSelectedEventId(ev.id)} onDoubleClick={() => setEditingEvent({ id:ev.id, name:ev.name, type:ev.type, startDate:ev.startDate||ev.nextDate||"", endDate:ev.endDate||"" })}>
                   <div style={{ fontSize:16, fontWeight:700, marginBottom:4 }}>{ev.name}</div>
                   <div style={{ fontSize:12, display:"flex", alignItems:"center", gap:6, flexWrap:"wrap" }}>
-                    {/* 定期バッジの代わりに持ち物ボタン */}
                     <button onClick={() => { setSelectedEventId(ev.id); setTabIndex(1); }} style={{ background:"#1d4ed840", border:"none", color:"#60a5fa", padding:"2px 10px", borderRadius:10, fontSize:11, cursor:"pointer", fontWeight:600 }}>📋 {t.viewItems}</button>
                     {dateDisplay(ev) && <span style={{ color:"#666" }}>📅 {dateDisplay(ev)}</span>}
                   </div>
@@ -1201,20 +968,18 @@ export default function App() {
                     <div style={{ fontSize:22, fontWeight:800, color:"#3b82f6" }}>{ev.items.length}</div>
                     <div style={{ fontSize:10, color:"#555" }}>{t.items}</div>
                   </div>
-                  <button onClick={() => copyEvent(ev)} style={{ background:"#1a2a3a", border:"none", borderRadius:8, color:"#60a5fa", fontSize:9, fontWeight:700, cursor:"pointer", padding:"6px 7px", lineHeight:1.4, letterSpacing:0.5 }}>{"CO\nPY".split("\n").map((line,i) => <div key={i}>{line}</div>)}</button>
+                  <button onClick={() => copyEvent(ev)} style={{ background:"#1a2a3a", border:"none", borderRadius:8, color:"#60a5fa", fontSize:9, fontWeight:700, cursor:"pointer", padding:"6px 7px", lineHeight:1.3 }}><div>CO</div><div>PY</div></button>
                   <button onClick={() => setEditingEvent({ id:ev.id, name:ev.name, type:ev.type, startDate:ev.startDate||ev.nextDate||"", endDate:ev.endDate||"" })} style={{ background:"#1e2030", border:"none", borderRadius:8, color:"#888", fontSize:14, cursor:"pointer", padding:"6px 8px" }}>✎</button>
                 </div>
               </div>
-              {isPeriodicType(ev.type)&&ev.items.some(i=>i.done) && <button onClick={() => resetChecks(ev.id)} style={{ width:"100%", padding:"8px", borderRadius:10, border:"none", background:"#1a2a1a", color:"#4ade80", fontSize:13, fontWeight:600, cursor:"pointer" }}>🔄 {t.resetChecks}</button>}
+              
             </div>
           )}
         </div>
       ))}
     </div>
-    );
-  };
+  );
 
-  // ── Tab: List ────────────────────────────────────────
   const moveItem = (id, dir) => {
     setEvents(p => p.map(ev => {
       if (ev.id !== selectedEventId) return ev;
@@ -1222,7 +987,7 @@ export default function App() {
       const idx = items.findIndex(i => i.id === id);
       const to = idx + dir;
       if (to < 0 || to >= items.length) return ev;
-      [items[idx], items[to]] = [items[to], items[idx]];
+      const tmp = items[idx]; items[idx] = items[to]; items[to] = tmp;
       return { ...ev, items };
     }));
   };
@@ -1239,7 +1004,6 @@ export default function App() {
           </div>
         </>}
       </div>
-      {/* ソート・フィルター・並び替えバー */}
       <div style={{ display:"flex", gap:6, marginBottom:10, alignItems:"center" }}>
         {!isReordering && <>
           <select value={sortBy} onChange={e => setSortBy(e.target.value)} style={selectStyle}>
@@ -1255,11 +1019,7 @@ export default function App() {
           </select>
         </>}
         <div style={{ marginLeft:"auto", display:"flex", gap:6, flexShrink:0 }}>
-          <button onClick={() => {
-            const next = !isReordering;
-            setIsReordering(next);
-            if (next) setSortBy("custom"); // 手動並び替えモード時はcustomに固定
-          }} style={{ ...selectStyle, background:isReordering?"#2563eb":"#1e2030", color:isReordering?"white":"#aaa", border:"none" }}>
+          <button onClick={() => { const next = !isReordering; setIsReordering(next); if (next) setSortBy("custom"); }} style={{ ...selectStyle, background:isReordering?"#2563eb":"#1e2030", color:isReordering?"white":"#aaa", border:"none" }}>
             ⇅ {t.sortCustom}
           </button>
           {isReordering && (
@@ -1275,12 +1035,11 @@ export default function App() {
           {editingItem?.id===item.id && !isReordering ? (
             <div>
               <div style={{ fontSize:12, fontWeight:700, color:"#60a5fa", marginBottom:10 }}>{t.editItem}</div>
-              <ItemForm item={editingItem} setter={setEditingItem} onSave={saveEditItem} onCancel={() => setEditingItem(null)} onDelete={() => { deleteItem(item.id); setEditingItem(null); }} t={t} useCat={useCat} userTags={userTags} toggleDay={toggleDay} toggleTag={toggleTag} daysLabel={daysLabel} maxDay={tripDays(selectedEvent)} />
+              <ItemForm item={editingItem} setter={setEditingItem} onSave={saveEditItem} onCancel={() => setEditingItem(null)} onDelete={() => { deleteItem(item.id); setEditingItem(null); }} t={t} useCat={useCat} userTags={userTags} customPreps={customPreps} toggleDay={toggleDay} daysLabel={daysLabel} maxDay={tripDays(selectedEvent)} />
             </div>
           ) : (
-            <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }} onDoubleClick={() => !isReordering && setEditingItem({ ...item })}>
               {isReordering ? (
-                /* 並び替えモード: ↑↓ボタン */
                 <div style={{ display:"flex", flexDirection:"column", gap:3, flexShrink:0 }}>
                   <button onClick={() => moveItem(item.id, -1)} disabled={idx===0} style={{ width:30, height:28, borderRadius:6, border:"none", background:idx===0?"#1a1a26":"#1e2030", color:idx===0?"#333":"#60a5fa", fontSize:14, cursor:idx===0?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>↑</button>
                   <button onClick={() => moveItem(item.id, 1)} disabled={idx===filteredItems.length-1} style={{ width:30, height:28, borderRadius:6, border:"none", background:idx===filteredItems.length-1?"#1a1a26":"#1e2030", color:idx===filteredItems.length-1?"#333":"#60a5fa", fontSize:14, cursor:idx===filteredItems.length-1?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>↓</button>
@@ -1295,7 +1054,7 @@ export default function App() {
                 <div style={{ fontSize:11, color:"#555", marginTop:3, display:"flex", gap:5, flexWrap:"wrap", alignItems:"center" }}>
                   <span style={{ color:"#60a5fa" }}>{daysLabel(item.days)}</span>
                   <span>·</span>
-                  <span style={{ color:prepColor(item.prep) }}>{prepLabel(item.prep, t)}{item.prepWhere?`（${item.prepWhere}）`:""}</span>
+                  <span style={{ color:prepColor(normPrep(item.prep, customPreps), customPreps) }}>{prepLabel(normPrep(item.prep, customPreps), t, customPreps)}{item.prepWhere?`（${item.prepWhere}）`:""}</span>
                   {useCat&&item.category&&<><span>·</span><span>{item.category}</span></>}
                   {item.tags?.map(tag => <span key={tag} style={{ background:"#2a1f3d", color:"#c084fc", padding:"1px 7px", borderRadius:8, fontSize:10 }}>{tag}</span>)}
                 </div>
@@ -1311,7 +1070,6 @@ export default function App() {
     </div>
   );
 
-  // ── Tab: Add ─────────────────────────────────────────
   const renderSettings = () => (
     <div>
       <div style={{ fontSize:16, fontWeight:700, marginBottom:16 }}>{t.settings}</div>
@@ -1330,6 +1088,25 @@ export default function App() {
         </div>
         <button onClick={() => { setSelectedLang(lang); setScreen("lang"); }} style={{ width:"100%", padding:"10px", borderRadius:12, border:"1px solid #ffffff15", background:"transparent", color:"#60a5fa", fontSize:13, cursor:"pointer" }}>🌐 Change language</button>
       </div>
+      <div style={card}>
+        <div style={{ fontSize:14, fontWeight:600, marginBottom:4 }}>{t.prepMethod}（カスタム）</div>
+        <div style={{ fontSize:11, color:"#555", marginBottom:12 }}>{t.customPrepLabel || "準備方法を追加できます"}</div>
+        <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:12 }}>
+          {customPreps.map(prep => (
+            <div key={prep} style={{ display:"flex", alignItems:"center", gap:4, background:"#1a2a40", borderRadius:20, padding:"5px 10px" }}>
+              <span style={{ fontSize:12, color:"#60a5fa" }}>{prep}</span>
+              <button onClick={() => setCustomPreps(p => p.filter(pp => pp!==prep))} style={{ background:"none", border:"none", color:"#3b82f6", cursor:"pointer", fontSize:13, padding:0, lineHeight:1 }}>✕</button>
+            </div>
+          ))}
+          {customPreps.length===0 && <span style={{ fontSize:12, color:"#444" }}>なし</span>}
+        </div>
+        <div style={{ display:"flex", gap:8 }}>
+          <input placeholder={t.customPrepPlaceholder || "例：現地調達"} value={newPrepInput} onChange={e => setNewPrepInput(e.target.value)}
+            onKeyDown={e => { if (e.key==="Enter"&&newPrepInput.trim()) { setCustomPreps(p => [...p, newPrepInput.trim()]); setNewPrepInput(""); }}}
+            style={{ ...inputStyle, marginBottom:0, flex:1 }} />
+          <button onClick={() => { if (newPrepInput.trim()) { setCustomPreps(p => [...p, newPrepInput.trim()]); setNewPrepInput(""); }}} style={{ ...pillBtn, flexShrink:0 }}>{t.addTag}</button>
+        </div>
+      </div>
       <div style={{ ...card, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <div style={{ flex:1, marginRight:16 }}>
           <div style={{ fontSize:14, fontWeight:600 }}>{t.useCat}</div>
@@ -1341,7 +1118,7 @@ export default function App() {
       </div>
       <div style={card}>
         <div style={{ fontSize:14, fontWeight:600, marginBottom:4 }}>{t.manageTags}</div>
-        <div style={{ fontSize:11, color:"#555", marginBottom:12 }}>{t.manageTagsDesc}</div>
+        <div style={{ fontSize:11, color:"#555", marginBottom:12 }}>{t.manageTagsDesc}（<span style={{ color:"#22c55e" }}>●</span>デフォルト / <span style={{ color:"#a855f7" }}>●</span>カスタム）</div>
         <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:12 }}>
           {userTags.map(tag => (
             <div key={tag} style={{ display:"flex", alignItems:"center", gap:4, background:"#2a1f3d", borderRadius:20, padding:"5px 10px" }}>
@@ -1363,7 +1140,6 @@ export default function App() {
 
   return (
     <div style={{ fontFamily:lang==="ja"||lang==="zh"||lang==="ko"?"'Hiragino Sans','Noto Sans JP',sans-serif":"system-ui,sans-serif", background:"#0f0f13", minHeight:"100vh", color:"#f0ede8", maxWidth:430, margin:"0 auto" }}>
-      {/* アイテム追加モーダル */}
       {showAddItem && (
         <div style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.75)", zIndex:200, display:"flex", alignItems:"flex-end", justifyContent:"center" }}>
           <div style={{ background:"#1a1a26", borderRadius:"20px 20px 0 0", padding:"10px 14px 24px", width:"100%", maxWidth:430, maxHeight:"95vh", overflowY:"auto", border:"1px solid #ffffff12" }}>
@@ -1372,9 +1148,7 @@ export default function App() {
               <button onClick={() => { setShowAddItem(false); setNewItem(emptyItem()); }} style={{ background:"#2a2d3e", border:"none", borderRadius:8, color:"#888", fontSize:13, cursor:"pointer", padding:"4px 8px" }}>✕</button>
             </div>
             {selectedEvent
-              ? <>
-                  <ItemForm item={newItem} setter={setNewItem} onSave={addItem} onCancel={() => { setShowAddItem(false); setNewItem(emptyItem()); setAddItemError(""); }} t={t} useCat={useCat} userTags={userTags} toggleDay={toggleDay} toggleTag={toggleTag} daysLabel={daysLabel} maxDay={tripDays(selectedEvent)} error={addItemError} />
-                </>
+              ? <ItemForm item={newItem} setter={setNewItem} onSave={addItem} onCancel={() => { setShowAddItem(false); setNewItem(emptyItem()); setAddItemError(""); }} t={t} useCat={useCat} userTags={userTags} customPreps={customPreps} toggleDay={toggleDay} daysLabel={daysLabel} maxDay={tripDays(selectedEvent)} error={addItemError} />
               : <div style={{ textAlign:"center", color:"#555", padding:40, fontSize:14 }}>{t.selectEventHint}</div>
             }
           </div>
@@ -1385,7 +1159,6 @@ export default function App() {
           <div style={{ background:"#1a1a26", borderRadius:20, padding:"24px 20px", width:"100%", maxWidth:360, border:"1px solid #ffffff12" }}>
             <div style={{ fontSize:14, fontWeight:700, color:"#60a5fa", marginBottom:16 }}>{t.copyEventTitle}</div>
             <input value={copyDraft.name} onChange={e => setCopyDraft(p => ({ ...p, name: e.target.value }))} style={inputStyle} />
-            {/* 名前を変えていない場合のみ、入力欄の真下に通知 */}
             {copyDraft.name === (copyDraft.baseName || "") && (() => {
               const baseName = copyDraft.baseName || copyDraft.name;
               const existing = events.map(e => { const m = e.name.match(/^(.+) \((\d+)\)$/); return m && m[1]===baseName ? parseInt(m[2]) : 0; }).filter(n => n > 0);
@@ -1402,11 +1175,11 @@ export default function App() {
           </div>
         </div>
       )}
-      <div style={{ background:"linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)", padding:"20px 20px 0", borderBottom:"1px solid #ffffff10" }}>
+      <div style={{ background:"linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)", padding:"14px 16px 0", borderBottom:"1px solid #ffffff10" }}>
         <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:16 }}>
           <div>
             <div style={{ fontSize:11, color:"#60a5fa", letterSpacing:3, textTransform:"uppercase", marginBottom:2 }}>{t.appSub}</div>
-            <div style={{ fontSize:22, fontWeight:700, letterSpacing:-0.5 }}>{t.appTitle}</div>
+            <div style={{ fontSize:19, fontWeight:700, letterSpacing:-0.5 }}>{t.appTitle}</div>
           </div>
         </div>
         <div style={{ display:"flex" }}>
@@ -1420,13 +1193,11 @@ export default function App() {
         </div>
       </div>
       <div style={{ padding:16, paddingBottom:96 }}>{tabContents[tabIndex]}</div>
-      {/* イベントタブ：固定追加ボタン */}
       {tabIndex===0 && (
         <button onClick={() => setShowAddEvent(true)} style={{ position:"fixed", bottom:24, right:24, borderRadius:40, background:"linear-gradient(135deg,#2563eb,#3b82f6)", border:"none", color:"white", fontSize:15, fontWeight:700, cursor:"pointer", boxShadow:"0 4px 20px #2563eb66", zIndex:100, padding:"14px 20px", display:"flex", alignItems:"center", gap:6 }}>
           ＋ {t.addEvent.replace("＋ ","").replace("+ ","")}
         </button>
       )}
-      {/* 持ち物タブ：固定追加ボタン */}
       {tabIndex===1 && (
         <button onClick={() => setShowAddItem(true)} style={{ position:"fixed", bottom:24, right:24, borderRadius:40, background:"linear-gradient(135deg,#2563eb,#3b82f6)", border:"none", color:"white", fontSize:15, fontWeight:700, cursor:"pointer", boxShadow:"0 4px 20px #2563eb66", zIndex:100, padding:"14px 20px", display:"flex", alignItems:"center", gap:6 }}>
           ＋ {t.addItem.replace("＋ ","").replace("+ ","")}
