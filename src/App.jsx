@@ -16,11 +16,11 @@ const TRANSLATIONS = {
     qty: "個数", qtyUnit: "個", days: "何日目に使う？（複数OK）", daysUnit: "日目",
     resetDays: "リセット", prepMethod: "準備方法",
     prepMethods: ["家にある", "買う", "レンタル", "その他"],
-    whereLabel: "どこで買う？", prepOtherLabel: "詳細（任意）", customPrepLabel: "準備方法を追加", customPrepPlaceholder: "例：現地調達", wherePlaceholder: "例：コンビニ、ドラッグストア",
+    whereLabel: "どこで買う？", prepOtherLabel: "詳細（任意）", customPrepLabel: "準備方法を追加", customPrepPlaceholder: "例：現地調達", prepMethodCustom: "準備方法（カスタム）", wherePlaceholder: "例：コンビニ、ドラッグストア",
     category: "カテゴリ", categories: ["衣類", "書類", "電子機器", "日用品", "食べ物", "その他"],
     tags: "オリジナルタグ（複数OK）", addToList: "✓ リストに追加する",
     settings: "設定", useCat: "カテゴリ機能を使う", useCatDesc: "OFFにするとカテゴリが非表示になります",
-    manageTags: "オリジナルタグを管理", manageTagsDesc: "カテゴリとは別の自由なグループ分けができます",
+    manageTags: "オリジナルタグを管理", manageTagsDesc: "カテゴリとは別の自由なグループ分けができます", categoryLegend: "デフォルト / カスタム",
     resetChecks: "もう一度使う（チェックをリセット）", noTags: "タグがまだありません",
     newTag: "新しいタグ名", addTag: "追加", editItem: "アイテムを編集", deleteItem: "🗑 削除",
     language: "言語", selectEvent: "イベントを選択",
@@ -55,11 +55,11 @@ const TRANSLATIONS = {
     qty: "Quantity", qtyUnit: "", days: "Which day(s)? (multi-select OK)", daysUnit: "",
     resetDays: "Reset", prepMethod: "How to prepare",
     prepMethods: ["Have it", "Buy it", "Rent it", "Other"],
-    whereLabel: "Where to buy?", prepOtherLabel: "Details (optional)", customPrepLabel: "Add prep method", customPrepPlaceholder: "e.g. Buy locally", wherePlaceholder: "e.g. Pharmacy, Supermarket",
+    whereLabel: "Where to buy?", prepOtherLabel: "Details (optional)", customPrepLabel: "Add prep method", customPrepPlaceholder: "e.g. Buy locally", prepMethodCustom: "Prep Methods (Custom)", wherePlaceholder: "e.g. Pharmacy, Supermarket",
     category: "Category", categories: ["Clothing", "Documents", "Electronics", "Toiletries", "Food", "Other"],
     tags: "Custom Tags (multi-select OK)", addToList: "✓ Add to List",
     settings: "Settings", useCat: "Use Category feature", useCatDesc: "Turn off to hide categories",
-    manageTags: "Manage Custom Tags", manageTagsDesc: "Create your own grouping labels",
+    manageTags: "Manage Custom Tags", manageTagsDesc: "Create your own grouping labels", categoryLegend: "Default / Custom",
     resetChecks: "Use again (reset checks)", noTags: "No tags yet",
     newTag: "New tag name", addTag: "Add", editItem: "Edit Item", deleteItem: "🗑 Delete",
     language: "Language", selectEvent: "Select an event",
@@ -94,11 +94,11 @@ const TRANSLATIONS = {
     qty: "Quantité", qtyUnit: "", days: "Quel(s) jour(s) ? (multi-sélection OK)", daysUnit: "",
     resetDays: "Réinitialiser", prepMethod: "Comment préparer",
     prepMethods: ["J'ai déjà", "Acheter", "Louer", "Autre"],
-    whereLabel: "Où acheter ?", prepOtherLabel: "Détails (optionnel)", customPrepLabel: "Ajouter méthode", customPrepPlaceholder: "ex: Acheter sur place", wherePlaceholder: "ex : Pharmacie, Supermarché",
+    whereLabel: "Où acheter ?", prepOtherLabel: "Détails (optionnel)", customPrepLabel: "Ajouter méthode", customPrepPlaceholder: "ex: Acheter sur place", prepMethodCustom: "Méthodes (personnalisé)", wherePlaceholder: "ex : Pharmacie, Supermarché",
     category: "Catégorie", categories: ["Vêtements", "Documents", "Électronique", "Toilettes", "Nourriture", "Autre"],
     tags: "Tags personnalisés (multi OK)", addToList: "✓ Ajouter à la liste",
     settings: "Réglages", useCat: "Utiliser les catégories", useCatDesc: "Désactiver pour masquer les catégories",
-    manageTags: "Gérer les tags", manageTagsDesc: "Créez vos propres étiquettes",
+    manageTags: "Gérer les tags", manageTagsDesc: "Créez vos propres étiquettes", categoryLegend: "Défaut / Personnalisé",
     resetChecks: "Réutiliser (réinitialiser)", noTags: "Pas encore de tags",
     newTag: "Nouveau tag", addTag: "Ajouter", editItem: "Modifier l'article", deleteItem: "🗑 Supprimer",
     language: "Langue", selectEvent: "Sélectionner un événement",
@@ -133,11 +133,11 @@ const TRANSLATIONS = {
     qty: "Quantidade", qtyUnit: "", days: "Qual(is) dia(s)? (múltipla seleção OK)", daysUnit: "",
     resetDays: "Resetar", prepMethod: "Como preparar",
     prepMethods: ["Já tenho", "Comprar", "Alugar", "Outro"],
-    whereLabel: "Onde comprar?", prepOtherLabel: "Detalhes (opcional)", customPrepLabel: "Adicionar método", customPrepPlaceholder: "ex: Comprar localmente", wherePlaceholder: "ex: Farmácia, Supermercado",
+    whereLabel: "Onde comprar?", prepOtherLabel: "Detalhes (opcional)", customPrepLabel: "Adicionar método", customPrepPlaceholder: "ex: Comprar localmente", prepMethodCustom: "Métodos (personalizado)", wherePlaceholder: "ex: Farmácia, Supermercado",
     category: "Categoria", categories: ["Roupas", "Documentos", "Eletrônicos", "Higiene", "Comida", "Outro"],
     tags: "Tags personalizadas (multi OK)", addToList: "✓ Adicionar à Lista",
     settings: "Configurações", useCat: "Usar categorias", useCatDesc: "Desative para ocultar categorias",
-    manageTags: "Gerenciar Tags", manageTagsDesc: "Crie seus próprios rótulos",
+    manageTags: "Gerenciar Tags", manageTagsDesc: "Crie seus próprios rótulos", categoryLegend: "Padrão / Personalizado",
     resetChecks: "Usar novamente (resetar)", noTags: "Nenhuma tag ainda",
     newTag: "Nome da nova tag", addTag: "Adicionar", editItem: "Editar Item", deleteItem: "🗑 Excluir",
     language: "Idioma", selectEvent: "Selecionar evento",
@@ -172,11 +172,11 @@ const TRANSLATIONS = {
     qty: "Cantidad", qtyUnit: "", days: "¿Qué día(s)? (múltiple OK)", daysUnit: "",
     resetDays: "Resetear", prepMethod: "Cómo preparar",
     prepMethods: ["Ya tengo", "Comprar", "Alquilar", "Otro"],
-    whereLabel: "¿Dónde comprar?", prepOtherLabel: "Detalles (opcional)", customPrepLabel: "Agregar método", customPrepPlaceholder: "ej: Comprar localmente", wherePlaceholder: "ej: Farmacia, Supermercado",
+    whereLabel: "¿Dónde comprar?", prepOtherLabel: "Detalles (opcional)", customPrepLabel: "Agregar método", customPrepPlaceholder: "ej: Comprar localmente", prepMethodCustom: "Métodos (personalizado)", wherePlaceholder: "ej: Farmacia, Supermercado",
     category: "Categoría", categories: ["Ropa", "Documentos", "Electrónica", "Higiene", "Comida", "Otro"],
     tags: "Etiquetas personalizadas (multi OK)", addToList: "✓ Agregar a la Lista",
     settings: "Ajustes", useCat: "Usar categorías", useCatDesc: "Desactivar para ocultar categorías",
-    manageTags: "Gestionar Etiquetas", manageTagsDesc: "Crea tus propias etiquetas",
+    manageTags: "Gestionar Etiquetas", manageTagsDesc: "Crea tus propias etiquetas", categoryLegend: "Predeterminado / Personalizado",
     resetChecks: "Usar de nuevo (resetear)", noTags: "Sin etiquetas aún",
     newTag: "Nombre de nueva etiqueta", addTag: "Agregar", editItem: "Editar Artículo", deleteItem: "🗑 Eliminar",
     language: "Idioma", selectEvent: "Seleccionar evento",
@@ -211,11 +211,11 @@ const TRANSLATIONS = {
     qty: "数量", qtyUnit: "个", days: "第几天使用？（可多选）", daysUnit: "天",
     resetDays: "重置", prepMethod: "准备方式",
     prepMethods: ["已有", "购买", "租借", "其他"],
-    whereLabel: "在哪里买？", prepOtherLabel: "详情（可选）", customPrepLabel: "添加准备方式", customPrepPlaceholder: "例：当地购买", wherePlaceholder: "例：超市、药店",
+    whereLabel: "在哪里买？", prepOtherLabel: "详情（可选）", customPrepLabel: "添加准备方式", customPrepPlaceholder: "例：当地购买", prepMethodCustom: "准备方式（自定义）", wherePlaceholder: "例：超市、药店",
     category: "分类", categories: ["服装", "证件", "电子产品", "日用品", "食品", "其他"],
     tags: "自定义标签（可多选）", addToList: "✓ 添加到清单",
     settings: "设置", useCat: "使用分类功能", useCatDesc: "关闭后隐藏分类",
-    manageTags: "管理自定义标签", manageTagsDesc: "创建自己的分组标签",
+    manageTags: "管理自定义标签", manageTagsDesc: "创建自己的分组标签", categoryLegend: "默认 / 自定义",
     resetChecks: "再次使用（重置勾选）", noTags: "还没有标签",
     newTag: "新标签名称", addTag: "添加", editItem: "编辑物品", deleteItem: "🗑 删除",
     language: "语言", selectEvent: "选择活动",
@@ -250,11 +250,11 @@ const TRANSLATIONS = {
     qty: "수량", qtyUnit: "개", days: "몇 번째 날？（복수 선택 가능）", daysUnit: "일차",
     resetDays: "초기화", prepMethod: "준비 방법",
     prepMethods: ["이미 있음", "구매", "렌탈", "기타"],
-    whereLabel: "어디서 살까요?", prepOtherLabel: "세부사항 (선택)", customPrepLabel: "준비방법 추가", customPrepPlaceholder: "예: 현지 구매", wherePlaceholder: "예: 편의점, 마트",
+    whereLabel: "어디서 살까요?", prepOtherLabel: "세부사항 (선택)", customPrepLabel: "준비방법 추가", customPrepPlaceholder: "예: 현지 구매", prepMethodCustom: "준비방법 (커스텀)", wherePlaceholder: "예: 편의점, 마트",
     category: "카테고리", categories: ["의류", "서류", "전자기기", "생활용품", "식품", "기타"],
     tags: "커스텀 태그 (복수 선택 가능)", addToList: "✓ 목록에 추가",
     settings: "설정", useCat: "카테고리 기능 사용", useCatDesc: "끄면 카테고리가 숨겨집니다",
-    manageTags: "커스텀 태그 관리", manageTagsDesc: "나만의 그룹 태그를 만들 수 있습니다",
+    manageTags: "커스텀 태그 관리", manageTagsDesc: "나만의 그룹 태그를 만들 수 있습니다", categoryLegend: "기본 / 커스텀",
     resetChecks: "다시 사용 (체크 초기화)", noTags: "태그가 아직 없습니다",
     newTag: "새 태그 이름", addTag: "추가", editItem: "아이템 편집", deleteItem: "🗑 삭제",
     language: "언어", selectEvent: "이벤트를 선택하세요",
@@ -1098,7 +1098,7 @@ export default function App() {
         <button onClick={() => { setSelectedLang(lang); setScreen("lang"); }} style={{ width:"100%", padding:"10px", borderRadius:12, border:"1px solid #ffffff15", background:"transparent", color:"#60a5fa", fontSize:13, cursor:"pointer" }}>🌐 Change language</button>
       </div>
       <div style={card}>
-        <div style={{ fontSize:14, fontWeight:600, marginBottom:4 }}>{t.prepMethod}（カスタム）</div>
+        <div style={{ fontSize:14, fontWeight:600, marginBottom:4 }}>{t.prepMethodCustom || t.prepMethod}</div>
         <div style={{ fontSize:11, color:"#555", marginBottom:12 }}>{t.customPrepLabel || "準備方法を追加できます"}</div>
         <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:12 }}>
           {customPreps.map(prep => (
@@ -1107,7 +1107,7 @@ export default function App() {
               <button onClick={() => setCustomPreps(p => p.filter(pp => pp!==prep))} style={{ background:"none", border:"none", color:"#3b82f6", cursor:"pointer", fontSize:13, padding:0, lineHeight:1 }}>✕</button>
             </div>
           ))}
-          {customPreps.length===0 && <span style={{ fontSize:12, color:"#444" }}>なし</span>}
+          {customPreps.length===0 && null}
         </div>
         <div style={{ display:"flex", gap:8 }}>
           <input placeholder={t.customPrepPlaceholder || "例：現地調達"} value={newPrepInput} onChange={e => setNewPrepInput(e.target.value)}
@@ -1127,7 +1127,7 @@ export default function App() {
       </div>
       <div style={card}>
         <div style={{ fontSize:14, fontWeight:600, marginBottom:4 }}>{t.manageTags}</div>
-        <div style={{ fontSize:11, color:"#555", marginBottom:12 }}>{t.manageTagsDesc}（<span style={{ color:"#22c55e" }}>●</span>デフォルト / <span style={{ color:"#a855f7" }}>●</span>カスタム）</div>
+        <div style={{ fontSize:11, color:"#555", marginBottom:12 }}>{t.manageTagsDesc}（<span style={{ color:"#22c55e" }}>●</span> {(t.categoryLegend||"Default / Custom").split("/")[0].trim()} / <span style={{ color:"#a855f7" }}>●</span> {(t.categoryLegend||"Default / Custom").split("/")[1].trim()}）</div>
         <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:12 }}>
           {userTags.map(tag => (
             <div key={tag} style={{ display:"flex", alignItems:"center", gap:4, background:"#2a1f3d", borderRadius:20, padding:"5px 10px" }}>
