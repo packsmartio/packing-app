@@ -1,4 +1,4 @@
-　import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 const TRANSLATIONS = {
   ja: {
@@ -739,6 +739,15 @@ export default function App() {
   const [newPrepInput, setNewPrepInput] = useState("");
   const [addItemError, setAddItemError] = useState("");
 
+  // ダブルタップ検知（iOS Safari対応）
+  const lastTapRef = React.useRef({});
+  const handleDoubleTap = (key, action) => {
+    const now = Date.now();
+    const last = lastTapRef.current[key] || 0;
+    if (now - last < 400) { action(); lastTapRef.current[key] = 0; }
+    else { lastTapRef.current[key] = now; }
+  };
+
   useEffect(() => { injectGlobalStyle(); }, []);
   useEffect(() => {
     const isModalOpen = showAddItem || !!copyDraft;
@@ -956,7 +965,7 @@ export default function App() {
           ) : (
             <div>
               <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:isPeriodicType(ev.type)&&ev.items.some(i=>i.done)?10:0 }}>
-                <div style={{ flex:1, cursor:"pointer" }} onClick={() => setSelectedEventId(ev.id)} onDoubleClick={() => setEditingEvent({ id:ev.id, name:ev.name, type:ev.type, startDate:ev.startDate||ev.nextDate||"", endDate:ev.endDate||"" })}>
+                <div style={{ flex:1, cursor:"pointer" }} onClick={() => { setSelectedEventId(ev.id); handleDoubleTap("ev_"+ev.id, () => setEditingEvent({ id:ev.id, name:ev.name, type:ev.type, startDate:ev.startDate||ev.nextDate||"", endDate:ev.endDate||"" })); }}>
                   <div style={{ fontSize:16, fontWeight:700, marginBottom:4 }}>{ev.name}</div>
                   <div style={{ fontSize:12, display:"flex", alignItems:"center", gap:6, flexWrap:"wrap" }}>
                     <button onClick={() => { setSelectedEventId(ev.id); setTabIndex(1); }} style={{ background:"#1d4ed840", border:"none", color:"#60a5fa", padding:"2px 10px", borderRadius:10, fontSize:11, cursor:"pointer", fontWeight:600 }}>📋 {t.viewItems}</button>
@@ -1038,7 +1047,7 @@ export default function App() {
               <ItemForm item={editingItem} setter={setEditingItem} onSave={saveEditItem} onCancel={() => setEditingItem(null)} onDelete={() => { deleteItem(item.id); setEditingItem(null); }} t={t} useCat={useCat} userTags={userTags} customPreps={customPreps} toggleDay={toggleDay} daysLabel={daysLabel} maxDay={tripDays(selectedEvent)} />
             </div>
           ) : (
-            <div style={{ display:"flex", alignItems:"center", gap:10 }} onDoubleClick={() => !isReordering && setEditingItem({ ...item })}>
+            <div style={{ display:"flex", alignItems:"center", gap:10 }} onClick={() => { if (!isReordering) handleDoubleTap("item_"+item.id, () => setEditingItem({ ...item })); }}>
               {isReordering ? (
                 <div style={{ display:"flex", flexDirection:"column", gap:3, flexShrink:0 }}>
                   <button onClick={() => moveItem(item.id, -1)} disabled={idx===0} style={{ width:30, height:28, borderRadius:6, border:"none", background:idx===0?"#1a1a26":"#1e2030", color:idx===0?"#333":"#60a5fa", fontSize:14, cursor:idx===0?"default":"pointer", display:"flex", alignItems:"center", justifyContent:"center" }}>↑</button>
